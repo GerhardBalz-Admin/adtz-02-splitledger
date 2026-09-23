@@ -1,6 +1,6 @@
 # SplitLedger — Homework 2 specification
 
-**Status:** Accepted for Homework 2 Question 2 on 2026-09-23; implementation defaults remain to be resolved during design.  
+**Status:** Accepted for Homework 2 Question 2 on 2026-09-23; implementation defaults resolved on 2026-09-23.  
 **Purpose:** AI Dev Tools Zoomcamp 2026, Homework 2 learning exercise. This is not a final-project selection or a continuation of another project.
 
 ## Product goal
@@ -65,10 +65,13 @@ The sum of all member balances in a group must be zero. Store and calculate mone
 
 The Homework 2 workflow calls for a frontend prototype with mocked backend calls, followed by an API contract, a FastAPI backend, frontend integration, replacement of the mock store with SQLAlchemy-backed SQLite persistence, and tests. The implementation should document its actual setup, run, and test commands in the repository. Do not treat these implementation details as decisions about the final project.
 
-## Defaults to confirm during design
+## Implementation defaults
+
+Resolved for the Homework 2 implementation on 2026-09-23:
 
 - Use email/password accounts without email verification for this local exercise.
 - Members can join through the invite code without an email from the app.
-- Group currency cannot change after expenses have been recorded.
+- Group currency cannot change after expenses have been recorded. Until then, the group creator may change it.
+- Leftover minor units from an equal split go one each to the selected members in group join order.
 
-These defaults are design assumptions, not additional user decisions. Resolve them before implementation if they affect the proposed interface or tests.
+These are design assumptions for this exercise, not additional user decisions.

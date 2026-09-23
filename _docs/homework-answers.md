@@ -22,7 +22,11 @@ It also includes `CLAUDE.md`, which points to `AGENTS.md`. This is the last comm
 
 ## Question 4: Frontend prototype
 
-Pending implementation. Record the actual frontend start command after building the interactive prototype.
+```bash
+npm run dev
+```
+
+Run it from `frontend/` after `npm install`. It serves the prototype at http://localhost:5173. The [frontend](../frontend/README.md) is a React + Vite + TypeScript app based on the SplitLedger design canvas. All backend calls go through `frontend/src/api/client.ts`, which currently uses an in-browser mock backend stored in `localStorage`. The main flows were verified in a browser at desktop and phone widths.
 
 ## Question 5: Backend
 

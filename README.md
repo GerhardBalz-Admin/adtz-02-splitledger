@@ -2,7 +2,18 @@
 
 AI Dev Tools Zoomcamp 2026 Homework 2 expense-splitting app.
 
-The accepted product specification is in [`_docs/specs.md`](_docs/specs.md). [Homework 2 answers and progress](_docs/homework-answers.md) are recorded separately. Implementation has not started.
+The accepted product specification is in [`_docs/specs.md`](_docs/specs.md). [Homework 2 answers and progress](_docs/homework-answers.md) are recorded separately.
+
+## Frontend prototype
+
+The React frontend is in [`frontend/`](frontend/README.md). It uses a mocked backend for now.
+
+```bash
+cd frontend
+npm install
+npm run dev     # http://localhost:5173
+npm test        # unit tests
+```
 
 ## Course materials
 
