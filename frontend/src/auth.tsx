@@ -26,6 +26,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     api
       .currentUser()
       .then((current) => active && setUser(current))
+      // Backend unreachable: show the sign-in page; signing in reports the problem.
+      .catch(() => active && setUser(null))
       .finally(() => active && setLoading(false));
     return () => {
       active = false;

@@ -1,13 +1,13 @@
-// In-browser stand-in for the SplitLedger backend.
+// In-memory stand-in for the SplitLedger backend, used only by the unit tests.
 //
-// It behaves like the future REST API: it authenticates by session token,
+// It behaves like the FastAPI backend: it authenticates by session token,
 // enforces membership and ownership rules, and keeps its data in
-// localStorage so it survives a page reload. Only `api/client.ts` calls it.
+// localStorage. Tests reach it through `mockFetch`, which stands in for `fetch`.
 
 import { isIsoDate } from '../lib/dates';
 import { isCurrencyCode, type CurrencyCode } from '../lib/money';
 import { computeBalances } from '../lib/split';
-import type { Expense, GroupDetail, GroupSummary, Member, User } from './types';
+import type { Expense, GroupDetail, GroupSummary, Member, User } from '../api/types';
 
 interface UserRow {
   id: string;

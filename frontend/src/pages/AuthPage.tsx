@@ -1,13 +1,12 @@
 import { useState, type FormEvent } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
-import { DEMO_PASSWORD, resetMockDatabase } from '../api/mockServer';
 import { useAuth } from '../auth';
 import { errorMessage } from '../lib/errors';
 
 type Mode = 'signin' | 'signup';
 
 export function AuthPage() {
-  const { user, loading, signIn, signUp, forget } = useAuth();
+  const { user, loading, signIn, signUp } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = (location.state as { from?: string } | null)?.from ?? '/';
@@ -17,7 +16,6 @@ export function AuthPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
-  const [resetDone, setResetDone] = useState(false);
 
   if (!loading && user) return <Navigate to={from} replace />;
 
@@ -123,21 +121,8 @@ export function AuthPage() {
               : 'No email verification in this version; you are signed in right away.'}
           </p>
           <p className="demo-note">
-            Prototype with mocked data. Demo accounts: <code>dana@example.com</code>, <code>anna@example.com</code>,{' '}
-            <code>ben@example.com</code>, <code>chiara@example.com</code>, password <code>{DEMO_PASSWORD}</code>.{' '}
-            <button
-              type="button"
-              className="btn-link"
-              style={{ padding: 0, minHeight: 0 }}
-              onClick={() => {
-                resetMockDatabase();
-                forget();
-                setResetDone(true);
-              }}
-            >
-              Reset demo data
-            </button>
-            {resetDone && <span role="status"> Done.</span>}
+            Demo accounts seeded by the backend: <code>dana@example.com</code>, <code>anna@example.com</code>,{' '}
+            <code>ben@example.com</code>, <code>chiara@example.com</code>, password <code>splitledger</code>.
           </p>
         </form>
       </main>

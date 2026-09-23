@@ -1,7 +1,7 @@
 {
   "name": "splitledger-frontend",
   "version": "1.0.0",
-  "description": "SplitLedger frontend prototype with a mocked backend",
+  "description": "SplitLedger frontend for the FastAPI backend",
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",

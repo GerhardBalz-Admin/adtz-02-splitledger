@@ -1,5 +1,4 @@
-// Shapes exchanged with the backend. The mock server returns exactly these,
-// so the real FastAPI backend can implement the same contract later.
+// Shapes exchanged with the FastAPI backend, as defined in /openapi.yaml.
 
 import type { CurrencyCode } from '../lib/money';
 

@@ -1,16 +1,60 @@
-import { ApiError, api } from './client';
-import { DEMO_PASSWORD, resetMockDatabase } from './mockServer';
+import { API_BASE_URL, ApiError, NETWORK_ERROR_STATUS, api } from './client';
+import { createMockFetch, type RecordedCall } from '../test/mockFetch';
+import { DEMO_PASSWORD, resetMockDatabase } from '../test/mockServer';
 
 async function expectStatus(promise: Promise<unknown>, status: number) {
   await expect(promise).rejects.toSatisfy((e: unknown) => e instanceof ApiError && e.status === status);
 }
 
+let calls: RecordedCall[];
+
 beforeEach(() => {
   localStorage.clear();
   resetMockDatabase();
+  calls = [];
+  vi.stubGlobal('fetch', createMockFetch(calls));
 });
 
-describe('mocked backend through the api client', () => {
+afterEach(() => {
+  vi.unstubAllGlobals();
+});
+
+describe('http requests', () => {
+  it('calls the FastAPI backend under /api with the session token', async () => {
+    expect(API_BASE_URL).toBe('http://localhost:8000/api');
+    await api.signIn('dana@example.com', DEMO_PASSWORD);
+    await api.listGroups();
+    expect(calls.map((c) => `${c.method} ${c.url}`)).toEqual([
+      'POST http://localhost:8000/api/auth/signin',
+      'GET http://localhost:8000/api/groups',
+    ]);
+    expect(calls[0].headers.Authorization).toBeUndefined();
+    expect(calls[0].headers['Content-Type']).toBe('application/json');
+    expect(calls[1].headers.Authorization).toMatch(/^Bearer .+/);
+  });
+
+  it('reports an unreachable backend and a server error detail', async () => {
+    vi.stubGlobal('fetch', async () => {
+      throw new TypeError('Failed to fetch');
+    });
+    await expect(api.listGroups()).rejects.toMatchObject({
+      status: NETWORK_ERROR_STATUS,
+      message: expect.stringContaining('http://localhost:8000/api'),
+    });
+
+    vi.stubGlobal('fetch', async () => new Response(JSON.stringify({ detail: 'Group not found.' }), { status: 404 }));
+    await expect(api.getGroup('g_missing')).rejects.toMatchObject({ status: 404, message: 'Group not found.' });
+  });
+
+  it('forgets the stored token when the backend rejects it', async () => {
+    await api.signIn('dana@example.com', DEMO_PASSWORD);
+    vi.stubGlobal('fetch', async () => new Response(JSON.stringify({ detail: 'Sign in again.' }), { status: 401 }));
+    expect(await api.currentUser()).toBeNull();
+    expect(localStorage.getItem('splitledger.token')).toBeNull();
+  });
+});
+
+describe('api client against the mock backend', () => {
   it('signs up, signs in and out, and lists only joined groups', async () => {
     await api.signUp('erin@example.com', 'long-enough');
     expect(await api.listGroups()).toEqual([]);
@@ -105,32 +149,8 @@ describe('mocked backend through the api client', () => {
     expect((await api.getGroup(group.id)).currencyLocked).toBe(true);
     await expectStatus(api.changeCurrency(group.id, 'USD'), 409);
     expect((await api.getGroup(group.id)).currency).toBe('EUR');
-    vi.resetModules();
-    const fresh = await import('./client');
-    expect((await fresh.api.getGroup(group.id)).currencyLocked).toBe(true);
-    await expect(fresh.api.changeCurrency(group.id, 'USD')).rejects.toMatchObject({ status: 409 });
 
     await api.signIn('ben@example.com', DEMO_PASSWORD);
     await expectStatus(api.changeCurrency('g_ticino', 'CHF'), 409);
-  });
-
-  it('keeps data across a reload of the mock store', async () => {
-    await api.signIn('dana@example.com', DEMO_PASSWORD);
-    const group = await api.createGroup('Persistent', 'CHF');
-    vi.resetModules();
-    const fresh = await import('./client');
-    expect((await fresh.api.getGroup(group.id)).name).toBe('Persistent');
-  });
-
-  it('keeps old mock groups locked when deleted expense history is unknown', async () => {
-    await api.signIn('dana@example.com', DEMO_PASSWORD);
-    const group = await api.createGroup('Legacy', 'CHF');
-    const oldData = JSON.parse(localStorage.getItem('splitledger.mockdb.v1')!);
-    delete oldData.groups.find((row: { id: string }) => row.id === group.id).hasRecordedExpense;
-    localStorage.setItem('splitledger.mockdb.v1', JSON.stringify(oldData));
-    vi.resetModules();
-    const fresh = await import('./client');
-    expect((await fresh.api.getGroup(group.id)).currencyLocked).toBe(true);
-    await expect(fresh.api.changeCurrency(group.id, 'EUR')).rejects.toMatchObject({ status: 409 });
   });
 });

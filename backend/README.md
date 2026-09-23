@@ -21,7 +21,7 @@ The API lives under `http://localhost:8000/api`. Interactive docs are at http://
 | `SPLITLEDGER_DEMO_DATA` | `1` | Seed the demo data at start-up. Set to `0` to start empty. |
 | `SPLITLEDGER_CORS_ORIGINS` | `http://localhost:5173,http://127.0.0.1:5173` | Browser origins allowed to call the API. |
 
-The demo data matches the frontend mock. The accounts are `dana@example.com`, `anna@example.com`, `ben@example.com` and `chiara@example.com`, all with the password `splitledger`. Dana created *Flat 4B*, whose invite code is `K7QM-4RX2`.
+The frontend in [`../frontend`](../frontend/README.md) calls this API at `http://localhost:8000/api`. The demo data matches the frontend's test mock. The accounts are `dana@example.com`, `anna@example.com`, `ben@example.com` and `chiara@example.com`, all with the password `splitledger`. Dana created *Flat 4B*, whose invite code is `K7QM-4RX2`.
 
 ## Layout
 
