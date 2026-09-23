@@ -103,9 +103,9 @@ Outcome: Claude pushed the contract and FastAPI mock-database backend in commit 
 
 **Follow-up before Question 6:** The backend as committed in `9dd1915` permitted changing the currency after all expenses were deleted, whereas [accepted decision 3](specs.md#accepted-decisions) says it is locked after the first expense was recorded. Commit `fbf6627` ("Keep group currency locked after first recorded expense") changes the backend, tests, frontend mock and contract accordingly, but no local Claude Code session records that work (see below).
 
-### Session `0d400f3a-2d58-426f-93ba-e1c6d4600f2a` (2026-09-23) · partial
+### Session `0d400f3a-2d58-426f-93ba-e1c6d4600f2a` (2026-09-23)
 
-Started in the repository root with `/clear`. It began by maintaining this record and became a development session with prompt 10. **Partial:** recorded through prompt 10, whose turn is still in progress.
+Started in the repository root with `/clear`. It began by maintaining this record and became a development session with prompt 10.
 
 #### 8. Set up the development record
 
@@ -157,15 +157,35 @@ Verify the connection through the app, using a browser if available. Tell me whi
 Do not start Question 7.
 ```
 
+Outcome: Claude connected the frontend's API client to the backend at `http://localhost:8000/api` and moved the in-browser mock into the frontend unit tests. It verified the app in a headless Chromium browser against both running servers and recorded the Question 6 answer. It also updated this record, marking the session partial, and pushed commit `3d22ad2`, with 19 frontend and 85 backend tests passing.
+
+### Session `a96d8d11-e7d5-4490-ac25-ad94a55266de` (2026-09-23) · partial
+
+Started in the repository root with `/clear`. **Partial:** recorded through prompt 11, whose turn is still in progress.
+
+#### 11. Question 7: database and tests
+
+2026-09-23 16:35:04 +02:00 · pasted
+
+```text
+Do Homework 2 Question 7 in SplitLedger. First inspect the branch and working tree; if clean on main, pull with `git pull --ff-only origin main`. Preserve and report any local changes or pull conflict instead of overwriting them. Read AGENTS.md, _docs/specs.md, the official Question 7 instruction, and the current backend and tests.
+
+Replace the backend's in-memory mock store with SQLAlchemy-backed persistence. Use SQLite locally while keeping the application database-agnostic through SQLAlchemy. Preserve the existing API contract, permissions, balance rules, deterministic join-order splits, and the permanent currency lock after the first recorded expense, even if all expenses are deleted. Ensure user-created data survives an application restart. Keep tests isolated; run the existing tests and add focused persistence and restart tests where needed. Ask for and report your recommendations for any remaining test gaps.
+
+Follow AGENTS.md for the Claude Code development record: reconcile the partial Question 6 session from its original local transcript, then record this development session to the available completed turn in both files. Do not reconstruct missing dialogue from recaps; preserve the disclosed fbf6627 provenance gap and inspect the staged transcript diff before publication.
+
+Document setup and the exact command you actually used to run tests, record the Question 7 answer in _docs/homework-answers.md, and report the results. Commit and push verified Question 7 work. Do not submit the homework.
+```
+
 Outcome: **In progress.** The outcome will be recorded at the next development checkpoint.
 
 ## Sources and gaps
 
 - Sources checked: `~/.claude/history.jsonl` and every session transcript under `~/.claude/projects/` (the home-directory and repository project folders).
-- All ten prompts above are taken from the three session transcripts and match `history.jsonl` exactly. Timestamps come from the transcripts (UTC) and are shown in local time (+02:00). "Pasted" marks prompts entered by pasting text.
+- All eleven prompts above are taken from the four session transcripts and match `history.jsonl` exactly. For pasted prompts, `history.jsonl` shows a placeholder; the pasted text, stored in the history itself or in Claude Code's local paste cache, was checked instead. Timestamps come from the transcripts (UTC) and are shown in local time (+02:00). "Pasted" marks prompts entered by pasting text.
 - Prompt 3 is stored in the transcript as a slash-command record; it is shown here as typed, which is also how the prompt history records it.
-- Not listed because they are not prompts to Claude: `exit`, which ended session `8fa56825…` at 14:42:21, and `/clear`, which ended session `745ecfb7…` at 15:27:38. Both appear only in the prompt history. The `/clear` that started session `0d400f3a…` at 15:49:06 is also not listed.
+- Not listed because they are not prompts to Claude: `exit`, which ended session `8fa56825…` at 14:42:21, and `/clear`, which ended session `745ecfb7…` at 15:27:38. Both appear only in the prompt history. The `/clear` commands that started sessions `0d400f3a…` at 15:49:06 and `a96d8d11…` at 16:35:00 are also not listed; the second one ended session `0d400f3a…`.
 - **Gap:** application commit `fbf6627` appears in no local Claude Code transcript, so no prompt or conversation is recorded for it.
-- Excluded sessions: `56fad681…` (finding the Question 4 prompt for this log), `c076f5a1…` (checkout verification only; no development), and the Homework 1 sessions `ec7765e9…`, `b45f1efe…` and `abc5d6e3…`. Session `0d400f3a…` is included because it went on to Question 6 development; its earlier record-maintenance turns are included with it.
+- Excluded sessions: `56fad681…` (finding the Question 4 prompt for this log), `c076f5a1…` (checkout verification only; no development), and the Homework 1 sessions `ec7765e9…`, `b45f1efe…` and `abc5d6e3…`. Session `0d400f3a…` is included because it went on to Question 6 development; its earlier record-maintenance turns are included with it. Session `a96d8d11…` is Question 7 development and also updates this record.
 - Corrections to the earlier version of this log: added prompt 1 (`ls`), restored the backticks in prompt 6, added timestamps and session identifiers, and removed a local path.
 - No prompt contains credentials or other secrets.

@@ -4,11 +4,13 @@ Run with:  uv run uvicorn splitledger_backend.main:app --reload
 """
 
 import os
+from collections.abc import AsyncIterator
+from contextlib import asynccontextmanager
 
 from fastapi import APIRouter, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .database import MockDatabase
+from .database import DEFAULT_DATABASE_URL, Database
 from .errors import install_error_handlers
 from .routes import auth, expenses, groups
 from .seed import seed_demo_data
@@ -16,14 +18,31 @@ from .seed import seed_demo_data
 DEFAULT_CORS_ORIGINS = "http://localhost:5173,http://127.0.0.1:5173"
 
 
-def create_app(db: MockDatabase | None = None) -> FastAPI:
-    """Build the app around `db`; a new empty in-memory database when none is given."""
+def create_app(database: Database | None = None) -> FastAPI:
+    """Build the app around `database`.
+
+    Without one, the app opens the configured database when it starts and closes it when it stops.
+    """
+
+    @asynccontextmanager
+    async def lifespan(app: FastAPI) -> AsyncIterator[None]:
+        if database is not None:
+            yield
+            return
+        app.state.database = open_default_database()
+        try:
+            yield
+        finally:
+            app.state.database.dispose()
+
     app = FastAPI(
         title="SplitLedger API",
         version="0.1.0",
         description="Backend for SplitLedger. The contract is in openapi.yaml at the repository root.",
+        lifespan=lifespan,
     )
-    app.state.db = db if db is not None else MockDatabase()
+    if database is not None:
+        app.state.database = database
 
     origins = [o.strip() for o in os.environ.get("SPLITLEDGER_CORS_ORIGINS", DEFAULT_CORS_ORIGINS).split(",")]
     app.add_middleware(
@@ -47,11 +66,14 @@ def create_app(db: MockDatabase | None = None) -> FastAPI:
     return app
 
 
-def _default_database() -> MockDatabase:
-    db = MockDatabase()
+def open_default_database() -> Database:
+    """The database at SPLITLEDGER_DATABASE_URL, with the demo data added if it is new and empty."""
+    database = Database(os.environ.get("SPLITLEDGER_DATABASE_URL", DEFAULT_DATABASE_URL))
     if os.environ.get("SPLITLEDGER_DEMO_DATA", "1") != "0":
-        seed_demo_data(db)
-    return db
+        with database.store() as store, store.transaction():
+            if store.is_empty():
+                seed_demo_data(store)
+    return database
 
 
-app = create_app(_default_database())
+app = create_app()

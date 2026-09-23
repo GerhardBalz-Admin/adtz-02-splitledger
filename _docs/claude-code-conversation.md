@@ -8,11 +8,12 @@ A sanitized, public rendering of the Claude Code sessions used for Homework 2 (S
 | --- | --- | --- | --- |
 | `8fa56825-d817-4b21-8a31-fc6b59021218` | 2026-09-23 13:43 – 13:57 | Complete | Home-directory listing, cloning and orientation, Question 4 design canvas (`/design`) |
 | `745ecfb7-5953-45ab-a1d2-b64bee611196` | 2026-09-23 14:07 – 14:53 | Complete | Question 4 frontend, stopping the dev server, checkout synchronization, Question 5 contract and backend |
-| `0d400f3a-2d58-426f-93ba-e1c6d4600f2a` | 2026-09-23 15:49 – 16:08 | **Partial** | Setting up this development record (interrupted by an API error), resuming it (commit `4f0e3fe`), and the Question 6 prompt |
+| `0d400f3a-2d58-426f-93ba-e1c6d4600f2a` | 2026-09-23 15:49 – 16:25 | Complete | Setting up this development record (interrupted by an API error), resuming it (commit `4f0e3fe`), and Question 6 (commit `3d22ad2`) |
+| `a96d8d11-e7d5-4490-ac25-ad94a55266de` | 2026-09-23 16:35 – | **Partial** | The Question 7 prompt (SQLAlchemy persistence and tests) |
 
 The first session started in the home directory, before the repository was cloned; the others started in the repository root. Times are local (+02:00); the original records are in UTC.
 
-**Session `0d400f3a…` is partial.** It began as record maintenance and became a development session with the Question 6 prompt. It is rendered through the last completed turn plus the Question 6 prompt. Claude's work on Question 6 (its tool calls and replies) is not rendered yet and will be added at the next development checkpoint.
+**Session `a96d8d11…` is partial.** Its only turn, Question 7, was still in progress when this file was generated for the Question 7 commit. The file renders the session through the Question 7 prompt. Claude's work on Question 7 (its tool calls and replies) is not rendered yet and will be added at the next development checkpoint. Session `0d400f3a…`, which was partial in the previous version of this file, is now rendered in full from its original transcript.
 
 Not covered:
 
@@ -23,33 +24,34 @@ Not covered:
 
 Entries appear in the order they occur in the session files:
 
-- **All 10 user prompts** in the covered range (3, 4 and 3 per session), word for word with their line breaks. Pasted prompts appear without Claude Code's paste wrapper. The `/design` prompt is shown as Claude Code stored it: a slash-command record with the command name and arguments.
-- **All 52 visible Claude text replies** in the covered range (4, 33 and 15), rendered as Markdown with unchanged wording. No line breaks were added.
-- **All 173 tool calls with their full inputs and all 173 tool results as text** (18, 103 and 52): 107 Bash, 43 Write, 7 Read, 6 Artifact, 4 TaskStop, 3 Edit, 2 ToolSearch and 1 PowerShell. For Bash and PowerShell, the tool's description is shown in the call heading. 6 results are marked as errors, as Claude Code recorded them. No text result was shortened for size.
-- **5 automatic Claude Code recaps**, shown to the user while they were away.
+- **All 11 user prompts** in the covered range (3, 4, 3 and 1 per session), word for word with their line breaks. Pasted prompts appear without Claude Code's paste wrapper. The `/design` prompt is shown as Claude Code stored it: a slash-command record with the command name and arguments.
+- **All 74 visible Claude text replies** in the covered range (4, 33, 37 and 0), rendered as Markdown with unchanged wording. No line breaks were added.
+- **All 250 tool calls with their full inputs and all 250 tool results as text** (18, 103, 129 and 0): 164 Bash, 47 Write, 12 Edit, 9 Read, 6 Artifact, 6 TaskStop, 4 PowerShell and 2 ToolSearch. For Bash and PowerShell, the tool's description is shown in the call heading. 7 results are marked as errors, as Claude Code recorded them. No text result was shortened for size. Line endings in tool output are normalized: Windows line breaks and lone carriage returns (for example in `git` progress output) become plain line breaks.
+- **6 automatic Claude Code recaps**, shown to the user while they were away.
 - **1 Claude Code API error** ("The response stopped arriving"), which ended the first turn of session `0d400f3a…`. It is labeled as an error, not as a Claude reply.
-- **The output of the `/clear` command** that started session `0d400f3a…` (empty).
+- **The output of the `/clear` commands** that started sessions `0d400f3a…` and `a96d8d11…` (empty).
 
 Session `0d400f3a…` maintains this record, so its tool calls and results quote the original transcripts, earlier renderings of this file, and the redaction rules themselves. The same redactions were applied to those quotations.
 
 ## What is omitted
 
-- **Claude's work on the current Question 6 turn** in session `0d400f3a…`, as explained above.
-- **6 screenshots.** Six Read results in session `745ecfb7…` were PNG images of the frontend taken during browser testing. Each is marked `[OMITTED: image content in tool result]`; the image data is not reproduced.
-- **116 thinking blocks.** 112 were stored with no readable text, only encrypted signatures. 4 contained Claude's internal reasoning text, which is not part of the visible replies.
+- **Claude's work on the current Question 7 turn** in session `a96d8d11…`, as explained above.
+- **7 screenshots.** Six Read results in session `745ecfb7…` and one in session `0d400f3a…` were PNG images of the frontend taken during browser testing. Each is marked `[OMITTED: image content in tool result]`; the image data is not reproduced.
+- **174 thinking blocks.** 158 were stored with no readable text, only encrypted signatures. 16 contained Claude's internal reasoning text, which is not part of the visible replies.
 - **1 skill expansion:** the instructions Claude Code injected for Claude when `/design` was invoked. It is not a user or Claude turn.
-- **218 context attachments that Claude Code injected for the model.** These are not conversation turns:
-  - 147 token-count reminders
+- **309 context attachments that Claude Code injected for the model.** These are not conversation turns:
+  - 213 token-count reminders
   - 6 system-prompt snapshots and 2 project-instructions attachments (`CLAUDE.md`/`AGENTS.md`)
-  - 13 environment notices, 3 date notices and 3 model notices
-  - 9 notices that a file had been edited, with a file excerpt
+  - 27 environment notices, 3 date notices and 4 model notices
+  - 11 notices that a file had been edited, with a file excerpt
   - 3 session-context notices and 3 commit/PR attribution settings
-  - 3 skill listings, 8 deferred-tool listings, 3 agent listings and 3 MCP-instruction listings
-  - 3 auto-mode notices and 1 command-permissions notice
-  - 8 "user hasn't heard from you" reminders
-- **The `/clear` command record and its caveat** that started session `0d400f3a…`. Only the command's (empty) output is shown.
-- **Session bookkeeping records:** mode and permission-mode markers, file-history snapshots and deltas, auto-generated titles, last-prompt markers, turn durations, cost state, and artifact and frame-link state.
-- **`exit` and `/clear`**, which ended sessions `8fa56825…` and `745ecfb7…`. Prompt history records them, but the session files do not.
+  - 4 skill listings, 9 deferred-tool listings, 4 agent listings and 4 MCP-instruction listings
+  - 4 auto-mode notices and 1 command-permissions notice
+  - 10 "user hasn't heard from you" reminders
+  - 1 background-task notification in session `0d400f3a…`: a dev server started in session `745ecfb7…` had exited. Claude Code marked it as not user input.
+- **The `/clear` command records and their caveats** that started sessions `0d400f3a…` and `a96d8d11…`. Only the commands' (empty) output is shown.
+- **Session bookkeeping records:** mode and permission-mode markers, file-history snapshots and deltas, auto-generated titles, last-prompt markers, turn durations, queue operations, cost state, and artifact and frame-link state.
+- **`exit` and `/clear`**, which ended sessions `8fa56825…`, `745ecfb7…` and `0d400f3a…`. Prompt history records them; for `0d400f3a…`, the `/clear` record is in the next session's file, as noted above.
 
 ## Redactions
 
@@ -57,30 +59,33 @@ Redacted text is replaced inline with an explicit marker. The counts are the rep
 
 | Marker | Replacements | What was removed |
 | --- | --- | --- |
-| `[REDACTED: local home path]` | 399 | The Windows home directory prefix in paths (all path forms) |
-| `[REDACTED: local username]` | 252 | The local Windows username, mainly in Claude Code's per-project folder names and in quoted redaction rules |
+| `[REDACTED: local home path]` | 510 | The Windows home directory prefix in paths (all path forms) |
+| `[REDACTED: local username]` | 339 | The local Windows username, mainly in Claude Code's per-project folder names and in quoted redaction rules |
 | `[REDACTED: home directory listing]` | 3 | Listings of the home directory's contents: from the first prompt's `ls`, from an `ls` of the home directory at the start of session `0d400f3a…`, and a quotation of the first |
-| `[REDACTED: home directory listing line]` | 9 | Single lines of that listing quoted in `grep` and `sed` output |
+| `[REDACTED: home directory listing line]` | 12 | Single lines of that listing, and of Claude's summary of it, quoted in `grep` and `sed` output |
+| `[REDACTED: home directory entry name]` | 22 | Names of individual home-directory entries used as search terms in Claude's leak-check commands and in a quoted redaction rule |
 | `[REDACTED: summary of the home directory listing]` | 2 | Claude's reply summarizing that listing, and a quotation of it |
-| `[REDACTED: PATH environment variable]` | 5 | The full `PATH` printed in a `which` error message, and quotations of it |
-| `[REDACTED: personal name]` | 15 | The author name in `git log`, `git show` and `backend/pyproject.toml` output |
-| `[REDACTED: email address]` | 6 | The personal email address in the same outputs |
-| `[REDACTED: personal account name]` | 13 | The personal GitHub login shown by `gh auth status`, and in quoted redaction rules |
-| `[REDACTED: account identifier]` | 2 | A Claude account identifier printed from a session bookkeeping record |
+| `[REDACTED: PATH environment variable]` | 6 | The full `PATH` printed in a `which` error message, and quotations of it |
+| `[REDACTED: personal name]` | 20 | The author name in `git log`, `git show` and `backend/pyproject.toml` output |
+| `[REDACTED: email address]` | 9 | The personal email address in the same outputs, and its local part used as a search term in Claude's leak-check commands |
+| `[REDACTED: personal account name]` | 25 | The personal GitHub login shown by `gh auth status`, and in quoted redaction rules |
+| `[REDACTED: account identifier]` | 11 | A Claude account identifier printed from a session bookkeeping record, in quoted redaction rules, and its first eight characters used as a search term in Claude's leak-check commands |
 | `[REDACTED: credential]` | 2 | The GitHub CLI token field in `gh auth status` output (already masked there), and a quotation of it |
+
+Corrections to the previous version of this file: two leak-check `grep` commands in session `0d400f3a…` contained the local part of the personal email address and the first eight characters of the Claude account identifier as search terms. Both are now redacted. The earlier version remains in the repository's Git history.
 
 The following were reviewed and kept:
 
-- The public repository owner `GerhardBalz-Admin`
+- The public repository owner `GerhardBalz-Admin`, and the first name alone as a search term in one leak-check command
 - `noreply@anthropic.com` in commit trailers
 - The SplitLedger design canvas link, which is already published in the prompt log, and the links to Claude's built-in Design artifact types
-- Demo accounts such as `dana@example.com` with the demo password `splitledger`
+- Demo accounts such as `dana@example.com` with the demo password `splitledger`, and test accounts such as `erin@example.com`
 - `localhost` and `127.0.0.1` dev-server URLs
 - Session IDs, the Claude Code background-task IDs, and the ID of the SplitLedger design artifact
 - A random bearer token in a failing `pytest` traceback, created by the in-memory test client for one test run; it grants access to nothing
-- Content hashes of the design canvas files in an Artifact listing
+- Content hashes of the design canvas files in an Artifact listing, and Git commit hashes
 - The Homework 1 prompts and records quoted from local prompt history, which are already public in the Homework 1 repository
-- Generic search terms such as `OneDrive` and `Dropbox` in a `grep` pattern Claude used to look for leaks; the listing lines that pattern found are redacted
+- Generic search terms such as `OneDrive`, `Dropbox`, `NTUSER` and `.ssh` in the `grep` patterns Claude used to look for leaks; the listing lines those patterns found are redacted
 
 ---
 
@@ -15425,7 +15430,7 @@ Now staging and scanning the full staged diff for sensitive material.
 **Tool call: Bash** — Stage files and scan staged diff
 
 ```sh
-git add AGENTS.md README.md _docs/claude-code-prompts.md _docs/claude-code-conversation.md && git status --short && git diff --cached --stat && D=$(git diff --cached) && echo "$D" | grep -n -i -E '[REDACTED: local username]\b|gerhard\.balz|gmail|[REDACTED: personal name]|[REDACTED: personal account name]($|[^-])|gho_|ghp_|github_pat|sk-[a-z0-9]|AKIA|BEGIN [A-Z ]*PRIVATE|password *[:=] *["'"'"'][^s]|C:\\\\Users|/c/Users|/home/|accountUuid|966c7816|\.ssh/|id_rsa|Bearer [A-Za-z0-9]' | grep -v 'noreply@anthropic' | cut -c1-200 | head -30
+git add AGENTS.md README.md _docs/claude-code-prompts.md _docs/claude-code-conversation.md && git status --short && git diff --cached --stat && D=$(git diff --cached) && echo "$D" | grep -n -i -E '[REDACTED: local username]\b|[REDACTED: email address]|gmail|[REDACTED: personal name]|[REDACTED: personal account name]($|[^-])|gho_|ghp_|github_pat|sk-[a-z0-9]|AKIA|BEGIN [A-Z ]*PRIVATE|password *[:=] *["'"'"'][^s]|C:\\\\Users|/c/Users|/home/|accountUuid|[REDACTED: account identifier]|\.ssh/|id_rsa|Bearer [A-Za-z0-9]' | grep -v 'noreply@anthropic' | cut -c1-200 | head -30
 ```
 
 <details><summary>Tool result</summary>
@@ -15637,7 +15642,7 @@ All 7 prompts match the source exactly in both files. Final scan of the added li
 **Tool call: Bash** — Final scan and remote check
 
 ```sh
-git diff --cached | grep '^+' | grep -n -i -E '[REDACTED: local username]\b|gerhard\.balz|gmail|[REDACTED: personal name]|[REDACTED: personal account name]($|[^-])|gho_|ghp_|github_pat|AKIA|PRIVATE KEY|C:\\+Users|/c/Users|966c7816|accountUuid' | grep -v noreply | wc -l; git fetch origin && git log --oneline HEAD..origin/main | wc -l; git status --short
+git diff --cached | grep '^+' | grep -n -i -E '[REDACTED: local username]\b|[REDACTED: email address]|gmail|[REDACTED: personal name]|[REDACTED: personal account name]($|[^-])|gho_|ghp_|github_pat|AKIA|PRIVATE KEY|C:\\+Users|/c/Users|[REDACTED: account identifier]|accountUuid' | grep -v noreply | wc -l; git fetch origin && git log --oneline HEAD..origin/main | wc -l; git status --short
 ```
 
 <details><summary>Tool result</summary>
@@ -15817,4 +15822,4121 @@ Verify the connection through the app, using a browser if available. Tell me whi
 Do not start Question 7.
 ```
 
+**Tool call: Bash** — Sync check and read docs and layout
+
+```sh
+git status --short --branch && git fetch origin && git log --oneline HEAD..origin/main; cat _docs/homework-answers.md; cat _docs/specs.md | head -80; ls frontend frontend/src frontend/src/api backend backend/src/splitledger_backend backend/tests
+```
+
+<details><summary>Tool result</summary>
+
+````text
+## main...origin/main
+# Homework 2 answers
+
+Answers to the [2026 Homework 2 questions](https://github.com/DataTalksClub/ai-dev-tools-zoomcamp/blob/main/cohorts/2026/homework/02-development/homework.md). This file tracks progress; it is not a course submission.
+
+## Question 1: Project
+
+**Expense splitter.**
+
+## Question 2: Spec and name
+
+**SplitLedger.** The accepted [product specification](specs.md) describes the groups, expenses, equal shares, and net balances.
+
+## Question 3: GitHub repository and setup commit
+
+[SplitLedger repository](https://github.com/GerhardBalz-Admin/adtz-02-splitledger). The required spec, `.gitignore`, `README.md`, and `AGENTS.md` were committed in several steps. The [final setup commit](https://github.com/GerhardBalz-Admin/adtz-02-splitledger/commit/3a04a0e3d05f62da2415e28722c583c8c46e87d7) has SHA-1:
+
+```text
+3a04a0e3d05f62da2415e28722c583c8c46e87d7
+```
+
+It also includes `CLAUDE.md`, which points to `AGENTS.md`. This is the last commit of the initial repository setup, before later documentation updates.
+
+## Question 4: Frontend prototype
+
+```bash
+npm run dev
+```
+
+Run it from `frontend/` after `npm install`. It serves the prototype at http://localhost:5173. The [frontend](../frontend/README.md) is a React + Vite + TypeScript app based on the SplitLedger design canvas. All backend calls go through `frontend/src/api/client.ts`, which currently uses an in-browser mock backend stored in `localStorage`. The main flows were verified in a browser at desktop and phone widths.
+
+## Question 5: Backend
+
+```bash
+uv run uvicorn splitledger_backend.main:app --reload
+```
+
+Run it from `backend/`. It serves the API at http://localhost:8000/api and interactive docs at http://localhost:8000/docs. The [backend](../backend/README.md) is a FastAPI app managed with uv. It implements the [`openapi.yaml`](../openapi.yaml) contract, which was written first from the frontend's centralized API client. It uses an in-memory mock database for now. The endpoint tests were written before the implementation, and all of them pass with `uv run pytest`. The frontend is not connected to it yet.
+
+## Question 6: Frontend–backend connection
+
+Pending implementation. Record the frontend's actual backend URL after integration.
+
+## Question 7: Database and tests
+
+Pending implementation. Record the actual test command after adding SQLAlchemy persistence and running the tests.
+# SplitLedger — Homework 2 specification
+
+**Status:** Accepted for Homework 2 Question 2 on 2026-09-23; implementation defaults resolved and pre-expense currency editing accepted on 2026-09-23.  
+**Purpose:** AI Dev Tools Zoomcamp 2026, Homework 2 learning exercise. This is not a final-project selection or a continuation of another project.
+
+## Product goal
+
+SplitLedger helps signed-in members of small groups record shared expenses and see each member's net balance. One account may belong to multiple groups. Each group keeps its own members, currency, expenses, and balances.
+
+## Accepted decisions
+
+1. A signed-in user may create and belong to multiple groups.
+2. A user joins an existing group by entering its invite code after signing in. Only the group creator can view and copy the code in the app.
+3. Every group has one currency, chosen when the group is created. Only the group creator may change it before the first expense is recorded; after that, it stays locked even if every expense is later deleted. All expenses in the group use that currency. No conversion occurs.
+4. An expense is divided equally among a selected, nonempty subset of that group's members.
+5. The signed-in member who enters an expense is its payer. The payer may be excluded from the selected members who share that expense.
+6. A member may edit or delete only expenses they created.
+7. The app shows each member's net balance. It does not suggest or record repayments.
+8. Each expense has a date that defaults to today when entered and may be changed by its creator.
+
+## Core user flows
+
+1. **Account:** Sign up with email and password, then sign in and out.
+2. **Create a group:** Enter a group name and choose a currency. The creator becomes a member and can view and copy the invite code to share outside the app. Other members cannot view it in the app. The creator may change the currency only before the first expense is recorded.
+3. **Join a group:** A signed-in user enters a valid invite code and becomes a member. Re-entering the same code does not create duplicate membership.
+4. **View groups:** A signed-in user sees only groups to which they belong and can open each group's expense list and balances.
+5. **Add an expense:** In a group, enter a description and positive amount; select at least one current group member who shares it. The expense date defaults to today but may be changed. The payer is the signed-in member. Save the expense and update the group's balances.
+6. **Correct an expense:** Its creator may change its description, amount, date, or selected participants, or delete it. Recalculate balances after every change.
+7. **Review balances:** Show the expense list and the signed net balance of each group member in the group's currency. Positive means the member is owed money; negative means the member owes money.
+
+## Balance rule
+
+For each member in a group:
+
+`net balance = amount paid for group expenses − sum of that member's allocated shares`
+
+The sum of all member balances in a group must be zero. Store and calculate money in the currency's minor units (for example, cents), not binary floating point. When an amount cannot be divided evenly, allocate the remaining minor units deterministically among the selected members so every share adds up to the expense total.
+
+**Example:** A pays CHF 90.00 for an expense shared equally by A, B, and C. A's balance becomes +CHF 60.00; B and C each have −CHF 30.00.
+
+## Acceptance checks
+
+- A user can sign up, sign in, create two separate groups, and view only groups they have joined.
+- Another signed-in user can join one group with its code; invalid codes do not grant access.
+- Only the group creator can view and copy the invite code in the app.
+- Only the group creator can change the currency before the first expense; no one can change it after an expense has been recorded, even after all expenses are deleted.
+- Group members can view that group's expenses and balances. A nonmember cannot read or change them.
+- A member can add an expense with a positive amount, a description, and at least one selected member of the same group.
+- A member can enter an earlier expense date and see that date in the expense list.
+- The payer is taken from the authenticated account, not from a client-supplied payer field.
+- A payer may record an expense shared only by other group members; the payer receives credit for the full amount and no allocated share.
+- The equal split handles a non-divisible amount deterministically and preserves every minor unit.
+- Adding, editing, and deleting an expense recalculates balances; they always sum to zero per group.
+- Only the creator of an expense may edit or delete it; other group members can view it.
+- Expense data and group membership remain after an application restart.
+
+## Boundaries for this exercise
+
+- No repayment recommendations, transfers, or settlement tracking.
+- No multi-currency expenses or exchange rates within a group.
+- No email invitation delivery, payment integration, receipt upload, recurring expense, or real-time synchronization requirement.
+- No member removal or group deletion in the first version.
+- This repository will be separate from the eventual course final-project decision; no other project is reused here.
+
+## Build and verification expectations
+
+The Homework 2 workflow calls for a frontend prototype with mocked backend calls, followed by an API contract, a FastAPI backend, frontend integration, replacement of the mock store with SQLAlchemy-backed SQLite persistence, and tests. The implementation should document its actual setup, run, and test commands in the repository. Do not treat these implementation details as decisions about the final project.
+
+## Implementation defaults
+
+Resolved for the Homework 2 implementation on 2026-09-23:
+
+- Use email/password accounts without email verification for this local exercise.
+- Members can join through the invite code without an email from the app.
+- Leftover minor units from an equal split go one each to the selected members in group join order.
+
+These are design assumptions for this exercise, not additional user decisions.
+backend:
+README.md
+pyproject.toml
+src/
+tests/
+uv.lock
+
+backend/src/splitledger_backend:
+__init__.py
+__pycache__/
+database.py
+deps.py
+errors.py
+main.py
+money.py
+routes/
+schemas.py
+security.py
+seed.py
+views.py
+
+backend/tests:
+__pycache__/
+conftest.py
+test_auth.py
+test_contract.py
+test_expenses.py
+test_groups.py
+test_money.py
+
+frontend:
+README.md
+dist/
+index.html
+node_modules/
+package-lock.json
+package.json
+src/
+tsconfig.json
+vite.config.ts
+
+frontend/src:
+App.tsx
+api/
+auth.tsx
+components/
+lib/
+main.tsx
+pages/
+styles.css
+test/
+
+frontend/src/api:
+client.test.ts
+client.ts
+mockServer.ts
+types.ts
+````
+
+</details>
+
+**Tool call: Bash** — Read frontend API client and config
+
+```sh
+cd [REDACTED: local home path]/adtz-02-splitledger/frontend && cat src/api/client.ts vite.config.ts package.json README.md; sed -n 1,60p src/api/client.test.ts; grep -n "export" src/api/mockServer.ts | head -20; grep -rn "mockServer\|resetDemo\|DEMO_" src --include=*.tsx --include=*.ts | grep -v "^src/api/mockServer.ts"
+```
+
+<details><summary>Tool result</summary>
+
+````text
+// The single place where the frontend talks to the backend.
+//
+// Every call goes through `request`, which currently hands the request to the
+// in-browser mock server. To switch to the real backend, replace the body of
+// `request` with a `fetch` to the API base URL (http://localhost:8000/api).
+// The endpoint paths and payloads below follow the contract in /openapi.yaml.
+
+import type { CurrencyCode } from '../lib/money';
+import { handleMockRequest } from './mockServer';
+import type {
+  Expense,
+  ExpenseInput,
+  GroupDetail,
+  GroupSummary,
+  JoinResult,
+  Session,
+  User,
+} from './types';
+
+export class ApiError extends Error {
+  readonly status: number;
+
+  constructor(status: number, message: string) {
+    super(message);
+    this.name = 'ApiError';
+    this.status = status;
+  }
+}
+
+const TOKEN_KEY = 'splitledger.token';
+
+function readToken(): string | null {
+  try {
+    return localStorage.getItem(TOKEN_KEY);
+  } catch {
+    return null;
+  }
+}
+
+function writeToken(token: string | null): void {
+  try {
+    if (token) localStorage.setItem(TOKEN_KEY, token);
+    else localStorage.removeItem(TOKEN_KEY);
+  } catch {
+    // Storage unavailable: the session lasts only for this page load.
+  }
+}
+
+type Method = 'GET' | 'POST' | 'PATCH' | 'DELETE';
+
+const MOCK_LATENCY_MS = import.meta.env.MODE === 'test' ? 0 : 150;
+
+async function request<T>(method: Method, path: string, body?: unknown): Promise<T> {
+  const token = readToken();
+  const response = handleMockRequest({ method, path, body, token });
+  if (MOCK_LATENCY_MS > 0) await new Promise((resolve) => setTimeout(resolve, MOCK_LATENCY_MS));
+  if (response.status === 401 && token) writeToken(null);
+  if (response.status >= 400) {
+    const detail = (response.body as { detail?: string } | undefined)?.detail ?? 'Request failed';
+    throw new ApiError(response.status, detail);
+  }
+  return response.body as T;
+}
+
+export const api = {
+  async signUp(email: string, password: string): Promise<User> {
+    const session = await request<Session>('POST', '/auth/signup', { email, password });
+    writeToken(session.token);
+    return session.user;
+  },
+
+  async signIn(email: string, password: string): Promise<User> {
+    const session = await request<Session>('POST', '/auth/signin', { email, password });
+    writeToken(session.token);
+    return session.user;
+  },
+
+  async signOut(): Promise<void> {
+    try {
+      await request<void>('POST', '/auth/signout');
+    } finally {
+      writeToken(null);
+    }
+  },
+
+  /** Returns the signed-in user, or null when there is no valid session. */
+  async currentUser(): Promise<User | null> {
+    if (!readToken()) return null;
+    try {
+      return await request<User>('GET', '/auth/me');
+    } catch (error) {
+      if (error instanceof ApiError && error.status === 401) return null;
+      throw error;
+    }
+  },
+
+  listGroups(): Promise<GroupSummary[]> {
+    return request('GET', '/groups');
+  },
+
+  createGroup(name: string, currency: CurrencyCode): Promise<GroupDetail> {
+    return request('POST', '/groups', { name, currency });
+  },
+
+  joinGroup(inviteCode: string): Promise<JoinResult> {
+    return request('POST', '/groups/join', { inviteCode });
+  },
+
+  getGroup(groupId: string): Promise<GroupDetail> {
+    return request('GET', `/groups/${encodeURIComponent(groupId)}`);
+  },
+
+  changeCurrency(groupId: string, currency: CurrencyCode): Promise<GroupDetail> {
+    return request('PATCH', `/groups/${encodeURIComponent(groupId)}`, { currency });
+  },
+
+  /** The payer is always the signed-in user; the server never accepts a payer field. */
+  createExpense(groupId: string, input: ExpenseInput): Promise<Expense> {
+    return request('POST', `/groups/${encodeURIComponent(groupId)}/expenses`, input);
+  },
+
+  updateExpense(groupId: string, expenseId: string, input: ExpenseInput): Promise<Expense> {
+    return request(
+      'PATCH',
+      `/groups/${encodeURIComponent(groupId)}/expenses/${encodeURIComponent(expenseId)}`,
+      input,
+    );
+  },
+
+  deleteExpense(groupId: string, expenseId: string): Promise<void> {
+    return request(
+      'DELETE',
+      `/groups/${encodeURIComponent(groupId)}/expenses/${encodeURIComponent(expenseId)}`,
+    );
+  },
+};
+import { defineConfig } from 'vitest/config';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig({
+  plugins: [react()],
+  server: { port: 5173, strictPort: true },
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: ['./src/test/setup.ts'],
+  },
+});
+{
+  "name": "splitledger-frontend",
+  "version": "1.0.0",
+  "description": "SplitLedger frontend prototype with a mocked backend",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "type": "module",
+  "dependencies": {
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "react-router-dom": "^7.18.4"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.7",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "jsdom": "^30.1.1",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.0",
+    "vitest": "^5.0.1"
+  },
+  "private": true
+}
+# SplitLedger frontend
+
+React + Vite + TypeScript prototype of SplitLedger, based on the SplitLedger design canvas. It adapts the desktop screens to phone widths.
+
+## Commands
+
+Run these from `frontend/` (Node.js 20 or newer):
+
+```bash
+npm install
+npm run dev        # start the app at http://localhost:5173
+npm test           # run the unit tests (Vitest)
+npm run build      # typecheck and build to dist/
+```
+
+## Mocked backend
+
+There is no real backend yet. Every backend call goes through [`src/api/client.ts`](src/api/client.ts). Its `request` function passes each call to [`src/api/mockServer.ts`](src/api/mockServer.ts), an in-browser mock of the planned REST API:
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| POST | `/auth/signup`, `/auth/signin`, `/auth/signout` | Account and session |
+| GET | `/auth/me` | Current user |
+| GET, POST | `/groups` | List my groups, create a group |
+| POST | `/groups/join` | Join by invite code (no duplicate membership) |
+| GET, PATCH | `/groups/{id}` | Group detail with balances; change currency |
+| POST | `/groups/{id}/expenses` | Add an expense (payer = signed-in user) |
+| PATCH, DELETE | `/groups/{id}/expenses/{expenseId}` | Edit or delete your own expense |
+
+The mock enforces the spec rules: nonmembers get 404, only the creator receives the invite code, only an expense's creator can change it, and the currency stays locked after the first expense is recorded, even if it is deleted. It stores its data in `localStorage`, so data survives a reload. **Reset demo data** on the sign-in page restores the seed data.
+
+Demo accounts: `dana@example.com`, `anna@example.com`, `ben@example.com`, `chiara@example.com`. They all use the password `splitledger`. Dana created *Flat 4B*, whose invite code is `K7QM-4RX2`.
+
+## Money rules
+
+Amounts are integer minor units (cents). [`src/lib/split.ts`](src/lib/split.ts) splits each expense equally among the selected members. Any leftover cents go one each to the selected members in group join order, so the shares always add up to the total and group balances sum to zero.
+# Currency lock for older mock data
+
+The browser mock records whether a group has ever had an expense. When loading
+data saved by an older mock that lacks this history, it keeps the group currency
+locked because deleted expenses cannot be recovered from the current list.
+import { ApiError, api } from './client';
+import { DEMO_PASSWORD, resetMockDatabase } from './mockServer';
+
+async function expectStatus(promise: Promise<unknown>, status: number) {
+  await expect(promise).rejects.toSatisfy((e: unknown) => e instanceof ApiError && e.status === status);
+}
+
+beforeEach(() => {
+  localStorage.clear();
+  resetMockDatabase();
+});
+
+describe('mocked backend through the api client', () => {
+  it('signs up, signs in and out, and lists only joined groups', async () => {
+    await api.signUp('erin@example.com', 'long-enough');
+    expect(await api.listGroups()).toEqual([]);
+    await api.createGroup('Trip', 'EUR');
+    await api.createGroup('Flat', 'CHF');
+    expect((await api.listGroups()).map((g) => g.name)).toEqual(['Trip', 'Flat']);
+
+    await api.signOut();
+    expect(await api.currentUser()).toBeNull();
+    await expectStatus(api.signIn('erin@example.com', 'wrong-password'), 401);
+    await api.signIn('erin@example.com', 'long-enough');
+    expect((await api.currentUser())?.email).toBe('erin@example.com');
+  });
+
+  it('shows the invite code only to the creator and joins without duplicates', async () => {
+    await api.signIn('dana@example.com', DEMO_PASSWORD);
+    const created = await api.createGroup('Board games', 'USD');
+    expect(created.inviteCode).toMatch(/^[A-Z0-9]{4}-[A-Z0-9]{4}$/);
+
+    await api.signUp('erin@example.com', 'long-enough');
+    await expectStatus(api.getGroup(created.id), 404);
+    await expectStatus(api.joinGroup('NOPE-0000'), 404);
+    expect(await api.listGroups()).toEqual([]);
+
+    const first = await api.joinGroup(created.inviteCode!.toLowerCase());
+    expect(first.alreadyMember).toBe(false);
+    const again = await api.joinGroup(created.inviteCode!);
+    expect(again.alreadyMember).toBe(true);
+
+    const seen = await api.getGroup(created.id);
+    expect(seen.inviteCode).toBeUndefined();
+    expect(seen.members.map((m) => m.email)).toEqual(['dana@example.com', 'erin@example.com']);
+  });
+
+  it('takes the payer from the session and recalculates balances on add, edit, delete', async () => {
+    await api.signIn('ben@example.com', DEMO_PASSWORD);
+    const input = {
+      description: 'Snacks',
+      amountMinor: 1000,
+      date: '2026-09-01',
+      participantIds: ['u_chiara', 'u_dana', 'u_anna'],
+      payerId: 'u_dana',
+    };
+    const expense = await api.createExpense('g_flat4b', input);
+    expect(expense.payerId).toBe('u_ben');
+    expect(expense.participantIds).toEqual(['u_dana', 'u_anna', 'u_chiara']);
+
+47:export interface MockRequest {
+54:export interface MockResponse {
+60:export const DEMO_PASSWORD = 'splitledger';
+96:export function displayNameFor(email: string): string {
+190:export function resetMockDatabase(): void {
+447:export function handleMockRequest(req: MockRequest): MockResponse {
+src/api/client.test.ts:2:import { DEMO_PASSWORD, resetMockDatabase } from './mockServer';
+src/api/client.test.ts:29:    await api.signIn('dana@example.com', DEMO_PASSWORD);
+src/api/client.test.ts:49:    await api.signIn('ben@example.com', DEMO_PASSWORD);
+src/api/client.test.ts:79:    await api.signIn('ben@example.com', DEMO_PASSWORD);
+src/api/client.test.ts:86:    await api.signIn('dana@example.com', DEMO_PASSWORD);
+src/api/client.test.ts:96:    await api.signIn('dana@example.com', DEMO_PASSWORD);
+src/api/client.test.ts:113:    await api.signIn('ben@example.com', DEMO_PASSWORD);
+src/api/client.test.ts:118:    await api.signIn('dana@example.com', DEMO_PASSWORD);
+src/api/client.test.ts:126:    await api.signIn('dana@example.com', DEMO_PASSWORD);
+src/api/client.ts:9:import { handleMockRequest } from './mockServer';
+src/pages/AuthPage.tsx:3:import { DEMO_PASSWORD, resetMockDatabase } from '../api/mockServer';
+src/pages/AuthPage.tsx:127:            <code>ben@example.com</code>, <code>chiara@example.com</code>, password <code>{DEMO_PASSWORD}</code>.{' '}
+````
+
+</details>
+
+**Tool call: Bash** — Read AuthPage, backend main, README, tests
+
+```sh
+cd [REDACTED: local home path]/adtz-02-splitledger && sed -n 1,40p frontend/src/pages/AuthPage.tsx; sed -n 110,140p frontend/src/pages/AuthPage.tsx; cat backend/src/splitledger_backend/main.py; cat backend/README.md; ls frontend/src/test frontend/src/components frontend/src/lib; cat frontend/src/test/setup.ts; grep -rln "api\b\|mockServer" frontend/src --include=*.test.* 
+```
+
+<details><summary>Tool result</summary>
+
+````text
+import { useState, type FormEvent } from 'react';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { DEMO_PASSWORD, resetMockDatabase } from '../api/mockServer';
+import { useAuth } from '../auth';
+import { errorMessage } from '../lib/errors';
+
+type Mode = 'signin' | 'signup';
+
+export function AuthPage() {
+  const { user, loading, signIn, signUp, forget } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = (location.state as { from?: string } | null)?.from ?? '/';
+
+  const [mode, setMode] = useState<Mode>('signin');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [resetDone, setResetDone] = useState(false);
+
+  if (!loading && user) return <Navigate to={from} replace />;
+
+  async function handleSubmit(event: FormEvent) {
+    event.preventDefault();
+    setError(null);
+    setSubmitting(true);
+    try {
+      if (mode === 'signin') await signIn(email, password);
+      else await signUp(email, password);
+      navigate(from, { replace: true });
+    } catch (err) {
+      setError(errorMessage(err));
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  function switchMode(next: Mode) {
+    setMode(next);
+          {error && (
+            <p className="form-error" role="alert">
+              {error}
+            </p>
+          )}
+
+          <button type="submit" className="btn btn-primary btn-lg" disabled={submitting}>
+            {submitting ? 'Please wait…' : mode === 'signin' ? 'Sign in' : 'Create account'}
+          </button>
+
+          <p className="demo-note">
+            {mode === 'signin'
+              ? 'Create account uses the same two fields. No email verification in this version.'
+              : 'No email verification in this version; you are signed in right away.'}
+          </p>
+          <p className="demo-note">
+            Prototype with mocked data. Demo accounts: <code>dana@example.com</code>, <code>anna@example.com</code>,{' '}
+            <code>ben@example.com</code>, <code>chiara@example.com</code>, password <code>{DEMO_PASSWORD}</code>.{' '}
+            <button
+              type="button"
+              className="btn-link"
+              style={{ padding: 0, minHeight: 0 }}
+              onClick={() => {
+                resetMockDatabase();
+                forget();
+                setResetDone(true);
+              }}
+            >
+              Reset demo data
+            </button>
+            {resetDone && <span role="status"> Done.</span>}
+"""FastAPI application for SplitLedger.
+
+Run with:  uv run uvicorn splitledger_backend.main:app --reload
+"""
+
+import os
+
+from fastapi import APIRouter, FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+from .database import MockDatabase
+from .errors import install_error_handlers
+from .routes import auth, expenses, groups
+from .seed import seed_demo_data
+
+DEFAULT_CORS_ORIGINS = "http://localhost:5173,http://127.0.0.1:5173"
+
+
+def create_app(db: MockDatabase | None = None) -> FastAPI:
+    """Build the app around `db`; a new empty in-memory database when none is given."""
+    app = FastAPI(
+        title="SplitLedger API",
+        version="0.1.0",
+        description="Backend for SplitLedger. The contract is in openapi.yaml at the repository root.",
+    )
+    app.state.db = db if db is not None else MockDatabase()
+
+    origins = [o.strip() for o in os.environ.get("SPLITLEDGER_CORS_ORIGINS", DEFAULT_CORS_ORIGINS).split(",")]
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=[o for o in origins if o],
+        allow_methods=["GET", "POST", "PATCH", "DELETE"],
+        allow_headers=["Authorization", "Content-Type"],
+    )
+    install_error_handlers(app)
+
+    api = APIRouter(prefix="/api")
+    api.include_router(auth.router)
+    api.include_router(groups.router)
+    api.include_router(expenses.router)
+    app.include_router(api)
+
+    @app.get("/health", include_in_schema=False)
+    def health() -> dict[str, str]:
+        return {"status": "ok"}
+
+    return app
+
+
+def _default_database() -> MockDatabase:
+    db = MockDatabase()
+    if os.environ.get("SPLITLEDGER_DEMO_DATA", "1") != "0":
+        seed_demo_data(db)
+    return db
+
+
+app = create_app(_default_database())
+# SplitLedger backend
+
+FastAPI backend for SplitLedger. It implements the contract in [`../openapi.yaml`](../openapi.yaml). For now it keeps its data in an in-memory mock database, which is lost when the server stops. SQLAlchemy with SQLite replaces it in Question 7.
+
+## Commands
+
+Run these from `backend/`. [uv](https://docs.astral.sh/uv/) installs Python and the dependencies on first use.
+
+```bash
+uv sync                                                        # install dependencies
+uv run uvicorn splitledger_backend.main:app --reload           # start at http://localhost:8000
+uv run pytest                                                  # run the tests
+```
+
+The API lives under `http://localhost:8000/api`. Interactive docs are at http://localhost:8000/docs.
+
+### Settings
+
+| Environment variable | Default | Effect |
+| --- | --- | --- |
+| `SPLITLEDGER_DEMO_DATA` | `1` | Seed the demo data at start-up. Set to `0` to start empty. |
+| `SPLITLEDGER_CORS_ORIGINS` | `http://localhost:5173,http://127.0.0.1:5173` | Browser origins allowed to call the API. |
+
+The demo data matches the frontend mock. The accounts are `dana@example.com`, `anna@example.com`, `ben@example.com` and `chiara@example.com`, all with the password `splitledger`. Dana created *Flat 4B*, whose invite code is `K7QM-4RX2`.
+
+## Layout
+
+| File | Purpose |
+| --- | --- |
+| `src/splitledger_backend/main.py` | `create_app()` factory and the module-level `app` |
+| `src/splitledger_backend/routes/` | `auth`, `groups` and `expenses` endpoints, including the permission rules |
+| `src/splitledger_backend/deps.py` | Bearer-token user lookup and the member-only group lookup |
+| `src/splitledger_backend/money.py` | Equal split and net balance calculation in minor units |
+| `src/splitledger_backend/database.py` | In-memory mock database (to be replaced in Question 7) |
+| `src/splitledger_backend/schemas.py` | Pydantic request and response models with camelCase JSON |
+| `src/splitledger_backend/errors.py` | Returns validation errors as `{"detail": "<message>"}` |
+| `src/splitledger_backend/seed.py` | Demo data |
+| `tests/` | Endpoint, money-rule and contract tests |
+
+## Rules enforced
+
+- Authenticated endpoints need `Authorization: Bearer <token>` and answer `401` otherwise. Passwords are stored as salted PBKDF2 hashes.
+- A user sees only the groups they belong to. A nonmember gets `404` for a group and everything in it, the same response as for a group that does not exist.
+- Only the group creator receives `inviteCode`. Joining with a code the user already used creates no duplicate membership, and an unknown code returns `404`.
+- Only the creator may change the currency (`403` otherwise), and only before the first expense is recorded (`409` afterward, even if all expenses are deleted). `currencyLocked` in group detail reflects this permanent lock.
+- The payer is always the signed-in user; any payer field in the request body is ignored. Participants must be distinct current members of the group. Amounts are positive integers of minor units, and dates are `YYYY-MM-DD`.
+- Only the expense's creator may edit or delete it (`403` otherwise).
+- Balances are the amount paid minus allocated shares. Leftover cents go to the selected members in group join order, so balances in a group always sum to zero.
+
+`tests/test_contract.py` checks that the app's operations, success status codes and response fields match `openapi.yaml`.
+frontend/src/components:
+AppHeader.tsx
+CopyButton.tsx
+NotFound.tsx
+
+frontend/src/lib:
+dates.ts
+errors.ts
+money.ts
+names.ts
+split.test.ts
+split.ts
+useGroup.ts
+
+frontend/src/test:
+setup.ts
+import '@testing-library/jest-dom/vitest';
+frontend/src/api/client.test.ts
+````
+
+</details>
+
+**Tool call: Bash** — Read mock server, auth context, errors
+
+```sh
+cd [REDACTED: local home path]/adtz-02-splitledger/frontend && sed -n 1,60p src/test/../api/mockServer.ts; sed -n 440,470p src/api/mockServer.ts; cat src/auth.tsx | head -70; cat src/lib/errors.ts; cat tsconfig.json; ls src/*.d.ts 2>/dev/null; sed -n 40,110p src/pages/AuthPage.tsx
+```
+
+<details><summary>Tool result</summary>
+
+```text
+// In-browser stand-in for the SplitLedger backend.
+//
+// It behaves like the future REST API: it authenticates by session token,
+// enforces membership and ownership rules, and keeps its data in
+// localStorage so it survives a page reload. Only `api/client.ts` calls it.
+
+import { isIsoDate } from '../lib/dates';
+import { isCurrencyCode, type CurrencyCode } from '../lib/money';
+import { computeBalances } from '../lib/split';
+import type { Expense, GroupDetail, GroupSummary, Member, User } from './types';
+
+interface UserRow {
+  id: string;
+  email: string;
+  // Plain text only because this is a local mock; the real backend must hash passwords.
+  password: string;
+}
+
+interface GroupRow {
+  id: string;
+  name: string;
+  currency: CurrencyCode;
+  createdBy: string;
+  inviteCode: string;
+  hasRecordedExpense: boolean;
+}
+
+interface MembershipRow {
+  groupId: string;
+  userId: string;
+  joinedAt: string;
+}
+
+interface ExpenseRow extends Expense {
+  groupId: string;
+}
+
+interface Database {
+  users: UserRow[];
+  sessions: Record<string, string>;
+  groups: GroupRow[];
+  /** Kept in join order. */
+  memberships: MembershipRow[];
+  expenses: ExpenseRow[];
+}
+
+export interface MockRequest {
+  method: string;
+  path: string;
+  body?: unknown;
+  token: string | null;
+}
+
+export interface MockResponse {
+  status: number;
+  body?: unknown;
+}
+
+const STORAGE_KEY = 'splitledger.mockdb.v1';
+export const DEMO_PASSWORD = 'splitledger';
+      return { status: 204 };
+    }
+  }
+
+  throw new HttpError(404, 'Not found.');
+}
+
+export function handleMockRequest(req: MockRequest): MockResponse {
+  // Work on a copy so a failed request leaves the stored data untouched.
+  const draft = structuredClone(load());
+  const parts = req.path.split('/').filter(Boolean).map(decodeURIComponent);
+  try {
+    let response: MockResponse;
+    if (parts[0] === 'auth') response = routeAuth(draft, req, parts[1]);
+    else if (parts[0] === 'groups') response = routeGroups(draft, req, parts);
+    else throw new HttpError(404, 'Not found.');
+    if (req.method !== 'GET') {
+      memoryDb = draft;
+      save(draft);
+    }
+    return response;
+  } catch (error) {
+    if (error instanceof HttpError) return { status: error.status, body: { detail: error.message } };
+    throw error;
+  }
+}
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { api } from './api/client';
+import type { User } from './api/types';
+
+interface AuthState {
+  user: User | null;
+  loading: boolean;
+  /** True after the user signed out in this tab, so the next sign-in starts at the groups list. */
+  signedOut: boolean;
+  signIn: (email: string, password: string) => Promise<void>;
+  signUp: (email: string, password: string) => Promise<void>;
+  signOut: () => Promise<void>;
+  /** Clears the user locally, e.g. after the server reports an expired session. */
+  forget: () => void;
+}
+
+const AuthContext = createContext<AuthState | null>(null);
+
+export function AuthProvider({ children }: { children: ReactNode }) {
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [signedOut, setSignedOut] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+    api
+      .currentUser()
+      .then((current) => active && setUser(current))
+      .finally(() => active && setLoading(false));
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  const signIn = useCallback(async (email: string, password: string) => {
+    setUser(await api.signIn(email, password));
+    setSignedOut(false);
+  }, []);
+  const signUp = useCallback(async (email: string, password: string) => {
+    setUser(await api.signUp(email, password));
+    setSignedOut(false);
+  }, []);
+  const signOut = useCallback(async () => {
+    try {
+      await api.signOut();
+    } finally {
+      setSignedOut(true);
+      setUser(null);
+    }
+  }, []);
+  const forget = useCallback(() => setUser(null), []);
+
+  const value = useMemo(
+    () => ({ user, loading, signedOut, signIn, signUp, signOut, forget }),
+    [user, loading, signedOut, signIn, signUp, signOut, forget],
+  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}
+
+export function useAuth(): AuthState {
+  const value = useContext(AuthContext);
+  if (!value) throw new Error('useAuth must be used inside AuthProvider');
+  return value;
+}
+
+/** The signed-in user; only call inside routes guarded by RequireAuth. */
+export function useUser(): User {
+  const { user } = useAuth();
+  if (!user) throw new Error('No signed-in user');
+  return user;
+import { ApiError } from '../api/client';
+
+export function errorMessage(error: unknown): string {
+  if (error instanceof ApiError) return error.message;
+  return 'Something went wrong. Please try again.';
+}
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"]
+  },
+  "include": ["src", "vite.config.ts"]
+}
+    setMode(next);
+    setError(null);
+  }
+
+  return (
+    <div className="auth">
+      <section className="auth-hero">
+        <div className="brand">SplitLedger</div>
+        <div>
+          <h1>
+            Shared expenses.
+            <br />
+            One net balance each.
+          </h1>
+          <p>Record what you paid, choose who shares it, and see who is owed and who owes, per group.</p>
+        </div>
+        <div className="hero-ledger" aria-hidden="true">
+          <div>
+            <span>You</span>
+            <span className="hero-pos">+60.00 CHF</span>
+          </div>
+          <div>
+            <span>Anna</span>
+            <span className="hero-neg">−30.00 CHF</span>
+          </div>
+          <div>
+            <span>Ben</span>
+            <span className="hero-neg">−30.00 CHF</span>
+          </div>
+        </div>
+      </section>
+
+      <main className="auth-main">
+        <form className="auth-form" onSubmit={handleSubmit} noValidate>
+          <div className="segmented" role="group" aria-label="Account action">
+            <button type="button" aria-pressed={mode === 'signin'} onClick={() => switchMode('signin')}>
+              Sign in
+            </button>
+            <button type="button" aria-pressed={mode === 'signup'} onClick={() => switchMode('signup')}>
+              Create account
+            </button>
+          </div>
+          <h2>{mode === 'signin' ? 'Welcome back' : 'Create your account'}</h2>
+
+          <div className="field">
+            <label htmlFor="email">Email</label>
+            <input
+              id="email"
+              className="input"
+              type="email"
+              autoComplete="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="field">
+            <label htmlFor="password">Password</label>
+            <input
+              id="password"
+              className="input"
+              type="password"
+              autoComplete={mode === 'signin' ? 'current-password' : 'new-password'}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            {mode === 'signup' && <span className="hint">At least 8 characters.</span>}
+          </div>
+
+          {error && (
+```
+
+</details>
+
+**Tool call: Bash** — Move mock server to test folder
+
+```sh
+git mv src/api/mockServer.ts src/test/mockServer.ts && sed -i "s#from './types';#from '../api/types';#; 1,5s#^// In-browser stand-in for the SplitLedger backend.#// In-memory stand-in for the SplitLedger backend, used only by the unit tests.#; s#^// It behaves like the future REST API: it authenticates by session token,#// It behaves like the FastAPI backend: it authenticates by session token,#; s#^// localStorage so it survives a page reload. Only \`api/client.ts\` calls it.#// localStorage. Tests reach it through \`mockFetch\`, which stands in for \`fetch\`.#" src/test/mockServer.ts && sed -n 1,11p src/test/mockServer.ts
+```
+
+<details><summary>Tool result</summary>
+
+```text
+// In-memory stand-in for the SplitLedger backend, used only by the unit tests.
+//
+// It behaves like the FastAPI backend: it authenticates by session token,
+// enforces membership and ownership rules, and keeps its data in
+// localStorage. Tests reach it through `mockFetch`, which stands in for `fetch`.
+
+import { isIsoDate } from '../lib/dates';
+import { isCurrencyCode, type CurrencyCode } from '../lib/money';
+import { computeBalances } from '../lib/split';
+import type { Expense, GroupDetail, GroupSummary, Member, User } from '../api/types';
+```
+
+</details>
+
+**Claude** · 2026-09-23 16:08:59
+
+Moved the mock to the test folder; now rewriting the client's `request` to call the real backend.
+
+**Tool call: Edit**
+
+File: `[REDACTED: local home path]\adtz-02-splitledger\frontend\src\api\client.ts`
+
+Old:
+
+```text
+// The single place where the frontend talks to the backend.
+//
+// Every call goes through `request`, which currently hands the request to the
+// in-browser mock server. To switch to the real backend, replace the body of
+// `request` with a `fetch` to the API base URL (http://localhost:8000/api).
+// The endpoint paths and payloads below follow the contract in /openapi.yaml.
+
+import type { CurrencyCode } from '../lib/money';
+import { handleMockRequest } from './mockServer';
+import type {
+```
+
+New:
+
+```text
+// The single place where the frontend talks to the backend.
+//
+// Every call goes through `request`, which sends it with `fetch` to the FastAPI
+// backend at API_BASE_URL. The endpoint paths and payloads below follow the
+// contract in /openapi.yaml.
+
+import type { CurrencyCode } from '../lib/money';
+import type {
+```
+
+**Tool call: Edit**
+
+File: `[REDACTED: local home path]\adtz-02-splitledger\frontend\src\api\client.ts`
+
+Old:
+
+```text
+type Method = 'GET' | 'POST' | 'PATCH' | 'DELETE';
+
+const MOCK_LATENCY_MS = import.meta.env.MODE === 'test' ? 0 : 150;
+
+async function request<T>(method: Method, path: string, body?: unknown): Promise<T> {
+  const token = readToken();
+  const response = handleMockRequest({ method, path, body, token });
+  if (MOCK_LATENCY_MS > 0) await new Promise((resolve) => setTimeout(resolve, MOCK_LATENCY_MS));
+  if (response.status === 401 && token) writeToken(null);
+  if (response.status >= 400) {
+    const detail = (response.body as { detail?: string } | undefined)?.detail ?? 'Request failed';
+    throw new ApiError(response.status, detail);
+  }
+  return response.body as T;
+}
+```
+
+New:
+
+```text
+type Method = 'GET' | 'POST' | 'PATCH' | 'DELETE';
+
+/** Base URL of the backend API. Set VITE_API_BASE_URL to point the frontend elsewhere. */
+export const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api').replace(/\/+$/, '');
+
+/** Status of an ApiError raised when the backend cannot be reached at all. */
+export const NETWORK_ERROR_STATUS = 0;
+
+async function request<T>(method: Method, path: string, body?: unknown): Promise<T> {
+  const token = readToken();
+  const headers: Record<string, string> = {};
+  if (token) headers.Authorization = `Bearer ${token}`;
+  if (body !== undefined) headers['Content-Type'] = 'application/json';
+
+  let response: Response;
+  try {
+    response = await fetch(`${API_BASE_URL}${path}`, {
+      method,
+      headers,
+      body: body === undefined ? undefined : JSON.stringify(body),
+    });
+  } catch {
+    throw new ApiError(
+      NETWORK_ERROR_STATUS,
+      `Cannot reach the SplitLedger backend at ${API_BASE_URL}. Check that it is running.`,
+    );
+  }
+
+  const text = await response.text();
+  let data: unknown;
+  try {
+    data = text ? JSON.parse(text) : undefined;
+  } catch {
+    data = undefined;
+  }
+  if (response.status === 401 && token) writeToken(null);
+  if (!response.ok) {
+    const detail = (data as { detail?: unknown } | undefined)?.detail;
+    throw new ApiError(response.status, typeof detail === 'string' ? detail : 'Request failed');
+  }
+  return data as T;
+}
+```
+
+<details><summary>Tool result</summary>
+
+```text
+The file [REDACTED: local home path]\adtz-02-splitledger\frontend\src\api\client.ts has been updated successfully. (file state is current in your context — no need to Read it back)
+```
+
+</details>
+
+<details><summary>Tool result</summary>
+
+```text
+The file [REDACTED: local home path]\adtz-02-splitledger\frontend\src\api\client.ts has been updated successfully. (file state is current in your context — no need to Read it back)
+```
+
+</details>
+
+**Tool call: Write**
+
+File: `[REDACTED: local home path]\adtz-02-splitledger\frontend\src\vite-env.d.ts`
+
+```text
+/// <reference types="vite/client" />
+
+interface ImportMetaEnv {
+  /** Backend API base URL; defaults to http://localhost:8000/api. */
+  readonly VITE_API_BASE_URL?: string;
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}
+
+```
+
+**Tool call: Write**
+
+File: `[REDACTED: local home path]\adtz-02-splitledger\frontend\src\test\mockFetch.ts`
+
+```text
+// A `fetch` replacement that routes API calls to the in-memory mock backend,
+// so unit tests exercise the real client code without a running server.
+
+import { API_BASE_URL } from '../api/client';
+import { handleMockRequest } from './mockServer';
+
+export interface RecordedCall {
+  url: string;
+  method: string;
+  headers: Record<string, string>;
+}
+
+export function createMockFetch(calls: RecordedCall[] = []): typeof fetch {
+  return async (input, init) => {
+    const url = String(input);
+    const method = init?.method ?? 'GET';
+    const headers = { ...(init?.headers as Record<string, string> | undefined) };
+    calls.push({ url, method, headers });
+    if (!url.startsWith(`${API_BASE_URL}/`)) throw new TypeError(`Unexpected URL ${url}`);
+
+    const path = url.slice(API_BASE_URL.length);
+    const auth = headers.Authorization;
+    const token = auth?.startsWith('Bearer ') ? auth.slice('Bearer '.length) : null;
+    const body = typeof init?.body === 'string' ? JSON.parse(init.body) : undefined;
+    const result = handleMockRequest({ method, path, body, token });
+    const payload = result.body === undefined ? null : JSON.stringify(result.body);
+    return new Response(payload, {
+      status: result.status,
+      headers: payload ? { 'Content-Type': 'application/json' } : undefined,
+    });
+  };
+}
+
+```
+
+<details><summary>Tool result</summary>
+
+```text
+File created successfully at: [REDACTED: local home path]\adtz-02-splitledger\frontend\src\vite-env.d.ts (file state is current in your context — no need to Read it back)
+```
+
+</details>
+
+<details><summary>Tool result</summary>
+
+```text
+File created successfully at: [REDACTED: local home path]\adtz-02-splitledger\frontend\src\test\mockFetch.ts (file state is current in your context — no need to Read it back)
+```
+
+</details>
+
+**Claude** · 2026-09-23 16:09:17
+
+Now the client tests: route `fetch` through the mock and add checks for the URL, auth header, and unreachable-backend error.
+
+**Tool call: Bash** — Read rest of client tests
+
+```sh
+sed -n 60,200p src/api/client.test.ts
+```
+
+<details><summary>Tool result</summary>
+
+```text
+    let group = await api.getGroup('g_flat4b');
+    const balanceOf = (id: string) => group.balances.find((b) => b.memberId === id)!.balance;
+    expect(balanceOf('u_ben')).toBe(-4833 + 1000);
+    expect(balanceOf('u_dana')).toBe(8166 - 334);
+    expect(group.balances.reduce((sum, b) => sum + b.balance, 0)).toBe(0);
+
+    await api.updateExpense('g_flat4b', expense.id, { ...input, amountMinor: 3000, participantIds: ['u_ben'] });
+    group = await api.getGroup('g_flat4b');
+    expect(balanceOf('u_ben')).toBe(-4833);
+    expect(group.balances.reduce((sum, b) => sum + b.balance, 0)).toBe(0);
+
+    await api.deleteExpense('g_flat4b', expense.id);
+    group = await api.getGroup('g_flat4b');
+    expect(group.expenses).toHaveLength(4);
+    expect(group.balances.map((b) => b.balance)).toEqual([8166, 1667, -4833, -5000]);
+  });
+
+  it('lets only the creator of an expense edit or delete it', async () => {
+    await api.signIn('ben@example.com', DEMO_PASSWORD);
+    const input = { description: 'Hack', amountMinor: 100, date: '2026-09-01', participantIds: ['u_ben'] };
+    await expectStatus(api.updateExpense('g_flat4b', 'e_groceries', input), 403);
+    await expectStatus(api.deleteExpense('g_flat4b', 'e_groceries'), 403);
+  });
+
+  it('validates expenses', async () => {
+    await api.signIn('dana@example.com', DEMO_PASSWORD);
+    const valid = { description: 'Ok', amountMinor: 100, date: '2026-09-01', participantIds: ['u_dana'] };
+    await expectStatus(api.createExpense('g_flat4b', { ...valid, amountMinor: 0 }), 422);
+    await expectStatus(api.createExpense('g_flat4b', { ...valid, description: '  ' }), 422);
+    await expectStatus(api.createExpense('g_flat4b', { ...valid, participantIds: [] }), 422);
+    await expectStatus(api.createExpense('g_flat4b', { ...valid, participantIds: ['u_stranger'] }), 422);
+    await expectStatus(api.createExpense('g_flat4b', { ...valid, date: '2026-02-30' }), 422);
+  });
+
+  it('keeps the currency locked after the last expense is deleted', async () => {
+    await api.signIn('dana@example.com', DEMO_PASSWORD);
+    await expectStatus(api.changeCurrency('g_flat4b', 'EUR'), 409);
+    const group = await api.createGroup('Empty', 'CHF');
+    expect(group.currencyLocked).toBe(false);
+    expect((await api.changeCurrency(group.id, 'EUR')).currency).toBe('EUR');
+    const expense = await api.createExpense(group.id, { description: 'X', amountMinor: 1, date: '2026-09-01', participantIds: ['u_dana'] });
+    await expectStatus(api.changeCurrency(group.id, 'USD'), 409);
+    await api.deleteExpense(group.id, expense.id);
+    expect((await api.getGroup(group.id)).expenses).toHaveLength(0);
+    expect((await api.getGroup(group.id)).currencyLocked).toBe(true);
+    await expectStatus(api.changeCurrency(group.id, 'USD'), 409);
+    expect((await api.getGroup(group.id)).currency).toBe('EUR');
+    vi.resetModules();
+    const fresh = await import('./client');
+    expect((await fresh.api.getGroup(group.id)).currencyLocked).toBe(true);
+    await expect(fresh.api.changeCurrency(group.id, 'USD')).rejects.toMatchObject({ status: 409 });
+
+    await api.signIn('ben@example.com', DEMO_PASSWORD);
+    await expectStatus(api.changeCurrency('g_ticino', 'CHF'), 409);
+  });
+
+  it('keeps data across a reload of the mock store', async () => {
+    await api.signIn('dana@example.com', DEMO_PASSWORD);
+    const group = await api.createGroup('Persistent', 'CHF');
+    vi.resetModules();
+    const fresh = await import('./client');
+    expect((await fresh.api.getGroup(group.id)).name).toBe('Persistent');
+  });
+
+  it('keeps old mock groups locked when deleted expense history is unknown', async () => {
+    await api.signIn('dana@example.com', DEMO_PASSWORD);
+    const group = await api.createGroup('Legacy', 'CHF');
+    const oldData = JSON.parse(localStorage.getItem('splitledger.mockdb.v1')!);
+    delete oldData.groups.find((row: { id: string }) => row.id === group.id).hasRecordedExpense;
+    localStorage.setItem('splitledger.mockdb.v1', JSON.stringify(oldData));
+    vi.resetModules();
+    const fresh = await import('./client');
+    expect((await fresh.api.getGroup(group.id)).currencyLocked).toBe(true);
+    await expect(fresh.api.changeCurrency(group.id, 'EUR')).rejects.toMatchObject({ status: 409 });
+  });
+});
+```
+
+</details>
+
+**Tool call: Bash** — Update client tests to use fetch stub
+
+```sh
+python - <<'EOF'
+p='src/api/client.test.ts'; s=open(p,encoding='utf-8').read()
+s=s.replace("""import { ApiError, api } from './client';
+import { DEMO_PASSWORD, resetMockDatabase } from './mockServer';
+""","""import { API_BASE_URL, ApiError, NETWORK_ERROR_STATUS, api } from './client';
+import { createMockFetch, type RecordedCall } from '../test/mockFetch';
+import { DEMO_PASSWORD, resetMockDatabase } from '../test/mockServer';
+""")
+s=s.replace("""beforeEach(() => {
+  localStorage.clear();
+  resetMockDatabase();
+});
+
+describe('mocked backend through the api client', () => {""","""let calls: RecordedCall[];
+
+beforeEach(() => {
+  localStorage.clear();
+  resetMockDatabase();
+  calls = [];
+  vi.stubGlobal('fetch', createMockFetch(calls));
+});
+
+afterEach(() => {
+  vi.unstubAllGlobals();
+});
+
+describe('http requests', () => {
+  it('calls the FastAPI backend under /api with the session token', async () => {
+    expect(API_BASE_URL).toBe('http://localhost:8000/api');
+    await api.signIn('dana@example.com', DEMO_PASSWORD);
+    await api.listGroups();
+    expect(calls.map((c) => `${c.method} ${c.url}`)).toEqual([
+      'POST http://localhost:8000/api/auth/signin',
+      'GET http://localhost:8000/api/groups',
+    ]);
+    expect(calls[0].headers.Authorization).toBeUndefined();
+    expect(calls[0].headers['Content-Type']).toBe('application/json');
+    expect(calls[1].headers.Authorization).toMatch(/^Bearer .+/);
+  });
+
+  it('reports an unreachable backend and a server error detail', async () => {
+    vi.stubGlobal('fetch', async () => {
+      throw new TypeError('Failed to fetch');
+    });
+    await expect(api.listGroups()).rejects.toMatchObject({
+      status: NETWORK_ERROR_STATUS,
+      message: expect.stringContaining('http://localhost:8000/api'),
+    });
+
+    vi.stubGlobal('fetch', async () => new Response(JSON.stringify({ detail: 'Group not found.' }), { status: 404 }));
+    await expect(api.getGroup('g_missing')).rejects.toMatchObject({ status: 404, message: 'Group not found.' });
+  });
+
+  it('forgets the stored token when the backend rejects it', async () => {
+    await api.signIn('dana@example.com', DEMO_PASSWORD);
+    vi.stubGlobal('fetch', async () => new Response(JSON.stringify({ detail: 'Sign in again.' }), { status: 401 }));
+    expect(await api.currentUser()).toBeNull();
+    expect(localStorage.getItem('splitledger.token')).toBeNull();
+  });
+});
+
+describe('api client against the mock backend', () => {""")
+old_reload="""    expect((await api.getGroup(group.id)).currency).toBe('EUR');
+    vi.resetModules();
+    const fresh = await import('./client');
+    expect((await fresh.api.getGroup(group.id)).currencyLocked).toBe(true);
+    await expect(fresh.api.changeCurrency(group.id, 'USD')).rejects.toMatchObject({ status: 409 });
+"""
+assert old_reload in s
+s=s.replace(old_reload,"""    expect((await api.getGroup(group.id)).currency).toBe('EUR');
+""")
+i=s.index("  it('keeps data across a reload of the mock store'")
+s=s[:i].rstrip()+"\n});\n"
+open(p,'w',encoding='utf-8',newline='\n').write(s)
+EOF
+tail -5 src/api/client.test.ts
+```
+
+<details><summary>Tool result</summary>
+
+```text
+    await api.signIn('ben@example.com', DEMO_PASSWORD);
+    await expectStatus(api.changeCurrency('g_ticino', 'CHF'), 409);
+  });
+});
+```
+
+</details>
+
+**Claude** · 2026-09-23 16:09:39
+
+Now the sign-in page (drop the mock reset link) and the auth provider (don't leave a rejected promise when the backend is down at startup).
+
+**Tool call: Bash** — Locate remaining reset code in AuthPage
+
+```sh
+sed -n 138,150p src/pages/AuthPage.tsx; grep -n "forget\|resetDone" src/pages/AuthPage.tsx
+```
+
+<details><summary>Tool result</summary>
+
+```text
+              Reset demo data
+            </button>
+            {resetDone && <span role="status"> Done.</span>}
+          </p>
+        </form>
+      </main>
+    </div>
+  );
+}
+10:  const { user, loading, signIn, signUp, forget } = useAuth();
+20:  const [resetDone, setResetDone] = useState(false);
+134:                forget();
+140:            {resetDone && <span role="status"> Done.</span>}
+```
+
+</details>
+
+**Tool call: Bash** — Remove reset link and handle startup errors
+
+```sh
+python - <<'EOF'
+p='src/pages/AuthPage.tsx'; s=open(p,encoding='utf-8',newline='').read()
+nl='\r\n' if '\r\n' in s else '\n'; s=s.replace('\r\n','\n')
+s=s.replace("import { DEMO_PASSWORD, resetMockDatabase } from '../api/mockServer';\n","")
+s=s.replace("const { user, loading, signIn, signUp, forget } = useAuth();","const { user, loading, signIn, signUp } = useAuth();")
+s=s.replace("  const [resetDone, setResetDone] = useState(false);\n","")
+a=s.index("          <p className=\"demo-note\">\n            Prototype with mocked data.")
+b=s.index("          </p>\n",s.index("{resetDone &&"))+len("          </p>\n")
+s=s[:a]+"""          <p className="demo-note">
+            Demo accounts seeded by the backend: <code>dana@example.com</code>, <code>anna@example.com</code>,{' '}
+            <code>ben@example.com</code>, <code>chiara@example.com</code>, password <code>splitledger</code>.
+          </p>
+"""+s[b:]
+open(p,'w',encoding='utf-8',newline='').write(s.replace('\n',nl))
+p='src/auth.tsx'; s=open(p,encoding='utf-8',newline='').read()
+old=".then((current) => active && setUser(current))\n"
+new=".then((current) => active && setUser(current))\n      // Backend unreachable: show the sign-in page; signing in reports the problem.\n      .catch(() => active && setUser(null))\n"
+s2=s.replace(old,new).replace(old.replace('\n','\r\n'),new.replace('\n','\r\n'))
+assert s2!=s; open(p,'w',encoding='utf-8',newline='').write(s2)
+EOF
+git diff src/pages/AuthPage.tsx src/auth.tsx | head -60
+```
+
+<details><summary>Tool result</summary>
+
+```text
+warning: in the working copy of 'frontend/src/pages/AuthPage.tsx', LF will be replaced by CRLF the next time Git touches it
+diff --git a/frontend/src/auth.tsx b/frontend/src/auth.tsx
+index 167cb33..bdb449d 100644
+--- a/frontend/src/auth.tsx
++++ b/frontend/src/auth.tsx
+@@ -26,6 +26,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
+     api
+       .currentUser()
+       .then((current) => active && setUser(current))
++      // Backend unreachable: show the sign-in page; signing in reports the problem.
++      .catch(() => active && setUser(null))
+       .finally(() => active && setLoading(false));
+     return () => {
+       active = false;
+diff --git a/frontend/src/pages/AuthPage.tsx b/frontend/src/pages/AuthPage.tsx
+index 83c4543..4bdf8d6 100644
+--- a/frontend/src/pages/AuthPage.tsx
++++ b/frontend/src/pages/AuthPage.tsx
+@@ -1,13 +1,12 @@
+ import { useState, type FormEvent } from 'react';
+ import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+-import { DEMO_PASSWORD, resetMockDatabase } from '../api/mockServer';
+ import { useAuth } from '../auth';
+ import { errorMessage } from '../lib/errors';
+ 
+ type Mode = 'signin' | 'signup';
+ 
+ export function AuthPage() {
+-  const { user, loading, signIn, signUp, forget } = useAuth();
++  const { user, loading, signIn, signUp } = useAuth();
+   const navigate = useNavigate();
+   const location = useLocation();
+   const from = (location.state as { from?: string } | null)?.from ?? '/';
+@@ -17,7 +16,6 @@ export function AuthPage() {
+   const [password, setPassword] = useState('');
+   const [error, setError] = useState<string | null>(null);
+   const [submitting, setSubmitting] = useState(false);
+-  const [resetDone, setResetDone] = useState(false);
+ 
+   if (!loading && user) return <Navigate to={from} replace />;
+ 
+@@ -123,21 +121,8 @@ export function AuthPage() {
+               : 'No email verification in this version; you are signed in right away.'}
+           </p>
+           <p className="demo-note">
+-            Prototype with mocked data. Demo accounts: <code>dana@example.com</code>, <code>anna@example.com</code>,{' '}
+-            <code>ben@example.com</code>, <code>chiara@example.com</code>, password <code>{DEMO_PASSWORD}</code>.{' '}
+-            <button
+-              type="button"
+-              className="btn-link"
+-              style={{ padding: 0, minHeight: 0 }}
+-              onClick={() => {
+-                resetMockDatabase();
+-                forget();
+-                setResetDone(true);
+-              }}
+-            >
+-              Reset demo data
+-            </button>
+-            {resetDone && <span role="status"> Done.</span>}
++            Demo accounts seeded by the backend: <code>dana@example.com</code>, <code>anna@example.com</code>,{' '}
+```
+
+</details>
+
+**Tool call: Bash** — Search leftovers, run tests and build
+
+```sh
+grep -rn -i "mock\|prototype\|localStorage" src --include=*.tsx --include=*.ts | grep -v "^src/test/\|client.test.ts"; npm test 2>&1 | tail -15; npm run build 2>&1 | tail -6
+```
+
+<details><summary>Tool result</summary>
+
+```text
+src/api/client.ts:32:    return localStorage.getItem(TOKEN_KEY);
+src/api/client.ts:40:    if (token) localStorage.setItem(TOKEN_KEY, token);
+src/api/client.ts:41:    else localStorage.removeItem(TOKEN_KEY);
+src/api/types.ts:1:// Shapes exchanged with the backend. The mock server returns exactly these,
+
+> splitledger-frontend@1.0.0 test
+> vitest run
+
+
+ RUN  v5.0.1 [REDACTED: local home path]/adtz-02-splitledger/frontend
+
+
+ Test Files  2 passed (2)
+      Tests  19 passed (19)
+   Start at  16:09:57
+   Duration  785ms (environment 78%, setup 12%, transform 6%, tests 2%, worker 1%, import 1%)
+
+computing gzip size...
+dist/index.html                   0.66 kB │ gzip:  0.38 kB
+dist/assets/index-DVe_0M-I.css   12.86 kB │ gzip:  3.13 kB
+dist/assets/index-l76sUIRM.js   289.92 kB │ gzip: 90.29 kB
+
+[32m✓ built in 98ms[39m
+```
+
+</details>
+
+**Tool call: Bash** — Check types comment and status
+
+```sh
+sed -n 1,5p src/api/types.ts; grep -rn "mock" index.html package.json; git status --short ..
+```
+
+<details><summary>Tool result</summary>
+
+```text
+// Shapes exchanged with the backend. The mock server returns exactly these,
+// so the real FastAPI backend can implement the same contract later.
+
+import type { CurrencyCode } from '../lib/money';
+
+package.json:4:  "description": "SplitLedger frontend prototype with a mocked backend",
+ M src/api/client.test.ts
+ M src/api/client.ts
+ M src/auth.tsx
+ M src/pages/AuthPage.tsx
+RM src/api/mockServer.ts -> src/test/mockServer.ts
+?? src/test/mockFetch.ts
+?? src/vite-env.d.ts
+```
+
+</details>
+
+**Tool call: Bash** — Update stale comments and description
+
+```sh
+python - <<'EOF'
+for p,o,n in [('src/api/types.ts',"// Shapes exchanged with the backend. The mock server returns exactly these,\n// so the real FastAPI backend can implement the same contract later.","// Shapes exchanged with the FastAPI backend, as defined in /openapi.yaml."),
+              ('package.json','"SplitLedger frontend prototype with a mocked backend"','"SplitLedger frontend for the FastAPI backend"')]:
+    s=open(p,encoding='utf-8',newline='').read(); s2=s.replace(o,n).replace(o.replace('\n','\r\n'),n)
+    assert s2!=s,p; open(p,'w',encoding='utf-8',newline='').write(s2)
+EOF
+grep -n description package-lock.json | head -2
+```
+
+<details><summary>Tool result</summary>
+
+```text
+(Bash completed with no output)
+```
+
+</details>
+
+**Claude** · 2026-09-23 16:10:10
+
+Unit tests (19) and build pass. Now the real end-to-end check: start the backend and frontend, then drive the app in a browser.
+
+**Tool call: Bash** — Start FastAPI backend on port 8000
+
+```sh
+cd [REDACTED: local home path]/adtz-02-splitledger/backend && uv run uvicorn splitledger_backend.main:app --port 8000 > "$TEMP/sl-backend.log" 2>&1
+```
+
+**Tool call: Bash** — Start Vite dev server on port 5173
+
+```sh
+npm run dev > "$TEMP/sl-frontend.log" 2>&1
+```
+
+<details><summary>Tool result</summary>
+
+```text
+Command running in background with ID: br61z9s11. Output is being written to: [REDACTED: local home path]\AppData\Local\Temp\claude\C--Users-[REDACTED: local username]-adtz-02-splitledger\745ecfb7-5953-45ab-a1d2-b64bee611196\tasks\br61z9s11.output. You will be notified when it completes. To check interim output, use Read on that file path.
+Session cwd remains [REDACTED: local home path]\adtz-02-splitledger\frontend; directory changes made by the backgrounded command do not apply to subsequent commands.
+```
+
+</details>
+
+<details><summary>Tool result</summary>
+
+```text
+Command running in background with ID: bc66uswm9. Output is being written to: [REDACTED: local home path]\AppData\Local\Temp\claude\C--Users-[REDACTED: local username]-adtz-02-splitledger\745ecfb7-5953-45ab-a1d2-b64bee611196\tasks\bc66uswm9.output. You will be notified when it completes. To check interim output, use Read on that file path.
+```
+
+</details>
+
+**Tool call: Bash** — Check servers, CORS preflight, playwright
+
+```sh
+sleep 1; curl -s http://localhost:8000/health; echo; curl -s -o /dev/null -w '%{http_code}\n' http://localhost:5173/; curl -s -i -X OPTIONS http://localhost:8000/api/groups -H 'Origin: http://localhost:5173' -H 'Access-Control-Request-Method: GET' -H 'Access-Control-Request-Headers: authorization' | head -8; ls [REDACTED: local home path]/AppData/Local/Temp/claude/C--Users-[REDACTED: local username]-adtz-02-splitledger/745ecfb7-5953-45ab-a1d2-b64bee611196/scratchpad/e2e/ 2>&1 | head
+```
+
+<details><summary>Tool result</summary>
+
+```text
+{"status":"ok"}
+200
+HTTP/1.1 200 OK
+date: Wed, 23 Sep 2026 14:10:20 GMT
+server: uvicorn
+vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers, Access-Control-Request-Private-Network
+access-control-allow-methods: GET, POST, PATCH, DELETE
+access-control-max-age: 600
+access-control-allow-headers: Accept, Accept-Language, Authorization, Content-Language, Content-Type
+access-control-allow-origin: http://localhost:5173
+dbg.mjs
+dbg2.mjs
+flows.mjs
+node_modules/
+package-lock.json
+package.json
+shots/
+```
+
+</details>
+
+**Tool call: Bash** — Check why Vite exited
+
+```sh
+cat "$TEMP/sl-frontend.log" | tail -8; netstat -ano | grep -E ':5173|:8000' | grep LISTEN
+```
+
+<details><summary>Tool result</summary>
+
+```text
+[31merror when starting dev server:
+Error: Port 5173 is already in use
+    at httpServerStart (file:///[REDACTED: local home path]/adtz-02-splitledger/frontend/node_modules/vite/dist/node/chunks/node.js:14167:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async startServer (file:///[REDACTED: local home path]/adtz-02-splitledger/frontend/node_modules/vite/dist/node/chunks/node.js:24582:30)
+    at async Object.listen (file:///[REDACTED: local home path]/adtz-02-splitledger/frontend/node_modules/vite/dist/node/chunks/node.js:24396:4)
+    at async CAC.<anonymous> (file:///[REDACTED: local home path]/adtz-02-splitledger/frontend/node_modules/vite/dist/node/cli.js:725:3)[39m
+  TCP    127.0.0.1:8000         0.0.0.0:0              LISTENING       18136
+  TCP    [::1]:5173             [::]:0                 LISTENING       16380
+```
+
+</details>
+
+**Claude** · 2026-09-23 16:10:27
+
+Port 5173 is already taken by another process. Checking what it is before touching anything.
+
+**Tool call: PowerShell** — Identify process listening on 5173
+
+```powershell
+Get-CimInstance Win32_Process -Filter "ProcessId=16380" | Select-Object ProcessId,ParentProcessId,CreationDate,CommandLine | Format-List
+```
+
+<details><summary>Tool result</summary>
+
+```text
+ProcessId       : 16380
+ParentProcessId : 30364
+CreationDate    : 9/23/2026 2:15:57 PM
+CommandLine     : "node"   "[REDACTED: local home path]\adtz-02-splitledger\frontend\node_modules\.bin\\..\vite\bin\vite.js"
+```
+
+</details>
+
+**Tool call: Bash** — Read existing Playwright flow script
+
+```sh
+E=[REDACTED: local home path]/AppData/Local/Temp/claude/C--Users-[REDACTED: local username]-adtz-02-splitledger/745ecfb7-5953-45ab-a1d2-b64bee611196/scratchpad/e2e; sed -n 1,120p $E/flows.mjs
+```
+
+<details><summary>Tool result</summary>
+
+```text
+import { chromium } from 'playwright';
+import assert from 'node:assert/strict';
+
+const BASE = 'http://localhost:5173';
+const SHOTS = new URL('./shots/', import.meta.url).pathname.replace(/^\/(\w:)/, '$1');
+const browser = await chromium.launch();
+const errors = [];
+
+async function newPage(viewport) {
+  const ctx = await browser.newContext({ viewport });
+  await ctx.grantPermissions(['clipboard-read', 'clipboard-write']);
+  const page = await ctx.newPage();
+  page.on('pageerror', (e) => errors.push(e.message));
+  page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
+  return page;
+}
+
+async function signIn(page, email, password = 'splitledger') {
+  await page.goto(`${BASE}/signin`);
+  await page.getByLabel('Email').fill(email);
+  await page.getByLabel('Password').fill(password);
+  await page.getByRole('button', { name: 'Sign in', exact: true }).last().click();
+  await page.getByRole('heading', { name: 'Your groups' }).waitFor();
+}
+
+const step = (s) => console.log('✓', s);
+
+// ---- Desktop: Dana (creator) ----
+const page = await newPage({ width: 1280, height: 900 });
+await page.goto(BASE);
+await page.evaluate(() => localStorage.clear());
+await page.goto(BASE);
+await page.waitForURL('**/signin');
+step('unauthenticated user is redirected to /signin');
+await page.screenshot({ path: SHOTS + 'd-01-signin.png' });
+
+await page.getByLabel('Email').fill('dana@example.com');
+await page.getByLabel('Password').fill('wrong');
+await page.getByRole('button', { name: 'Sign in', exact: true }).last().click();
+await page.getByText('Email or password is incorrect.').waitFor();
+step('wrong password rejected');
+
+await signIn(page, 'dana@example.com');
+const rows = page.locator('a.group-row');
+await rows.first().waitFor();
+assert.equal(await rows.count(), 2);
+assert.match(await rows.nth(0).innerText(), /Flat 4B[\s\S]*\+81\.66/);
+await page.screenshot({ path: SHOTS + 'd-02-groups.png' });
+step('groups list shows 2 groups with balance +81.66');
+
+await rows.nth(0).click();
+await page.getByRole('heading', { name: 'Flat 4B' }).waitFor();
+const bal = await page.getByTestId('balances').innerText();
+for (const v of ['+81.66', '+16.67', '−48.33', '−50.00']) assert.ok(bal.includes(v), v);
+assert.equal(await page.getByTestId('balance-sum').innerText(), '0.00');
+assert.equal(await page.getByTestId('invite-code').innerText(), 'K7QM-4RX2');
+await page.screenshot({ path: SHOTS + 'd-03-group.png', fullPage: true });
+step('group detail: balances match design, sum 0.00, creator sees code');
+
+// Add expense with remainder and earlier date
+await page.getByRole('link', { name: 'Add expense' }).click();
+await page.getByRole('heading', { name: 'Add expense' }).waitFor();
+const today = await page.getByLabel('Date').inputValue();
+assert.match(today, /^\d{4}-\d{2}-\d{2}$/);
+await page.getByRole('button', { name: 'Save expense' }).click();
+await page.getByText('Enter a description.').waitFor();
+await page.getByText('Enter an amount like 12.50.').waitFor();
+step('empty form shows validation errors; date defaults to today ' + today);
+await page.getByLabel('Description').fill('Pizza night');
+await page.getByLabel('Amount (CHF)').fill('100');
+await page.getByLabel('Chiara').uncheck();
+assert.equal(await page.getByTestId('split-summary').innerText(), '100.00 ÷ 3 = 33.33 r 0.01');
+const prevText = await page.locator('.preview').innerText();
+assert.ok(prevText.includes('+1 cent') && prevText.includes('+66.66'), prevText);
+await page.getByLabel('Date').fill('2026-08-15');
+await page.screenshot({ path: SHOTS + 'd-04-expense-form.png', fullPage: true });
+await page.getByRole('button', { name: 'Save expense' }).click();
+await page.getByRole('heading', { name: 'Flat 4B' }).waitFor();
+const pizza = page.getByTestId('expense-row').filter({ hasText: 'Pizza night' });
+assert.match(await pizza.innerText(), /15 Aug[\s\S]*100\.00/);
+let b2 = await page.getByTestId('balances').innerText();
+assert.ok(b2.includes('+148.32'), b2); // 81.66 + 66.66
+assert.equal(await page.getByTestId('balance-sum').innerText(), '0.00');
+step('added expense with earlier date; leftover cent to first member; balances recalculated, sum 0');
+
+// Edit it: exclude self
+await pizza.getByRole('link', { name: /Edit/ }).click();
+await page.getByRole('heading', { name: 'Edit expense' }).waitFor();
+assert.equal(await page.getByLabel('Amount (CHF)').inputValue(), '100.00');
+await page.getByRole('button', { name: 'Everyone but me' }).click();
+await page.getByLabel('Amount (CHF)').fill('90');
+await page.getByRole('button', { name: 'Save changes' }).click();
+await page.getByRole('heading', { name: 'Flat 4B' }).waitFor();
+b2 = await page.getByTestId('balances').innerText();
+assert.ok(b2.includes('+171.66'), b2); // 81.66 + 90
+assert.match(await page.getByTestId('expense-row').filter({ hasText: 'Pizza night' }).innerText(), /shared by Anna, Ben, Chiara/);
+step('edited expense to exclude payer; payer credited full amount');
+
+// Other members' expenses are read-only
+const cleaning = page.getByTestId('expense-row').filter({ hasText: 'Cleaning supplies' });
+assert.match(await cleaning.innerText(), /Ben's entry/);
+assert.equal(await cleaning.getByRole('link', { name: /Edit/ }).count(), 0);
+await page.goto(`${BASE}/groups/g_flat4b/expenses/e_cleaning/edit`);
+await page.getByRole('heading', { name: "Can't edit this expense" }).waitFor();
+step("other member's expense has no Edit/Delete and edit URL is refused");
+
+// Delete
+await page.goto(`${BASE}/groups/g_flat4b`);
+const pizza2 = page.getByTestId('expense-row').filter({ hasText: 'Pizza night' });
+await pizza2.getByRole('button', { name: /Delete/ }).click();
+await pizza2.getByRole('button', { name: 'Confirm delete' }).click();
+await pizza2.waitFor({ state: 'detached' });
+assert.ok((await page.getByTestId('balances').innerText()).includes('+81.66'));
+step('deleted expense; balances back to +81.66');
+
+// Currency locked
+assert.match(await page.locator('.side').innerText(), /CHF is fixed because expenses have been recorded/);
+
+// Create group
+await page.goto(`${BASE}/groups/new`);
+```
+
+</details>
+
+**Tool call: Bash** — Check backend seed IDs
+
+```sh
+cd [REDACTED: local home path]/adtz-02-splitledger/backend && grep -n "id=\|_id\|invite\|name=" src/splitledger_backend/seed.py | head -30; grep -n "signout\|def sign" src/splitledger_backend/routes/auth.py | head
+```
+
+<details><summary>Tool result</summary>
+
+```text
+26:                id=f"u_{name}",
+36:    for group_id, user_id, joined in (
+45:        db.add_membership(MembershipRecord(group_id, user_id, _at(joined)))
+49:    for expense_id, group_id, description, amount, day, payer, participants in (
+59:                id=expense_id,
+60:                group_id=group_id,
+64:                payer_id=payer,
+65:                participant_ids=participants,
+22:def sign_up(body: schemas.Credentials, db: Db) -> schemas.Session:
+39:def sign_in(body: schemas.Credentials, db: Db) -> schemas.Session:
+47:    "/signout",
+53:def sign_out(db: Db, credentials: Credentials) -> None:
+```
+
+</details>
+
+**Claude** · 2026-09-23 16:10:48
+
+Seed IDs match the mock (`u_dana`, `g_flat4b`, …). Writing the browser check.
+
+**Tool call: Write**
+
+File: `[REDACTED: local home path]\AppData\Local\Temp\claude\C--Users-[REDACTED: local username]-adtz-02-splitledger\0d400f3a-2d58-426f-93ba-e1c6d4600f2a\scratchpad\q6\connect.mjs`
+
+```text
+// Browser check that the SplitLedger frontend talks to the running FastAPI backend.
+import { chromium } from 'file:///[REDACTED: local home path]/AppData/Local/Temp/claude/C--Users-[REDACTED: local username]-adtz-02-splitledger/745ecfb7-5953-45ab-a1d2-b64bee611196/scratchpad/e2e/node_modules/playwright/index.mjs';
+import assert from 'node:assert/strict';
+
+const APP = 'http://localhost:5173';
+const API = 'http://localhost:8000/api';
+const SHOTS = '[REDACTED: local home path]/AppData/Local/Temp/claude/C--Users-[REDACTED: local username]-adtz-02-splitledger/0d400f3a-2d58-426f-93ba-e1c6d4600f2a/scratchpad/q6/';
+const step = (s) => console.log('✓', s);
+const browser = await chromium.launch();
+const errors = [];
+const apiCalls = [];
+
+async function newPage(viewport = { width: 1280, height: 900 }) {
+  const ctx = await browser.newContext({ viewport });
+  const page = await ctx.newPage();
+  page.on('pageerror', (e) => errors.push(e.message));
+  page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
+  page.on('request', (r) => {
+    if (r.resourceType() === 'fetch' || r.resourceType() === 'xhr') apiCalls.push(`${r.method()} ${r.url()}`);
+  });
+  return page;
+}
+
+async function signIn(page, email, password = 'splitledger') {
+  await page.goto(`${APP}/signin`);
+  await page.getByLabel('Email').fill(email);
+  await page.getByLabel('Password').fill(password);
+  await page.getByRole('button', { name: 'Sign in', exact: true }).last().click();
+  await page.getByRole('heading', { name: 'Your groups' }).waitFor();
+}
+
+async function backend(method, path, token, body) {
+  const res = await fetch(API + path, {
+    method,
+    headers: { Authorization: `Bearer ${token}`, ...(body ? { 'Content-Type': 'application/json' } : {}) },
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  return { status: res.status, body: res.status === 204 ? null : await res.json() };
+}
+
+const stamp = Date.now().toString(36);
+
+// Dana signs in through the UI; the backend's seed data appears.
+const dana = await newPage();
+await dana.goto(APP);
+await dana.waitForURL('**/signin');
+await dana.getByLabel('Email').fill('dana@example.com');
+await dana.getByLabel('Password').fill('wrong-password');
+await dana.getByRole('button', { name: 'Sign in', exact: true }).last().click();
+const wrong = await dana.getByRole('alert').innerText();
+step(`wrong password rejected by the backend: "${wrong}"`);
+
+await signIn(dana, 'dana@example.com');
+const rows = dana.locator('a.group-row');
+await rows.first().waitFor();
+assert.match(await rows.first().innerText(), /Flat 4B[\s\S]*\+81\.66/);
+step('Dana signed in; groups list comes from the backend seed data (Flat 4B, +81.66)');
+
+const danaToken = await dana.evaluate(() => localStorage.getItem('splitledger.token'));
+assert.ok(danaToken, 'token stored');
+assert.equal(await dana.evaluate(() => localStorage.getItem('splitledger.mockdb.v1')), null);
+const me = await backend('GET', '/auth/me', danaToken);
+assert.equal(me.status, 200);
+assert.equal(me.body.email, 'dana@example.com');
+step('the token the browser holds is accepted by the backend directly (GET /api/auth/me → dana); no mock store in localStorage');
+
+// Create a group in the UI and read it back straight from the backend.
+const groupName = `Q6 check ${stamp}`;
+await dana.goto(`${APP}/groups/new`);
+await dana.getByLabel(/name/i).first().fill(groupName);
+await dana.getByRole('button', { name: /Create group/ }).click();
+const code = (await dana.getByTestId('invite-code').first().innerText()).trim();
+const groups = await backend('GET', '/groups', danaToken);
+const created = groups.body.find((g) => g.name === groupName);
+assert.ok(created, 'group exists in backend');
+step(`created "${groupName}" in the browser; backend lists it (id ${created.id}), invite code ${code}`);
+await dana.screenshot({ path: SHOTS + 'q6-1-created.png', fullPage: true });
+
+// Add an expense in the UI; backend returns it and the balances.
+await dana.goto(`${APP}/groups/${created.id}`);
+await dana.getByRole('heading', { name: groupName }).waitFor();
+await dana.getByRole('link', { name: 'Add expense' }).click();
+await dana.getByLabel('Description').fill('Train tickets');
+await dana.getByLabel(/Amount/).fill('90');
+await dana.getByLabel('Date').fill('2026-09-20');
+await dana.getByRole('button', { name: 'Save expense' }).click();
+await dana.getByRole('heading', { name: groupName }).waitFor();
+let detail = await backend('GET', `/groups/${created.id}`, danaToken);
+assert.equal(detail.body.expenses.length, 1);
+assert.equal(detail.body.expenses[0].amountMinor, 9000);
+assert.equal(detail.body.expenses[0].date, '2026-09-20');
+assert.equal(detail.body.expenses[0].payerId, 'u_dana');
+step('added a 90.00 expense dated 2026-09-20 in the browser; backend stores 9000 minor units, payer u_dana');
+
+// Ben joins with the code in a separate browser context.
+const ben = await newPage({ width: 390, height: 844 });
+await signIn(ben, 'ben@example.com');
+await ben.goto(`${APP}/join`);
+await ben.getByLabel(/code/i).fill('NOPE-0000');
+await ben.getByRole('button', { name: /Join/ }).click();
+const bad = await ben.getByRole('alert').innerText();
+step(`invalid code rejected by the backend: "${bad}"`);
+await ben.getByLabel(/code/i).fill(code);
+await ben.getByRole('button', { name: /Join/ }).click();
+await ben.getByRole('heading', { name: groupName }).waitFor();
+assert.equal(await ben.getByTestId('invite-code').count(), 0);
+step('Ben (phone width) joined with the code; he does not see the invite code');
+
+// Dana includes Ben in the expense by editing it; Ben sees the new balance.
+await dana.goto(`${APP}/groups/${created.id}`);
+await dana.getByTestId('expense-row').filter({ hasText: 'Train tickets' }).getByRole('link', { name: /Edit/ }).click();
+await dana.getByLabel('Ben').check();
+await dana.getByRole('button', { name: 'Save changes' }).click();
+await dana.getByRole('heading', { name: groupName }).waitFor();
+await ben.reload();
+await ben.getByRole('heading', { name: groupName }).waitFor();
+const benBalances = await ben.getByTestId('balances').innerText();
+assert.ok(benBalances.includes('−45.00') && benBalances.includes('+45.00'), benBalances);
+assert.equal(await ben.getByTestId('balance-sum').innerText(), '0.00');
+await ben.screenshot({ path: SHOTS + 'q6-2-ben-phone.png', fullPage: true });
+step("Dana's edit in her browser shows up in Ben's browser: Dana +45.00, Ben −45.00, sum 0.00");
+
+// Delete in the UI; backend no longer has it and the currency stays locked.
+await dana.goto(`${APP}/groups/${created.id}`);
+const row = dana.getByTestId('expense-row').filter({ hasText: 'Train tickets' });
+await row.getByRole('button', { name: /Delete/ }).click();
+await row.getByRole('button', { name: 'Confirm delete' }).click();
+await row.waitFor({ state: 'detached' });
+detail = await backend('GET', `/groups/${created.id}`, danaToken);
+assert.equal(detail.body.expenses.length, 0);
+assert.equal(detail.body.currencyLocked, true);
+step('deleted the expense in the browser; backend has 0 expenses and currencyLocked=true');
+
+// Sign out through the UI; the backend revokes the token.
+await dana.getByRole('button', { name: /Sign out/ }).click();
+await dana.waitForURL('**/signin');
+assert.equal((await backend('GET', '/auth/me', danaToken)).status, 401);
+step('signed out in the browser; backend now rejects the old token (401)');
+
+const hosts = [...new Set(apiCalls.map((c) => new URL(c.split(' ')[1]).origin + '/api'))];
+console.log(`\n${apiCalls.length} fetch requests from the app, all to: ${hosts.join(', ')}`);
+assert.deepEqual(hosts, [API]);
+console.log(apiCalls.slice(0, 6).join('\n'));
+assert.deepEqual(errors.filter((e) => !/status of 4\d\d/.test(e)), [], errors.join('\n'));
+console.log(`console errors other than expected 4xx responses: 0 (4xx logged: ${errors.length})`);
+await browser.close();
+
+```
+
+<details><summary>Tool result</summary>
+
+```text
+File created successfully at: [REDACTED: local home path]\AppData\Local\Temp\claude\C--Users-[REDACTED: local username]-adtz-02-splitledger\0d400f3a-2d58-426f-93ba-e1c6d4600f2a\scratchpad\q6\connect.mjs (file state is current in your context — no need to Read it back)
+```
+
+</details>
+
+**Tool call: Bash** — Check selectors in create and join pages
+
+```sh
+cd [REDACTED: local home path]/adtz-02-splitledger/frontend && grep -n "label\|getByTestId\|data-testid" src/pages/CreateGroupPage.tsx src/pages/JoinGroupPage.tsx 2>/dev/null | head -20; ls src/pages; grep -n "Sign out" -r src | head -3
+```
+
+<details><summary>Tool result</summary>
+
+```text
+src/pages/CreateGroupPage.tsx:44:          <label htmlFor="group-name">Group name</label>
+src/pages/CreateGroupPage.tsx:57:          <label htmlFor="currency">Currency</label>
+src/pages/CreateGroupPage.tsx:104:          <span className="success-label">Group created</span>
+src/pages/CreateGroupPage.tsx:111:            <span className="code-box" data-testid="invite-code">
+src/pages/CreateGroupPage.tsx:114:            <CopyButton text={created.inviteCode} label="Copy code" />
+src/pages/JoinGroupPage.tsx:41:        <label htmlFor="code">Invite code</label>
+AuthPage.tsx
+CreateGroupPage.tsx
+ExpenseFormPage.tsx
+GroupPage.tsx
+GroupsPage.tsx
+JoinGroupPage.tsx
+src/components/AppHeader.tsx:21:          Sign out
+```
+
+</details>
+
+**Tool call: Bash** — Run browser connection check
+
+```sh
+cd [REDACTED: local home path]/AppData/Local/Temp/claude/C--Users-[REDACTED: local username]-adtz-02-splitledger/0d400f3a-2d58-426f-93ba-e1c6d4600f2a/scratchpad/q6 && grep -n "route\|path=" [REDACTED: local home path]/adtz-02-splitledger/frontend/src/App.tsx | head; timeout 150 node connect.mjs 2>&1 | tail -30
+```
+
+<details><summary>Tool result</summary>
+
+```text
+1:import { Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom';
+28:        <Route path="/signin" element={<AuthPage />} />
+30:          <Route path="/" element={<GroupsPage />} />
+31:          <Route path="/groups/new" element={<CreateGroupPage />} />
+32:          <Route path="/join" element={<JoinGroupPage />} />
+33:          <Route path="/groups/:groupId" element={<GroupPage />} />
+34:          <Route path="/groups/:groupId/expenses/new" element={<ExpenseFormPage />} />
+35:          <Route path="/groups/:groupId/expenses/:expenseId/edit" element={<ExpenseFormPage />} />
+37:        <Route path="*" element={<Navigate to="/" replace />} />
+✓ wrong password rejected by the backend: "Something went wrong. Please try again."
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+locator.waitFor: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for getByRole('heading', { name: 'Your groups' }) to be visible[22m
+
+    at signIn ([REDACTED: local home path]\AppData\Local\Temp\claude\C--Users-[REDACTED: local username]-adtz-02-splitledger\0d400f3a-2d58-426f-93ba-e1c6d4600f2a\scratchpad\q6\connect.mjs:29:60)
+    at async file:///[REDACTED: local home path]/AppData/Local/Temp/claude/C--Users-[REDACTED: local username]-adtz-02-splitledger/0d400f3a-2d58-426f-93ba-e1c6d4600f2a/scratchpad/q6/connect.mjs:53:1 {
+  log: [
+    "  - waiting for getByRole('heading', { name: 'Your groups' }) to be visible"
+  ],
+  name: 'TimeoutError'
+}
+
+Node.js v24.19.0
+Shell cwd was reset to [REDACTED: local home path]\adtz-02-splitledger
+```
+
+</details>
+
+**Claude** · 2026-09-23 16:12:07
+
+The browser gets a generic error instead of the backend's message, so something other than an `ApiError` is being thrown. Capturing the browser console to see what.
+
+**Tool call: Bash** — Debug sign-in request in browser
+
+```sh
+cd [REDACTED: local home path]/AppData/Local/Temp/claude/C--Users-[REDACTED: local username]-adtz-02-splitledger/0d400f3a-2d58-426f-93ba-e1c6d4600f2a/scratchpad/q6 && cat > dbg.mjs <<'EOF'
+import { chromium } from 'file:///[REDACTED: local home path]/AppData/Local/Temp/claude/C--Users-[REDACTED: local username]-adtz-02-splitledger/745ecfb7-5953-45ab-a1d2-b64bee611196/scratchpad/e2e/node_modules/playwright/index.mjs';
+const b = await chromium.launch(); const p = await b.newPage();
+p.on('console', m => console.log('console', m.type(), m.text()));
+p.on('pageerror', e => console.log('pageerror', e.message));
+p.on('requestfailed', r => console.log('failed', r.url(), r.failure()?.errorText));
+p.on('response', r => r.url().includes('8000') && console.log('resp', r.status(), r.url()));
+await p.goto('http://localhost:5173/signin');
+await p.getByLabel('Email').fill('dana@example.com');
+await p.getByLabel('Password').fill('splitledger');
+await p.getByRole('button', { name: 'Sign in', exact: true }).last().click();
+await p.waitForTimeout(2000);
+console.log(await p.evaluate(async () => { const m = await import('/src/api/client.ts'); return m.API_BASE_URL; }).catch(e => 'import failed ' + e.message));
+await b.close();
+EOF
+timeout 60 node dbg.mjs
+```
+
+<details><summary>Tool result</summary>
+
+```text
+console debug [vite] connecting...
+console info %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+console debug [vite] connected.
+undefined
+Shell cwd was reset to [REDACTED: local home path]\adtz-02-splitledger
+```
+
+</details>
+
+**Tool call: PowerShell** — Stop orphaned Vite server on 5173
+
+```powershell
+Stop-Process -Id 16380 -Confirm:$false; Start-Sleep -Milliseconds 800; Get-NetTCPConnection -LocalPort 5173 -State Listen -ErrorAction SilentlyContinue | Measure-Object | Select-Object -ExpandProperty Count
+```
+
+**Tool call: Bash** — Start fresh Vite dev server
+
+```sh
+cd [REDACTED: local home path]/adtz-02-splitledger/frontend && npm run dev > "$TEMP/sl-frontend.log" 2>&1
+```
+
+<details><summary>Tool result (error)</summary>
+
+```text
+Exit code 1
+0
+```
+
+</details>
+
+<details><summary>Tool result</summary>
+
+```text
+Command running in background with ID: bdhbss182. Output is being written to: [REDACTED: local home path]\AppData\Local\Temp\claude\C--Users-[REDACTED: local username]-adtz-02-splitledger\745ecfb7-5953-45ab-a1d2-b64bee611196\tasks\bdhbss182.output. You will be notified when it completes. To check interim output, use Read on that file path.
+Session cwd remains [REDACTED: local home path]\adtz-02-splitledger; directory changes made by the backgrounded command do not apply to subsequent commands.
+```
+
+</details>
+
+**Tool call: Bash** — Rerun browser check against fresh server
+
+```sh
+sleep 3; tail -4 "$TEMP/sl-frontend.log"; cd [REDACTED: local home path]/AppData/Local/Temp/claude/C--Users-[REDACTED: local username]-adtz-02-splitledger/0d400f3a-2d58-426f-93ba-e1c6d4600f2a/scratchpad/q6 && timeout 150 node connect.mjs 2>&1 | tail -30
+```
+
+<details><summary>Tool result</summary>
+
+```text
+  [32m[1mVITE[22m v8.3.0[39m  [2mready in [0m[1m119[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m5173[22m/[39m
+[2m  [32m➜[39m  [1mNetwork[22m[2m: use [22m[1m--host[22m[2m to expose[22m
+✓ wrong password rejected by the backend: "Email or password is incorrect."
+✓ Dana signed in; groups list comes from the backend seed data (Flat 4B, +81.66)
+✓ the token the browser holds is accepted by the backend directly (GET /api/auth/me → dana); no mock store in localStorage
+✓ created "Q6 check mue6n0l5" in the browser; backend lists it (id b2256b0ca02a4d4c9b8f03c25a7d9ce2), invite code NMSG-2LFP
+✓ added a 90.00 expense dated 2026-09-20 in the browser; backend stores 9000 minor units, payer u_dana
+✓ invalid code rejected by the backend: "That code doesn't match any group. Check it and try again."
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+locator.waitFor: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for getByRole('heading', { name: 'Q6 check mue6n0l5' }) to be visible[22m
+
+    at [REDACTED: local home path]\AppData\Local\Temp\claude\C--Users-[REDACTED: local username]-adtz-02-splitledger\0d400f3a-2d58-426f-93ba-e1c6d4600f2a\scratchpad\q6\connect.mjs:105:53 {
+  log: [
+    "  - waiting for getByRole('heading', { name: 'Q6 check mue6n0l5' }) to be visible"
+  ],
+  name: 'TimeoutError'
+}
+
+Node.js v24.19.0
+Shell cwd was reset to [REDACTED: local home path]\adtz-02-splitledger
+```
+
+</details>
+
+**Tool call: Bash** — Read join page behavior
+
+```sh
+cd [REDACTED: local home path]/adtz-02-splitledger/frontend && sed -n 1,40p src/pages/JoinGroupPage.tsx; sed -n 55,90p src/pages/JoinGroupPage.tsx
+```
+
+<details><summary>Tool result</summary>
+
+```text
+import { useState, type FormEvent } from 'react';
+import { Link } from 'react-router-dom';
+import { api } from '../api/client';
+import type { JoinResult } from '../api/types';
+import { errorMessage } from '../lib/errors';
+
+export function JoinGroupPage() {
+  const [code, setCode] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [result, setResult] = useState<JoinResult | null>(null);
+
+  async function handleSubmit(event: FormEvent) {
+    event.preventDefault();
+    setResult(null);
+    if (!code.trim()) {
+      setError('Enter the invite code.');
+      return;
+    }
+    setError(null);
+    setSubmitting(true);
+    try {
+      setResult(await api.joinGroup(code));
+    } catch (err) {
+      setError(errorMessage(err));
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  return (
+    <main className="page narrow">
+      <Link to="/" className="back-link">
+        ← Your groups
+      </Link>
+      <h1 className="page-title">Join a group</h1>
+      <p className="muted" style={{ lineHeight: 1.5 }}>
+        Ask the person who created the group for its invite code.
+      </p>
+      <form className="field" style={{ gap: 8 }} onSubmit={handleSubmit} noValidate>
+            }}
+            aria-invalid={error ? true : undefined}
+            aria-describedby={error ? 'code-err' : undefined}
+          />
+          <button type="submit" className="btn btn-primary" disabled={submitting}>
+            {submitting ? 'Joining…' : 'Join'}
+          </button>
+        </div>
+        {error && (
+          <span id="code-err" className="error-text" role="alert">
+            {error}
+          </span>
+        )}
+      </form>
+
+      {result && (
+        <div className="notice-success" role="status">
+          <strong>
+            {result.alreadyMember ? `You're already in ${result.group.name}` : `You joined ${result.group.name}`}
+          </strong>
+          <span>
+            {result.alreadyMember
+              ? 'No duplicate membership was created.'
+              : `Its expenses and balances are in ${result.group.currency}.`}{' '}
+            <Link to={`/groups/${result.group.id}`}>Open group →</Link>
+          </span>
+        </div>
+      )}
+    </main>
+  );
+}
+```
+
+</details>
+
+**Tool call: Bash** — Fix join step and rerun browser check
+
+```sh
+cd [REDACTED: local home path]/AppData/Local/Temp/claude/C--Users-[REDACTED: local username]-adtz-02-splitledger/0d400f3a-2d58-426f-93ba-e1c6d4600f2a/scratchpad/q6 && python - <<'EOF'
+p='connect.mjs'; s=open(p,encoding='utf-8').read()
+old="""await ben.getByRole('button', { name: /Join/ }).click();
+await ben.getByRole('heading', { name: groupName }).waitFor();
+assert.equal"""
+new="""await ben.getByRole('button', { name: /Join/ }).click();
+await ben.getByRole('status').getByText(`You joined ${groupName}`).waitFor();
+await ben.getByRole('button', { name: /Join/ }).click();
+await ben.getByRole('status').getByText(`You're already in ${groupName}`).waitFor();
+await ben.getByRole('link', { name: 'Open group →' }).click();
+await ben.getByRole('heading', { name: groupName }).waitFor();
+const members = (await backend('GET', `/groups/${created.id}`, danaToken)).body.members.map((m) => m.id);
+assert.deepEqual(members, ['u_dana', 'u_ben']);
+assert.equal"""
+assert old in s; s=s.replace(old,new)
+s=s.replace("step('Ben (phone width) joined with the code; he does not see the invite code');","step('Ben (phone width) joined with the code, re-joining added no duplicate (backend members: u_dana, u_ben); no invite code shown to him');")
+open(p,'w',encoding='utf-8').write(s)
+EOF
+timeout 170 node connect.mjs 2>&1 | tail -30
+```
+
+<details><summary>Tool result</summary>
+
+```text
+✓ wrong password rejected by the backend: "Email or password is incorrect."
+✓ Dana signed in; groups list comes from the backend seed data (Flat 4B, +81.66)
+✓ the token the browser holds is accepted by the backend directly (GET /api/auth/me → dana); no mock store in localStorage
+✓ created "Q6 check mue6o1kd" in the browser; backend lists it (id 47699a648a3f4dfbb4b589bd3e8248a1), invite code NJ95-THK2
+✓ added a 90.00 expense dated 2026-09-20 in the browser; backend stores 9000 minor units, payer u_dana
+✓ invalid code rejected by the backend: "That code doesn't match any group. Check it and try again."
+✓ Ben (phone width) joined with the code, re-joining added no duplicate (backend members: u_dana, u_ben); no invite code shown to him
+✓ Dana's edit in her browser shows up in Ben's browser: Dana +45.00, Ben −45.00, sum 0.00
+✓ deleted the expense in the browser; backend has 0 expenses and currencyLocked=true
+✓ signed out in the browser; backend now rejects the old token (401)
+
+46 fetch requests from the app, all to: http://localhost:8000/api
+POST http://localhost:8000/api/auth/signin
+POST http://localhost:8000/api/auth/signin
+GET http://localhost:8000/api/groups
+GET http://localhost:8000/api/groups
+GET http://localhost:8000/api/auth/me
+GET http://localhost:8000/api/auth/me
+console errors other than expected 4xx responses: 0 (4xx logged: 2)
+Shell cwd was reset to [REDACTED: local home path]\adtz-02-splitledger
+```
+
+</details>
+
+**Claude** · 2026-09-23 16:13:32
+
+All 10 browser checks pass, and all 46 of the app's requests went to `http://localhost:8000/api`. Viewing a screenshot to confirm the page actually renders correctly.
+
+**Tool call: Read**
+
+File: `[REDACTED: local home path]\AppData\Local\Temp\claude\C--Users-[REDACTED: local username]-adtz-02-splitledger\0d400f3a-2d58-426f-93ba-e1c6d4600f2a\scratchpad\q6\q6-2-ben-phone.png`
+
+<details><summary>Tool result</summary>
+
+```text
+[OMITTED: image content in tool result]
+```
+
+</details>
+
+**Claude** · 2026-09-23 16:13:36
+
+Renders correctly with backend data. One more browser check: what the user sees when the backend is not running.
+
+**Tool call: TaskStop**
+
+```json
+{
+  "task_id": "br61z9s11"
+}
+```
+
+<details><summary>Tool result</summary>
+
+```text
+{"message":"Successfully stopped task: br61z9s11 (cd [REDACTED: local home path]/adtz-02-splitledger/backend && uv run uvicorn splitledger_backend.main:app --port 8000 > \"$TEMP/sl-backend.log\" 2>&1)","task_id":"br61z9s11","task_type":"local_bash","command":"cd [REDACTED: local home path]/adtz-02-splitledger/backend && uv run uvicorn splitledger_backend.main:app --port 8000 > \"$TEMP/sl-backend.log\" 2>&1"}
+```
+
+</details>
+
+**Tool call: Bash** — Check UI message when backend is down
+
+```sh
+netstat -ano | grep ':8000' | grep LISTEN; cd [REDACTED: local home path]/AppData/Local/Temp/claude/C--Users-[REDACTED: local username]-adtz-02-splitledger/0d400f3a-2d58-426f-93ba-e1c6d4600f2a/scratchpad/q6 && cat > down.mjs <<'EOF'
+import { chromium } from 'file:///[REDACTED: local home path]/AppData/Local/Temp/claude/C--Users-[REDACTED: local username]-adtz-02-splitledger/745ecfb7-5953-45ab-a1d2-b64bee611196/scratchpad/e2e/node_modules/playwright/index.mjs';
+const b = await chromium.launch(); const p = await b.newPage();
+const pageErrors = []; p.on('pageerror', e => pageErrors.push(e.message));
+await p.goto('http://localhost:5173/');
+await p.waitForURL('**/signin');
+await p.getByLabel('Email').fill('dana@example.com');
+await p.getByLabel('Password').fill('splitledger');
+await p.getByRole('button', { name: 'Sign in', exact: true }).last().click();
+console.log('alert:', await p.getByRole('alert').innerText());
+console.log('uncaught page errors:', pageErrors.length);
+await b.close();
+EOF
+timeout 60 node down.mjs
+```
+
+<details><summary>Tool result</summary>
+
+```text
+alert: Cannot reach the SplitLedger backend at http://localhost:8000/api. Check that it is running.
+uncaught page errors: 0
+Shell cwd was reset to [REDACTED: local home path]\adtz-02-splitledger
+```
+
+</details>
+
+**Claude** · 2026-09-23 16:14:18
+
+The unreachable-backend path shows a clear message with no uncaught errors. Running the backend test suite for completeness, then updating the docs.
+
+**Tool call: Bash** — Run backend tests and frontend typecheck
+
+```sh
+cd [REDACTED: local home path]/adtz-02-splitledger/backend && uv run pytest -q 2>&1 | tail -3; cd ../frontend && npm run typecheck 2>&1 | tail -2
+```
+
+<details><summary>Tool result</summary>
+
+```text
+........................................................................ [ 84%]
+.............                                                            [100%]
+> tsc --noEmit
+```
+
+</details>
+
+**Tool call: Bash** — Get backend test summary line
+
+```sh
+cd [REDACTED: local home path]/adtz-02-splitledger/backend && uv run pytest -q 2>&1 | grep -E "passed|failed"
+```
+
+<details><summary>Tool result</summary>
+
+```text
+(Bash completed with no output)
+```
+
+</details>
+
+**Tool call: Bash** — Show backend pytest summary
+
+```sh
+cd [REDACTED: local home path]/adtz-02-splitledger/backend && uv run pytest 2>&1 | tail -2
+```
+
+<details><summary>Tool result</summary>
+
+```text
+.............                                                            [100%]
+85 passed in 1.75s
+```
+
+</details>
+
+**Claude** · 2026-09-23 16:14:40
+
+Backend: 85 passed. Frontend: 19 passed, typecheck clean. Now the docs: frontend README, root README, backend README, and the Question 6 answer.
+
+**Tool call: Bash** — Update frontend and root READMEs
+
+````sh
+cd [REDACTED: local home path]/adtz-02-splitledger && python - <<'EOF'
+import re
+def edit(p, pairs):
+    s=open(p,encoding='utf-8',newline='').read(); crlf='\r\n' in s; s=s.replace('\r\n','\n')
+    for o,n in pairs:
+        assert o in s,(p,o[:60]); s=s.replace(o,n)
+    open(p,'w',encoding='utf-8',newline='').write(s.replace('\n','\r\n') if crlf else s)
+
+fr='frontend/README.md'
+s=open(fr,encoding='utf-8').read().replace('\r\n','\n')
+start=s.index('# SplitLedger frontend'); 
+new_fr="""# SplitLedger frontend
+
+React + Vite + TypeScript frontend of SplitLedger, based on the SplitLedger design canvas. It adapts the desktop screens to phone widths and talks to the FastAPI backend in [`../backend`](../backend/README.md).
+
+## Commands
+
+Start the backend first (from `backend/`: `uv run uvicorn splitledger_backend.main:app --reload`). Then run these from `frontend/` (Node.js 20 or newer):
+
+```bash
+npm install
+npm run dev        # start the app at http://localhost:5173
+npm test           # run the unit tests (Vitest)
+npm run build      # typecheck and build to dist/
+```
+
+## Backend connection
+
+Every backend call goes through [`src/api/client.ts`](src/api/client.ts). Its `request` function sends each call with `fetch` to the API base URL:
+
+```text
+http://localhost:8000/api
+```
+
+To use another backend, set `VITE_API_BASE_URL` before starting or building, for example `VITE_API_BASE_URL=http://127.0.0.1:9000/api npm run dev`. The backend allows browser requests from `http://localhost:5173` and `http://127.0.0.1:5173`; set `SPLITLEDGER_CORS_ORIGINS` there when the frontend runs elsewhere.
+
+The client sends the session token as `Authorization: Bearer <token>` and keeps it in `localStorage`. When the backend rejects the token, for example after a backend restart clears its in-memory sessions, the client forgets it and the app returns to the sign-in page. If the backend is not running, forms show "Cannot reach the SplitLedger backend at http://localhost:8000/api".
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| POST | `/auth/signup`, `/auth/signin`, `/auth/signout` | Account and session |
+| GET | `/auth/me` | Current user |
+| GET, POST | `/groups` | List my groups, create a group |
+| POST | `/groups/join` | Join by invite code (no duplicate membership) |
+| GET, PATCH | `/groups/{id}` | Group detail with balances; change currency |
+| POST | `/groups/{id}/expenses` | Add an expense (payer = signed-in user) |
+| PATCH, DELETE | `/groups/{id}/expenses/{expenseId}` | Edit or delete your own expense |
+
+The paths and payloads follow the contract in [`../openapi.yaml`](../openapi.yaml).
+
+Demo accounts, seeded by the backend: `dana@example.com`, `anna@example.com`, `ben@example.com`, `chiara@example.com`. They all use the password `splitledger`. Dana created *Flat 4B*, whose invite code is `K7QM-4RX2`.
+
+## Unit tests
+
+The unit tests do not need a running backend. [`src/test/mockFetch.ts`](src/test/mockFetch.ts) replaces `fetch` and routes the client's requests to [`src/test/mockServer.ts`](src/test/mockServer.ts), an in-memory copy of the backend's rules. The tests also check the request URLs, the `Authorization` header, and the error shown when the backend cannot be reached.
+
+## Money rules
+
+Amounts are integer minor units (cents). [`src/lib/split.ts`](src/lib/split.ts) splits each expense equally among the selected members. Any leftover cents go one each to the selected members in group join order, so the shares always add up to the total and group balances sum to zero.
+"""
+open(fr,'w',encoding='utf-8',newline='\n').write(new_fr)
+
+edit('README.md',[("""The React frontend is in [`frontend/`](frontend/README.md). It uses a mocked backend for now.
+
+```bash
+cd frontend
+npm install
+npm run dev     # http://localhost:5173
+npm test        # unit tests
+```""","""The React frontend is in [`frontend/`](frontend/README.md). It calls the backend at `http://localhost:8000/api`, so start the backend first.
+
+```bash
+cd frontend
+npm install
+npm run dev     # http://localhost:5173
+npm test        # unit tests
+```"""),
+("It implements the API contract in [`openapi.yaml`](openapi.yaml) and uses an in-memory mock database for now. The frontend does not call it yet.",
+ "It implements the API contract in [`openapi.yaml`](openapi.yaml) and uses an in-memory mock database for now, so its data is lost when it stops.")])
+EOF
+grep -n "## Frontend prototype" README.md; grep -n -i "frontend" backend/README.md
+````
+
+<details><summary>Tool result</summary>
+
+```text
+7:## Frontend prototype
+24:The demo data matches the frontend mock. The accounts are `dana@example.com`, `anna@example.com`, `ben@example.com` and `chiara@example.com`, all with the password `splitledger`. Dana created *Flat 4B*, whose invite code is `K7QM-4RX2`.
+```
+
+</details>
+
+**Tool call: Bash** — Update READMEs and record Question 6 answer
+
+````sh
+python - <<'EOF'
+p='README.md'; s=open(p,encoding='utf-8',newline='').read(); crlf='\r\n' in s; s=s.replace('\r\n','\n')
+o="## Frontend prototype\n"
+n="""## Run the app
+
+Start the backend and the frontend in two terminals, then open http://localhost:5173 and sign in as `dana@example.com` with the password `splitledger`.
+
+```bash
+cd backend && uv run uvicorn splitledger_backend.main:app --reload   # terminal 1
+cd frontend && npm install && npm run dev                            # terminal 2
+```
+
+## Frontend
+"""
+assert o in s; s=s.replace(o,n)
+p2='backend/README.md'
+open(p,'w',encoding='utf-8',newline='').write(s.replace('\n','\r\n') if crlf else s)
+t=open(p2,encoding='utf-8',newline='').read(); c2='\r\n' in t; t=t.replace('\r\n','\n')
+o2="The demo data matches the frontend mock."
+assert o2 in t; t=t.replace(o2,"The frontend in [`../frontend`](../frontend/README.md) calls this API at `http://localhost:8000/api`. The demo data matches the frontend's test mock.")
+open(p2,'w',encoding='utf-8',newline='').write(t.replace('\n','\r\n') if c2 else t)
+p3='_docs/homework-answers.md'; u=open(p3,encoding='utf-8',newline='').read(); c3='\r\n' in u; u=u.replace('\r\n','\n')
+o3="""## Question 6: Frontend–backend connection
+
+Pending implementation. Record the frontend's actual backend URL after integration.
+"""
+n3="""## Question 6: Frontend–backend connection
+
+```text
+http://localhost:8000/api
+```
+
+The frontend sends every backend call from `frontend/src/api/client.ts` with `fetch` to this base URL, for example `POST http://localhost:8000/api/auth/signin` and `GET http://localhost:8000/api/groups`. `VITE_API_BASE_URL` can override it. The backend allows browser requests from the Vite dev server at http://localhost:5173.
+
+Run the backend from `backend/` with `uv run uvicorn splitledger_backend.main:app --reload`, then the frontend from `frontend/` with `npm install` and `npm run dev`, and open http://localhost:5173.
+
+The connection was verified in a headless Chromium browser against both running servers. All 46 requests the app made went to `http://localhost:8000/api`. Two users in separate browsers, one at phone width, signed in, created a group, joined it by code, and added, edited and deleted an expense. The group and expense were then read back directly from the backend API, and each user's changes appeared in the other's browser. After sign-out, the backend rejected the old token. With the backend stopped, the sign-in form reports that it cannot reach the backend. The unit tests (19 frontend, 85 backend) pass. The in-browser mock is now used only by the frontend unit tests.
+"""
+assert o3 in u; u=u.replace(o3,n3)
+open(p3,'w',encoding='utf-8',newline='').write(u.replace('\n','\r\n') if c3 else u)
+EOF
+git status --short
+````
+
+<details><summary>Tool result</summary>
+
+```text
+ M README.md
+ M _docs/homework-answers.md
+ M backend/README.md
+ M frontend/README.md
+ M frontend/package.json
+ M frontend/src/api/client.test.ts
+ M frontend/src/api/client.ts
+ M frontend/src/api/types.ts
+ M frontend/src/auth.tsx
+ M frontend/src/pages/AuthPage.tsx
+RM frontend/src/api/mockServer.ts -> frontend/src/test/mockServer.ts
+?? frontend/src/test/mockFetch.ts
+?? frontend/src/vite-env.d.ts
+```
+
+</details>
+
+**Tool call: Bash** — Fix stale wording in earlier answers
+
+```sh
+python - <<'EOF'
+p='_docs/homework-answers.md'; u=open(p,encoding='utf-8',newline='').read()
+for o,n in [("which currently uses an in-browser mock backend stored in `localStorage`.","which at that stage used an in-browser mock backend stored in `localStorage`."),
+            ("The frontend is not connected to it yet.","The frontend is connected to it in Question 6.")]:
+    assert o in u; u=u.replace(o,n)
+open(p,'w',encoding='utf-8',newline='').write(u)
+EOF
+git diff --stat
+```
+
+**Tool call: TaskStop**
+
+```json
+{
+  "task_id": "bdhbss182"
+}
+```
+
+<details><summary>Tool result</summary>
+
+```text
+warning: in the working copy of 'frontend/README.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'frontend/package.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'frontend/src/api/client.test.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'frontend/src/pages/AuthPage.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'frontend/src/test/mockServer.ts', LF will be replaced by CRLF the next time Git touches it
+ README.md                       | 15 +++++++--
+ _docs/homework-answers.md       | 14 ++++++--
+ backend/README.md               |  2 +-
+ frontend/README.md              | 29 ++++++++++------
+ frontend/package.json           |  2 +-
+ frontend/src/api/client.test.ts | 74 ++++++++++++++++++++++++++---------------
+ frontend/src/api/client.ts      | 49 ++++++++++++++++++++-------
+ frontend/src/api/types.ts       |  3 +-
+ frontend/src/auth.tsx           |  2 ++
+ frontend/src/pages/AuthPage.tsx | 21 ++----------
+ frontend/src/test/mockServer.ts |  8 ++---
+ 11 files changed, 137 insertions(+), 82 deletions(-)
+```
+
+</details>
+
+<details><summary>Tool result</summary>
+
+```text
+{"message":"Successfully stopped task: bdhbss182 (cd [REDACTED: local home path]/adtz-02-splitledger/frontend && npm run dev > \"$TEMP/sl-frontend.log\" 2>&1)","task_id":"bdhbss182","task_type":"local_bash","command":"cd [REDACTED: local home path]/adtz-02-splitledger/frontend && npm run dev > \"$TEMP/sl-frontend.log\" 2>&1"}
+```
+
+</details>
+
+**Tool call: Bash** — Confirm both dev servers stopped
+
+```sh
+sleep 1; netstat -ano | grep -E ':5173 |:8000 ' | grep LISTEN || echo "no servers listening"
+```
+
+<details><summary>Tool result</summary>
+
+```text
+  TCP    [::1]:5173             [::]:0                 LISTENING       2300
+```
+
+</details>
+
+**Claude** · 2026-09-23 16:15:24
+
+Same orphan problem as before: stopping the task killed npm but left Vite's node process running. Checking that it's the one I just started, then stopping it.
+
+**Tool call: PowerShell** — Verify and stop leftover Vite process
+
+```powershell
+$p = Get-CimInstance Win32_Process -Filter "ProcessId=2300"; $p.CommandLine; $p.CreationDate; if ($p.CommandLine -like '*adtz-02-splitledger\frontend*vite*') { Stop-Process -Id 2300 -Confirm:$false; 'stopped' }
+```
+
+<details><summary>Tool result</summary>
+
+```text
+"node"   "[REDACTED: local home path]\adtz-02-splitledger\frontend\node_modules\.bin\\..\vite\bin\vite.js" 
+
+Wednesday, September 23, 2026 4:12:29 PM
+stopped
+```
+
+</details>
+
+**Tool call: Bash** — List prompts and errors in current session
+
+```sh
+cd ~/.claude/projects/C--Users-[REDACTED: local username]-adtz-02-splitledger && PYTHONIOENCODING=utf-8 python -c "
+import json,collections
+c=collections.Counter()
+for l in open('0d400f3a-2d58-426f-93ba-e1c6d4600f2a.jsonl',encoding='utf-8'):
+    d=json.loads(l); t=d.get('type')
+    if t=='user' and isinstance(d['message']['content'],str): print('USER',d['timestamp'],(d.get('origin') or {}).get('kind'),repr(d['message']['content'][:90]))
+    if t=='assistant' and (d.get('isApiErrorMessage') or d.get('error')): print('APIERR',d['timestamp'],json.dumps(d['message']['content'])[:200])
+    if t=='system': c['system '+str(d.get('subtype'))]+=1
+    if d.get('isSidechain'): c['sidechain']+=1
+    if d.get('isCompactSummary'): c['compact']+=1
+print(c)
+"
+```
+
+<details><summary>Tool result</summary>
+
+```text
+USER 2026-09-23T13:49:06.458Z None '<local-command-caveat>Caveat: The messages below were generated by the user while running '
+USER 2026-09-23T13:49:06.452Z None '<command-name>/clear</command-name>\n            <command-message>clear</command-message>\n '
+USER 2026-09-23T13:49:10.192Z human '\n\n<pasted_content id="ea2f">\nSet up the same Claude Code development record approach for H'
+APIERR 2026-09-23T13:58:09.460Z [{"type": "text", "text": "API Error: The response stopped arriving. The response above may be incomplete."}]
+USER 2026-09-23T13:59:51.372Z human '\n\n<pasted_content id="ea2f">\nContinue the interrupted Homework 2 development-record task. '
+USER 2026-09-23T14:08:14.401Z human '\n\n<pasted_content id="ea2f">\nDo Homework 2 Question 6: connect the existing SplitLedger fr'
+Counter({'system turn_duration': 2, 'system local_command': 1})
+Shell cwd was reset to [REDACTED: local home path]\adtz-02-splitledger
+```
+
+</details>
+
+**Tool call: Bash** — Create extended renderer for three sessions
+
+```sh
+S=[REDACTED: local home path]/AppData/Local/Temp/claude/C--Users-[REDACTED: local username]-adtz-02-splitledger/0d400f3a-2d58-426f-93ba-e1c6d4600f2a/scratchpad; cd $S && cp render.py render2.py && python - <<'EOF'
+p='render2.py'; s=open(p,encoding='utf-8').read()
+def rep(o,n):
+    global s
+    assert o in s,o[:50]; s=s.replace(o,n,1)
+rep("SESS=[('C--Users-[REDACTED: local username]/','8fa56825-d817-4b21-8a31-fc6b59021218'),('C--Users-[REDACTED: local username]-adtz-02-splitledger/','745ecfb7-5953-45ab-a1d2-b64bee611196')]",
+"SESS=[('C--Users-[REDACTED: local username]/','8fa56825-d817-4b21-8a31-fc6b59021218'),('C--Users-[REDACTED: local username]-adtz-02-splitledger/','745ecfb7-5953-45ab-a1d2-b64bee611196'),('C--Users-[REDACTED: local username]-adtz-02-splitledger/','0d400f3a-2d58-426f-93ba-e1c6d4600f2a')]\n# The current session is recorded up to and including this prompt (the turn still in progress).\nSTOP_AFTER={'0d400f3a-2d58-426f-93ba-e1c6d4600f2a':'2026-09-23T14:08:14.401Z'}")
+rep(" ('path-env', r'(which: no pnpm in \\()[^\\n]*(\\))$', r'\\1[REDACTED: PATH environment variable]\\2', re.M),",
+    " ('path-env', r'(which: no pnpm in \\()[^\\n]*', r'\\1[REDACTED: PATH environment variable])', 0),\n ('account-id', r'[REDACTED: account identifier]', '[REDACTED: account identifier]', 0),\n ('home-ls', r'AppData/\\nApplication Data@\\n[\\s\\S]*?\\ntools/\\n', '[REDACTED: home directory listing]\\n', 0),")
+rep("r'(Directory: \\[REDACTED: local home path\\]\\s*)Mode[\\s\\S]*'", "r'(Directory: \\[REDACTED: local home path\\]\\s*)Mode[\\s\\S]*?[REDACTED: home directory entry name][^\\n]*'")
+rep("\\*\\*Folders\\*\\*[\\s\\S]*\"", "\\*\\*Folders\\*\\*[\\s\\S]*?\\.claude\\.json`\"")
+rep("""    for l in open(T+sid+'.jsonl',encoding='utf-8'):
+        d=json.loads(l); t=d.get('type')
+""","""    stop=STOP_AFTER.get(sid)
+    for l in open(T+sid+'.jsonl',encoding='utf-8'):
+        d=json.loads(l); t=d.get('type')
+        if stop and d.get('timestamp','') > stop: stats['records after cutoff']+=1; continue
+        if t=='user' and isinstance(d['message']['content'],str) and (d['message']['content'].startswith('<local-command-caveat>') or d['message']['content'].startswith('<command-name>/clear')):
+            stats['/clear records omitted']+=1; continue
+        if t=='system' and d.get('subtype')=='local_command' and '/clear' not in str(d.get('content')) and False: pass
+        if t=='assistant' and d.get('isApiErrorMessage'):
+            out.append(f"*Claude Code error* · {ts(d['timestamp'])}\\n\\n"+fence(red(d['message']['content'][0]['text']))); stats['api errors']+=1; continue
+""")
+open(p,'w',encoding='utf-8').write(s)
+EOF
+grep -n "path-env\|home-listing\|home-ls\|account-id" render2.py
+```
+
+<details><summary>Tool result</summary>
+
+```text
+<stdin>:7: SyntaxWarning: "\(" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\("? A raw string is also an option.
+<stdin>:8: SyntaxWarning: "\(" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\("? A raw string is also an option.
+<stdin>:9: SyntaxWarning: "\[" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\["? A raw string is also an option.
+<stdin>:9: SyntaxWarning: "\[" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\["? A raw string is also an option.
+<stdin>:10: SyntaxWarning: "\*" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\*"? A raw string is also an option.
+<stdin>:10: SyntaxWarning: "\*" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\*"? A raw string is also an option.
+Traceback (most recent call last):
+  File "<stdin>", line 7, in <module>
+  File "<stdin>", line 4, in rep
+AssertionError:  ('path-env', r'(which: no pnpm in \()[^
+]*(\))$',
+14: ('path-env', r'(which: no pnpm in \()[^\n]*(\))$', r'\1[REDACTED: PATH environment variable]\2', re.M),
+15: ('home-listing-result', r'(Directory: \[REDACTED: local home path\]\s*)Mode[\s\S]*', r'\1[REDACTED: home directory listing]', 0),
+16: ('home-listing-reply', r"(Here's what's in `\[REDACTED: local home path\]`:\s*)\*\*Folders\*\*[\s\S]*", r'\1[REDACTED: summary of the home directory listing]', 0),
+Shell cwd was reset to [REDACTED: local home path]\adtz-02-splitledger
+```
+
+</details>
+
+**Claude** · 2026-09-23 16:16:00
+
+Escaping got tangled; I'll make the same edits with the Edit tool instead.
+
+**Tool call: Read**
+
+File: `[REDACTED: local home path]\AppData\Local\Temp\claude\C--Users-[REDACTED: local username]-adtz-02-splitledger\0d400f3a-2d58-426f-93ba-e1c6d4600f2a\scratchpad\render2.py`, limit=20
+
+<details><summary>Tool result</summary>
+
+```text
+1	import json,re,sys,datetime,collections
+2	P='[REDACTED: local home path]/.claude/projects/'
+3	SESS=[('C--Users-[REDACTED: local username]/','8fa56825-d817-4b21-8a31-fc6b59021218'),('C--Users-[REDACTED: local username]-adtz-02-splitledger/','745ecfb7-5953-45ab-a1d2-b64bee611196')]
+4	REDACT = '--redact' in sys.argv
+5	counts=collections.Counter()
+6	RULES=[
+7	 ('email', r'[A-Za-z0-9._%+-]+@gmail\.com', '[REDACTED: email address]', 0),
+8	 ('github-token', r'gho_[A-Za-z0-9*]+', '[REDACTED: credential]', 0),
+9	 ('django-secret-key', r"django-insecure-[^'\"\s]+", '[REDACTED: credential]', 0),
+10	 ('home-path', r'[A-Z]:(?:[\\]+|/)Users(?:[\\]+|/)[REDACTED: local username]\b|/[a-z]/Users/[REDACTED: local username]\b', '[REDACTED: local home path]', re.I),
+11	 ('username', r'\b[REDACTED: local username]\b', '[REDACTED: local username]', 0),
+12	 ('gh-account', r'\b[REDACTED: personal account name]\b(?!-Admin)', '[REDACTED: personal account name]', 0),
+13	 ('personal-name', r'[REDACTED: personal name]', '[REDACTED: personal name]', 0),
+14	 ('path-env', r'(which: no pnpm in \()[^\n]*(\))$', r'\1[REDACTED: PATH environment variable]\2', re.M),
+15	 ('home-listing-result', r'(Directory: \[REDACTED: local home path\]\s*)Mode[\s\S]*', r'\1[REDACTED: home directory listing]', 0),
+16	 ('home-listing-reply', r"(Here's what's in `\[REDACTED: local home path\]`:\s*)\*\*Folders\*\*[\s\S]*", r'\1[REDACTED: summary of the home directory listing]', 0),
+17	]
+18	def red(s):
+19	    if not REDACT: return s
+20	    for name,pat,rep,fl in RULES:
+```
+
+</details>
+
+**Tool call: Edit**
+
+File: `[REDACTED: local home path]\AppData\Local\Temp\claude\C--Users-[REDACTED: local username]-adtz-02-splitledger\0d400f3a-2d58-426f-93ba-e1c6d4600f2a\scratchpad\render2.py`
+
+Old:
+
+```text
+ ('path-env', r'(which: no pnpm in \()[^\n]*(\))$', r'\1[REDACTED: PATH environment variable]\2', re.M),
+ ('home-listing-result', r'(Directory: \[REDACTED: local home path\]\s*)Mode[\s\S]*', r'\1[REDACTED: home directory listing]', 0),
+ ('home-listing-reply', r"(Here's what's in `\[REDACTED: local home path\]`:\s*)\*\*Folders\*\*[\s\S]*", r'\1[REDACTED: summary of the home directory listing]', 0),
+]
+```
+
+New:
+
+```text
+ ('path-env', r'(which: no pnpm in \()[^\n]*', r'\1[REDACTED: PATH environment variable])', 0),
+ ('home-listing-result', r'(Directory: \[REDACTED: local home path\]\s*)Mode[\s\S]*?[REDACTED: home directory entry name][^\n]*', r'\1[REDACTED: home directory listing]', 0),
+ ('home-listing-reply', r"(Here's what's in `\[REDACTED: local home path\]`:\s*)\*\*Folders\*\*[\s\S]*?\.claude\.json`", r'\1[REDACTED: summary of the home directory listing]', 0),
+ ('home-ls', r'AppData/\nApplication Data@\n[\s\S]*?\ntools/\n', '[REDACTED: home directory listing]\n', 0),
+ ('account-id', r'[REDACTED: account identifier]', '[REDACTED: account identifier]', 0),
+]
+```
+
+<details><summary>Tool result</summary>
+
+```text
+The file [REDACTED: local home path]\AppData\Local\Temp\claude\C--Users-[REDACTED: local username]-adtz-02-splitledger\0d400f3a-2d58-426f-93ba-e1c6d4600f2a\scratchpad\render2.py has been updated successfully. (file state is current in your context — no need to Read it back)
+```
+
+</details>
+
+**Tool call: Edit**
+
+File: `[REDACTED: local home path]\AppData\Local\Temp\claude\C--Users-[REDACTED: local username]-adtz-02-splitledger\0d400f3a-2d58-426f-93ba-e1c6d4600f2a\scratchpad\render2.py`
+
+Old:
+
+```text
+SESS=[('C--Users-[REDACTED: local username]/','8fa56825-d817-4b21-8a31-fc6b59021218'),('C--Users-[REDACTED: local username]-adtz-02-splitledger/','745ecfb7-5953-45ab-a1d2-b64bee611196')]
+```
+
+New:
+
+```text
+SESS=[('C--Users-[REDACTED: local username]/','8fa56825-d817-4b21-8a31-fc6b59021218'),('C--Users-[REDACTED: local username]-adtz-02-splitledger/','745ecfb7-5953-45ab-a1d2-b64bee611196'),('C--Users-[REDACTED: local username]-adtz-02-splitledger/','0d400f3a-2d58-426f-93ba-e1c6d4600f2a')]
+# A session still in progress is rendered up to and including the prompt of its current turn.
+STOP_AFTER={'0d400f3a-2d58-426f-93ba-e1c6d4600f2a':'2026-09-23T14:08:14.401Z'}
+```
+
+<details><summary>Tool result</summary>
+
+```text
+The file [REDACTED: local home path]\AppData\Local\Temp\claude\C--Users-[REDACTED: local username]-adtz-02-splitledger\0d400f3a-2d58-426f-93ba-e1c6d4600f2a\scratchpad\render2.py has been updated successfully. (file state is current in your context — no need to Read it back)
+```
+
+</details>
+
+**Tool call: Edit**
+
+File: `[REDACTED: local home path]\AppData\Local\Temp\claude\C--Users-[REDACTED: local username]-adtz-02-splitledger\0d400f3a-2d58-426f-93ba-e1c6d4600f2a\scratchpad\render2.py`
+
+Old:
+
+```text
+    for l in open(T+sid+'.jsonl',encoding='utf-8'):
+        d=json.loads(l); t=d.get('type')
+        if t in ('user','assistant'):
+            c=d['message']['content']
+```
+
+New:
+
+```text
+    stop=STOP_AFTER.get(sid)
+    for l in open(T+sid+'.jsonl',encoding='utf-8'):
+        d=json.loads(l); t=d.get('type')
+        if stop and d.get('timestamp','') > stop: stats['records after cutoff (current turn)']+=1; continue
+        if t in ('user','assistant'):
+            c=d['message']['content']
+            if t=='user' and isinstance(c,str) and (c.startswith('<local-command-caveat>') or c.startswith('<command-name>/clear')):
+                stats['/clear records omitted']+=1; continue
+            if t=='assistant' and d.get('isApiErrorMessage'):
+                out.append(f"*Claude Code error* · {ts(d['timestamp'])}\n\n"+fence(red(c[0]['text']))); stats['api errors']+=1; continue
+```
+
+<details><summary>Tool result</summary>
+
+```text
+The file [REDACTED: local home path]\AppData\Local\Temp\claude\C--Users-[REDACTED: local username]-adtz-02-splitledger\0d400f3a-2d58-426f-93ba-e1c6d4600f2a\scratchpad\render2.py has been updated successfully. (file state is current in your context — no need to Read it back)
+```
+
+</details>
+
+**Tool call: Edit**
+
+File: `[REDACTED: local home path]\AppData\Local\Temp\claude\C--Users-[REDACTED: local username]-adtz-02-splitledger\0d400f3a-2d58-426f-93ba-e1c6d4600f2a\scratchpad\render2.py`
+
+Old:
+
+```text
+STOP_AFTER={'0d400f3a-2d58-426f-93ba-e1c6d4600f2a':'2026-09-23T14:08:14.401Z'}
+```
+
+New:
+
+```text
+STOP_AFTER={'0d400f3a-2d58-426f-93ba-e1c6d4600f2a':'2026-09-23T14:08:14.401Z'}
+import os
+if os.environ.get('ONLY'): SESS=[x for x in SESS if x[1].startswith(os.environ['ONLY'])]
+```
+
+<details><summary>Tool result</summary>
+
+```text
+The file [REDACTED: local home path]\AppData\Local\Temp\claude\C--Users-[REDACTED: local username]-adtz-02-splitledger\0d400f3a-2d58-426f-93ba-e1c6d4600f2a\scratchpad\render2.py has been updated successfully. (file state is current in your context — no need to Read it back)
+```
+
+</details>
+
+**Tool call: Bash** — Render current session alone and inspect
+
+```sh
+S=[REDACTED: local home path]/AppData/Local/Temp/claude/C--Users-[REDACTED: local username]-adtz-02-splitledger/0d400f3a-2d58-426f-93ba-e1c6d4600f2a/scratchpad; cd $S; ONLY=0d400f3a PYTHONIOENCODING=utf-8 python render2.py s3.md --redact | grep -v -E 'record (mode|permission|atis|last-prompt|ai-title|file-history)'; grep -n -E '^\*Local command|^\*Claude Code error|· User' s3.md; wc -l s3.md
+```
+
+<details><summary>Tool result</summary>
+
+```text
+{
+"/clear records omitted": 2,
+"local command records": 1,
+"user prompts": 3,
+"attachment environment": 1,
+"attachment model": 1,
+"attachment deferred_tools_delta": 1,
+"attachment agent_listing_delta": 1,
+"attachment mcp_instructions_delta": 1,
+"attachment skill_listing": 1,
+"attachment auto_mode": 1,
+"attachment total_tokens_reminder": 53,
+"attachment instructions": 1,
+"attachment session_context": 1,
+"attachment date": 1,
+"attachment remote_session_change": 1,
+"attachment prompt_snapshot": 2,
+"thinking blocks omitted": 44,
+"thinking with text": 1,
+"tool calls": 52,
+"tool results": 52,
+"attachment deferred_tools_record": 2,
+"attachment silent_turn_reminder": 5,
+"assistant texts": 15,
+"api errors": 1,
+"system turn_duration omitted": 2,
+"attachment edited_text_file": 1,
+"records after cutoff (current turn)": 208
+}
+{
+"email": 4,
+"github-token": 1,
+"django-secret-key": 3,
+"home-path": 231,
+"username": 165,
+"gh-account": 5,
+"personal-name": 12,
+"path-env": 4,
+"home-listing-result": 1,
+"home-listing-reply": 1,
+"home-ls": 1,
+"account-id": 2
+}
+5:*Local command* · 2026-09-23 15:49:06
+11:### 2026-09-23 15:49:10 · User (pasted)
+314:### 2026-09-22 17:24:23 · User (pasted)
+329:### 2026-09-22 17:26:04 · User
+893:                    out.append(f"### {ts(d['timestamp'])} · User{lab}\n\n"+fence(red(m.group(1) if m else c)))
+1519:S=[REDACTED: local home path]/AppData/Local/Temp/claude/C--Users-[REDACTED: local username]-adtz-02-splitledger/0d400f3a-2d58-426f-93ba-e1c6d4600f2a/scratchpad; cd $S; grep -n -A8 '· User' red.md | cut -c1-200; grep -n -E '^\*Claude Code automatic recap|^\*Local command|System message' red.md
+1525:5:### 2026-09-23 13:43:39 · User
+1535:76:### 2026-09-23 13:45:53 · User
+1545:605:### 2026-09-23 13:51:18 · User
+1555:1848:### 2026-09-23 14:07:34 · User (pasted)
+1565:9001:### 2026-09-23 14:34:17 · User
+1575:9039:### 2026-09-23 14:38:39 · User (pasted)
+1585:9174:### 2026-09-23 14:41:52 · User (pasted)
+1738:### 2026-09-23 13:43:39 · User
+1971:### 2026-09-23 13:45:53 · User
+2149:S=[REDACTED: local home path]/AppData/Local/Temp/claude/C--Users-[REDACTED: local username]-adtz-02-splitledger/0d400f3a-2d58-426f-93ba-e1c6d4600f2a/scratchpad; cd $S; awk 'NR>=220 && NR<=240' red.md | cut -c1-600; grep -n '^\*\*Claude\*\*' red.md | sed -n '1,60p' | tr '\n' ' '; echo; sed -n '/14:34:17 · User/,/14:38:39 · User/p' red.md | grep -v '^$' | cut -c1-400 | head -60
+2177:### 2026-09-23 14:34:17 · User
+2201:### 2026-09-23 14:38:39 · User (pasted)
+2243:### 2026-09-23 13:51:18 · User
+2305:### 2026-09-23 14:41:52 · User (pasted)
+2372:### 2026-09-23 14:34:17 · User
+2448:*Claude Code error* · 2026-09-23 15:58:09
+2454:### 2026-09-23 15:59:51 · User (pasted)
+2693:563:### 2026-09-23 13:51:18 · User (slash command)
+3373:### 2026-09-23 16:08:14 · User (pasted)
+3381 s3.md
+Shell cwd was reset to [REDACTED: local home path]\adtz-02-splitledger
+```
+
+</details>
+
+**Claude** · 2026-09-23 16:16:37
+
+The session renders. Its fenced blocks correctly contain transcript excerpts I printed earlier. Checking what the credential-pattern rules matched in this session, and scanning for leaks.
+
+**Tool call: Bash** — Inspect credential matches and scan for leaks
+
+```sh
+S=[REDACTED: local home path]/AppData/Local/Temp/claude/C--Users-[REDACTED: local username]-adtz-02-splitledger/0d400f3a-2d58-426f-93ba-e1c6d4600f2a/scratchpad; cd $S; grep -n 'REDACTED: credential' s3.md | cut -c1-160; grep -n -i -E '[REDACTED: local username]\b|gmail|[REDACTED: personal name]|[REDACTED: personal account name]($|[^-])|gho_|[REDACTED: account identifier]|NTUSER|[REDACTED: home directory entry name]|\.ssh|Dropbox|OneDrive|[REDACTED: home directory entry name]' s3.md | cut -c1-160 | head -20
+```
+
+<details><summary>Tool result</summary>
+
+```text
+298:| `[REDACTED: credential]` | 2 | The GitHub CLI token field in `gh auth status` output (already masked there), and the Django development `SECRET_KEY` value
+620:Before publishing, inspect the entire output for credentials, tokens, personal data, machine-specific paths, and other sensitive content. Replace only conte
+849: ('github-token', r'gho_[A-Za-z0-9*]+', '[REDACTED: credential]', 0),
+850: ('django-secret-key', r"[REDACTED: credential]'\"\s]+", '[REDACTED: credential]', 0),
+1006:| `[REDACTED: credential]` | 2 | The GitHub CLI token field in `gh auth status` output (already masked there), and the Django development `SECRET_KEY` valu
+1410:8884:  - Token: [REDACTED: credential]
+1814:8- ('github-token', r'gho_[A-Za-z0-9*]+', '[REDACTED: credential]', 0),
+1815:9- ('django-secret-key', r"[REDACTED: credential]'\"\s]+", '[REDACTED: credential]', 0),
+1862:8884-  - Token: [REDACTED: credential]
+1885:8	 ('github-token', r'gho_[A-Za-z0-9*]+', '[REDACTED: credential]', 0),
+1886:9	 ('django-secret-key', r"[REDACTED: credential]'\"\s]+", '[REDACTED: credential]', 0),
+2740:      1 [REDACTED: credential]
+2820:| `[REDACTED: credential]` | 1 | The GitHub CLI token field in `gh auth status` output (already masked there) |
+848: ('email', r'[A-Za-z0-9._%+-]+@gmail\.com', '[REDACTED: email address]', 0),
+849: ('github-token', r'gho_[A-Za-z0-9*]+', '[REDACTED: credential]', 0),
+852: ('username', r'\b[REDACTED: local username]\b', '[REDACTED: local username]', 0),
+853: ('gh-account', r'\b[REDACTED: personal account name]\b(?!-Admin)', '[REDACTED: personal account name]', 0),
+1292:S=[REDACTED: local home path]/AppData/Local/Temp/claude/C--Users-[REDACTED: local username]-adtz-02-splitledger/0d400f3a-2d58-426f-93ba-e1c6d4600f2a/scratc
+1389:S=[REDACTED: local home path]/AppData/Local/Temp/claude/C--Users-[REDACTED: local username]-adtz-02-splitledger/0d400f3a-2d58-426f-93ba-e1c6d4600f2a/scratc
+1711:S=[REDACTED: local home path]/AppData/Local/Temp/claude/C--Users-[REDACTED: local username]-adtz-02-splitledger/0d400f3a-2d58-426f-93ba-e1c6d4600f2a/scratc
+[REDACTED: home directory listing line]
+[REDACTED: home directory listing line]
+[REDACTED: home directory listing line]
+1796:s=s.replace(""" ('gh-account', r'\\b[REDACTED: personal account name]\\b(?!-Admin)', '[REDACTED: personal account name]', 0),
+1797:]""",""" ('gh-account', r'\\b[REDACTED: personal account name]\\b(?!-Admin)', '[REDACTED: personal account name]', 0),
+1813:7- ('email', r'[A-Za-z0-9._%+-]+@gmail\.com', '[REDACTED: email address]', 0),
+1814:8- ('github-token', r'gho_[A-Za-z0-9*]+', '[REDACTED: credential]', 0),
+1817:11- ('username', r'\b[REDACTED: local username]\b', '[REDACTED: local username]', 0),
+1818:12- ('gh-account', r'\b[REDACTED: personal account name]\b(?!-Admin)', '[REDACTED: personal account name]', 0),
+1884:7	 ('email', r'[A-Za-z0-9._%+-]+@gmail\.com', '[REDACTED: email address]', 0),
+1885:8	 ('github-token', r'gho_[A-Za-z0-9*]+', '[REDACTED: credential]', 0),
+1888:11	 ('username', r'\b[REDACTED: local username]\b', '[REDACTED: local username]', 0),
+1889:12	 ('gh-account', r'\b[REDACTED: personal account name]\b(?!-Admin)', '[REDACTED: personal account name]', 0),
+Shell cwd was reset to [REDACTED: local home path]\adtz-02-splitledger
+```
+
+</details>
+
+**Tool call: Edit**
+
+File: `[REDACTED: local home path]\AppData\Local\Temp\claude\C--Users-[REDACTED: local username]-adtz-02-splitledger\0d400f3a-2d58-426f-93ba-e1c6d4600f2a\scratchpad\render2.py`
+
+Old:
+
+```text
+ ('django-secret-key', r"django-insecure-[^'\"\s]+", '[REDACTED: credential]', 0),
+ ('home-path', r'[A-Z]:(?:[\\]+|/)Users(?:[\\]+|/)[REDACTED: local username]\b|/[a-z]/Users/[REDACTED: local username]\b', '[REDACTED: local home path]', re.I),
+ ('username', r'\b[REDACTED: local username]\b', '[REDACTED: local username]', 0),
+ ('gh-account', r'\b[REDACTED: personal account name]\b(?!-Admin)', '[REDACTED: personal account name]', 0),
+```
+
+New:
+
+```text
+ ('django-secret-key', r"django-insecure-[A-Za-z0-9!@#$%^&*(=+)_-]{20,}", '[REDACTED: credential]', 0),
+ ('home-path', r'[A-Z]:(?:[\\]+|/)Users(?:[\\]+|/)[REDACTED: local username]\b|/[a-z]/Users/[REDACTED: local username]\b', '[REDACTED: local home path]', re.I),
+ ('username', r'[REDACTED: local username](?!rd)', '[REDACTED: local username]', 0),
+ ('gh-account', r'[REDACTED: personal account name](?!-Admin)', '[REDACTED: personal account name]', 0),
+```
+
+<details><summary>Tool result</summary>
+
+```text
+The file [REDACTED: local home path]\AppData\Local\Temp\claude\C--Users-[REDACTED: local username]-adtz-02-splitledger\0d400f3a-2d58-426f-93ba-e1c6d4600f2a\scratchpad\render2.py has been updated successfully. (file state is current in your context — no need to Read it back)
+```
+
+</details>
+
+**Tool call: Edit**
+
+File: `[REDACTED: local home path]\AppData\Local\Temp\claude\C--Users-[REDACTED: local username]-adtz-02-splitledger\0d400f3a-2d58-426f-93ba-e1c6d4600f2a\scratchpad\render2.py`
+
+Old:
+
+```text
+ ('account-id', r'[REDACTED: account identifier]', '[REDACTED: account identifier]', 0),
+]
+```
+
+New:
+
+```text
+ ('account-id', r'[REDACTED: account identifier]', '[REDACTED: account identifier]', 0),
+ ('home-listing-line', r'^(\d+[:-])?[d-][a-z-]{5}\s+\d{1,2}/\d{1,2}/\d{4}\s.*$', '[REDACTED: home directory listing line]', re.M),
+ ('home-listing-summary-line', r'^(\d+[:-])?- (Cloud sync|Config and tools|Projects and code|Standard Windows folders): .*$', '[REDACTED: home directory listing line]', re.M),
+]
+```
+
+<details><summary>Tool result</summary>
+
+```text
+The file [REDACTED: local home path]\AppData\Local\Temp\claude\C--Users-[REDACTED: local username]-adtz-02-splitledger\0d400f3a-2d58-426f-93ba-e1c6d4600f2a\scratchpad\render2.py has been updated successfully. (file state is current in your context — no need to Read it back)
+```
+
+</details>
+
+**Tool call: Bash** — Re-render all three sessions and scan
+
+```sh
+S=[REDACTED: local home path]/AppData/Local/Temp/claude/C--Users-[REDACTED: local username]-adtz-02-splitledger/0d400f3a-2d58-426f-93ba-e1c6d4600f2a/scratchpad; cd $S; PYTHONIOENCODING=utf-8 python render2.py all.md --redact | tail -20; grep -c '' all.md; for f in all.md; do grep -n -i -E '[REDACTED: local username]($|[^r])|gmail\.com|[REDACTED: personal name]|[REDACTED: personal account name]($|[^-])|gho_[A-Za-z*]|[REDACTED: account identifier]|NTUSER|[REDACTED: home directory entry name]|Dropbox|OneDrive|[REDACTED: home directory entry name]|\.ssh|[REDACTED: home directory entry name]|[REDACTED: home directory entry name]|[REDACTED: home directory entry name]' $f | cut -c1-150 | head; done
+```
+
+<details><summary>Tool result</summary>
+
+```text
+"local command records": 1,
+"api errors": 1,
+"records after cutoff (current turn)": 219
+}
+{
+"email": 6,
+"github-token": 2,
+"django-secret-key": 0,
+"home-path": 399,
+"username": 252,
+"gh-account": 13,
+"personal-name": 15,
+"path-env": 5,
+"home-listing-result": 2,
+"home-listing-reply": 2,
+"home-ls": 1,
+"account-id": 2,
+"home-listing-line": 8,
+"home-listing-summary-line": 1
+}
+15732
+3457:  async currentUser(): Promise<User | null> {
+5513:      .currentUser()
+5672:export function memberName(members: Member[], memberId: string, currentUserId: string): string {
+5673:  if (memberId === currentUserId) return 'You';
+5678:export function participantSummary(members: Member[], participantIds: string[], currentUserId: string): string {
+5681:    .map((id) => (id === currentUserId ? 'you' : memberName(members, id, currentUserId)))
+6811:                currentUserId={user.id}
+6820:          <BalancesCard group={group} currentUserId={user.id} />
+6849:  currentUserId,
+6855:  currentUserId: string;
+Shell cwd was reset to [REDACTED: local home path]\adtz-02-splitledger
+```
+
+</details>
+
+**Claude** · 2026-09-23 16:17:19
+
+The `NTUSER` hits are false positives (`currentUser` matched case-insensitively). Checking the listing-line redactions only hit home-directory entries.
+
+**Tool call: Bash** — Check listing-line redaction contexts
+
+```sh
+S=[REDACTED: local home path]/AppData/Local/Temp/claude/C--Users-[REDACTED: local username]-adtz-02-splitledger/0d400f3a-2d58-426f-93ba-e1c6d4600f2a/scratchpad; cd $S; PYTHONIOENCODING=utf-8 python - <<'EOF'
+import re
+raw=open('all.md',encoding='utf-8').read()
+EOF
+grep -n 'home directory listing line' all.md | cut -c1-120; grep -n 'NTUSER' all.md | head -3; grep -n -B3 'home directory listing line' all.md | grep -v 'listing line' | cut -c1-140 | head -20
+```
+
+<details><summary>Tool result</summary>
+
+````text
+14068:[REDACTED: home directory listing line]
+14069:[REDACTED: home directory listing line]
+14070:[REDACTED: home directory listing line]
+14201:[REDACTED: home directory listing line]
+14202:[REDACTED: home directory listing line]
+14203:[REDACTED: home directory listing line]
+14204:[REDACTED: home directory listing line]
+14205:[REDACTED: home directory listing line]
+14206:[REDACTED: home directory listing line]
+14065-<details><summary>Tool result</summary>
+14066-
+14067-```text
+--
+14198-
+14199-Mode                 LastWriteTime         Length Name                                                                 
+14200-----                 -------------         ------ ----
+Shell cwd was reset to [REDACTED: local home path]\adtz-02-splitledger
+````
+
+</details>
+
+**Tool call: Bash** — View context of second listing block
+
+```sh
+S=[REDACTED: local home path]/AppData/Local/Temp/claude/C--Users-[REDACTED: local username]-adtz-02-splitledger/0d400f3a-2d58-426f-93ba-e1c6d4600f2a/scratchpad; cd $S; sed -n 14180,14215p all.md | cut -c1-140
+```
+
+<details><summary>Tool result</summary>
+
+````text
+"attachment edited_text_file": 8,
+"omitted non-text result parts": 6
+}
+{
+"email": 2,
+"github-token": 1,
+"django-secret-key": 0,
+"home-path": 168,
+"username": 84,
+"gh-account": 1
+}
+```
+
+<details><summary>Tool result</summary>
+
+```text
+    Directory: [REDACTED: local home path]
+
+
+Mode                 LastWriteTime         Length Name                                                                 
+----                 -------------         ------ ----                                                                 
+[REDACTED: home directory listing line]
+[REDACTED: home directory listing line]
+[REDACTED: home directory listing line]
+[REDACTED: home directory listing line]
+[REDACTED: home directory listing line]
+[REDACTED: home directory listing line]
+3003:which: no pnpm in ([REDACTED: PATH environment variable])
+8879-dfe7724542d6c78c57eb474f6f397a184e283db5	HEAD
+8880-github.com
+8881:  ✓ Logged in to github.com account [REDACTED: personal account name] (keyring)
+8882-  - Active account: true
+8883-  - Git operations protocol: ssh
+8884-  - Token: [REDACTED: credential]
+8885-```
+8886-
+Shell cwd was reset to [REDACTED: local home path]\adtz-02-splitledger
+````
+
+</details>
+
+**Claude** · 2026-09-23 16:17:36
+
+All nine listing lines are home-directory entries. Computing per-session and total counts for the header.
+
+**Tool call: Bash** — Compute per-session coverage counts
+
+```sh
+S=[REDACTED: local home path]/AppData/Local/Temp/claude/C--Users-[REDACTED: local username]-adtz-02-splitledger/0d400f3a-2d58-426f-93ba-e1c6d4600f2a/scratchpad; cd $S; for s in 8fa56825 745ecfb7 0d400f3a; do ONLY=$s PYTHONIOENCODING=utf-8 python render2.py s_$s.md --redact > st_$s.txt; echo "== $s"; grep -E '"(user prompts|assistant texts|tool calls|tool results|recaps|api errors|thinking blocks omitted|thinking with text|omitted non-text result parts|meta \(skill expansion\) omitted|local command records|/clear records omitted)"' st_$s.txt | tr -d '\n'; echo; python -c "
+import json,sys,re
+t=open('st_$s.txt',encoding='utf-8').read(); d=json.loads(t[:t.index('}')+1])
+print('attachments',sum(v for k,v in d.items() if k.startswith('attachment ')))"; grep -o '^\*\*Tool call: [A-Za-z]*' s_$s.md | sort | uniq -c | tr '\n' ' '; echo; echo errors $(grep -c 'Tool result (error)' s_$s.md); done; grep -o '\[REDACTED: [^]]*\]' all.md | sort | uniq -c; grep -o '\[OMITTED: [^]]*\]' all.md | sort | uniq -c; ONLY=0d400f3a python render2.py /dev/null --redact | python -c "import sys,json;t=sys.stdin.read();d=json.loads(t[:t.index('}')+1]);print({k:v for k,v in d.items() if k.startswith('attachment')})"
+```
+
+<details><summary>Tool result</summary>
+
+```text
+== 8fa56825
+"user prompts": 3,"tool calls": 18,"tool results": 18,"thinking blocks omitted": 10,"thinking with text": 0,"assistant texts": 4,"recaps": 2,"meta (skill expansion) omitted": 1,
+attachments 31
+      3 **Tool call: Artifact       6 **Tool call: Bash       1 **Tool call: Edit       1 **Tool call: PowerShell       7 **Tool call: Write 
+errors 1
+== 745ecfb7
+"user prompts": 4,"thinking blocks omitted": 62,"thinking with text": 3,"tool calls": 103,"tool results": 103,"assistant texts": 33,"omitted non-text result parts": 6,"recaps": 3,
+attachments 113
+      3 **Tool call: Artifact      55 **Tool call: Bash       1 **Tool call: Edit       6 **Tool call: Read       3 **Tool call: TaskStop       1 **Tool call: ToolSearch      34 **Tool call: Write 
+errors 4
+== 0d400f3a
+"/clear records omitted": 2,"local command records": 1,"user prompts": 3,"thinking blocks omitted": 44,"thinking with text": 1,"tool calls": 52,"tool results": 52,"assistant texts": 15,"api errors": 1,
+attachments 74
+      2 **Tool call: Artifact      49 **Tool call: Bash       1 **Tool call: Edit       2 **Tool call: PowerShell       1 **Tool call: Read       3 **Tool call: TaskStop       1 **Tool call: ToolSearch       2 **Tool call: Write 
+errors 3
+      9 [REDACTED: PATH environment variable]
+      1 [REDACTED: [^]
+      2 [REDACTED: account identifier]
+     14 [REDACTED: credential]
+     15 [REDACTED: email address]
+      1 [REDACTED: home directory listing (29 folders, 6 files)]
+      9 [REDACTED: home directory listing line]
+      7 [REDACTED: home directory listing]
+      2 [REDACTED: local home path\\]
+      2 [REDACTED: local home path\]
+    405 [REDACTED: local home path]
+    259 [REDACTED: local username]
+     25 [REDACTED: personal account name]
+     24 [REDACTED: personal name]
+      7 [REDACTED: summary of the home directory listing]
+      1 [OMITTED: [^]
+      9 [OMITTED: image content in tool result]
+      1 [OMITTED: {y.get('type')} content in tool result]
+{'attachment environment': 1, 'attachment model': 1, 'attachment deferred_tools_delta': 1, 'attachment agent_listing_delta': 1, 'attachment mcp_instructions_delta': 1, 'attachment skill_listing': 1, 'attachment auto_mode': 1, 'attachment total_tokens_reminder': 53, 'attachment instructions': 1, 'attachment session_context': 1, 'attachment date': 1, 'attachment remote_session_change': 1, 'attachment prompt_snapshot': 2, 'attachment deferred_tools_record': 2, 'attachment silent_turn_reminder': 5, 'attachment edited_text_file': 1}
+Shell cwd was reset to [REDACTED: local home path]\adtz-02-splitledger
+```
+
+</details>
+
+**Tool call: Bash** — View start and end of session 3 rendering
+
+```sh
+S=[REDACTED: local home path]/AppData/Local/Temp/claude/C--Users-[REDACTED: local username]-adtz-02-splitledger/0d400f3a-2d58-426f-93ba-e1c6d4600f2a/scratchpad; cd $S; sed -n 1,14p s_0d400f3a.md; tail -30 s_0d400f3a.md | cut -c1-200
+```
+
+<details><summary>Tool result</summary>
+
+````text
+## Session `0d400f3a-2d58-426f-93ba-e1c6d4600f2a`
+
+
+*Local command* · 2026-09-23 15:49:06
+
+```text
+<local-command-stdout></local-command-stdout>
+```
+
+### 2026-09-23 15:49:10 · User (pasted)
+
+```text
+Set up the same Claude Code development record approach for Homework 2 (SplitLedger) that Homework 1 now uses.
+
+**Omissions**, all listed at the top of the file:
+- **Screenshots:** 6, each marked where it was.
+- **Thinking blocks:** 72. Of these, 69 held no readable text and 3 held Claude's internal reasoning.
+- **The `/design` skill instructions:** 1.
+- **Injected context attachments:** 144.
+- **Session bookkeeping records:** not counted individually.
+- **`exit` and `/clear`:** these appear only in the prompt history, not in the session files.
+
+**Reviewed and kept**
+- **Test token:** a random bearer token in a failing `pytest` output. It came from the in-memory test client for one run and gives access to nothing.
+- **Other content:** your public repository owner name, the design canvas link, the demo accounts and passwords, and localhost URLs.
+
+**Other checks**
+- **Rendered Markdown:** it parses cleanly. Headings are correct and every code block and `<details>` section closes.
+- **Staged diff:** the scan of every added line found no remaining credentials, personal names, email addresses or local paths.
+- **Instruction files:** `CLAUDE.md` still contains only `@AGENTS.md`. The new "Claude Code development record" rule is only in `AGENTS.md`.
+- **Trailing spaces:** some lines in copied tool output have trailing spaces, which `git diff --check` reports. I left them as they appear in the original output.
+
+**Concern for you:** `backend/pyproject.toml`, committed in `9dd1915`, contains your full name and gmail address. `uv init` filled them in from your git settings. That file is application code, so I d
+
+### 2026-09-23 16:08:14 · User (pasted)
+
+```text
+Do Homework 2 Question 6: connect the existing SplitLedger frontend to the FastAPI backend. Read the repository instructions and existing code, then make the connection work.
+
+Verify the connection through the app, using a browser if available. Tell me which URL the frontend uses to talk to the backend, how you verified it, and the commands needed to run both parts. Record 
+
+Do not start Question 7.
+```
+Shell cwd was reset to [REDACTED: local home path]\adtz-02-splitledger
+````
+
+</details>
+
+**Tool call: Bash** — Totals of tool calls across sessions
+
+```sh
+S=[REDACTED: local home path]/AppData/Local/Temp/claude/C--Users-[REDACTED: local username]-adtz-02-splitledger/0d400f3a-2d58-426f-93ba-e1c6d4600f2a/scratchpad; cd $S; grep -c '' header.md; grep -n "Session tool" all.md | head -2; grep -o '^\*\*Tool call: [A-Za-z]*' all.md | sort | uniq -c
+```
+
+<details><summary>Tool result</summary>
+
+```text
+70
+      8 **Tool call: Artifact
+    110 **Tool call: Bash
+      3 **Tool call: Edit
+      3 **Tool call: PowerShell
+      7 **Tool call: Read
+      6 **Tool call: TaskStop
+      2 **Tool call: ToolSearch
+     43 **Tool call: Write
+Shell cwd was reset to [REDACTED: local home path]\adtz-02-splitledger
+```
+
+</details>
+
+**Claude** · 2026-09-23 16:18:12
+
+The line-based tallies also pick up quoted text, so I'll count tool names directly from the JSONL instead.
+
+**Tool call: Bash** — Count tool calls per session from JSONL
+
+```sh
+cd ~/.claude/projects && PYTHONIOENCODING=utf-8 python -c "
+import json,collections
+S=[('C--Users-[REDACTED: local username]/','8fa56825-d817-4b21-8a31-fc6b59021218',None),('C--Users-[REDACTED: local username]-adtz-02-splitledger/','745ecfb7-5953-45ab-a1d2-b64bee611196',None),('C--Users-[REDACTED: local username]-adtz-02-splitledger/','0d400f3a-2d58-426f-93ba-e1c6d4600f2a','2026-09-23T14:08:14.401Z')]
+tot=collections.Counter()
+for sub,sid,stop in S:
+    c=collections.Counter(); e=0; first=last=None
+    for l in open(sub+sid+'.jsonl',encoding='utf-8'):
+        d=json.loads(l)
+        if stop and d.get('timestamp','')>stop: continue
+        if d.get('type')=='assistant':
+            for x in d['message']['content']:
+                if x['type']=='tool_use': c[x['name']]+=1
+        if d.get('type')=='user' and isinstance(d['message']['content'],list):
+            e+=sum(1 for x in d['message']['content'] if x.get('type')=='tool_result' and x.get('is_error'))
+        if d.get('type') in ('user','assistant','system') and d.get('timestamp'):
+            first=first or d['timestamp']; last=d['timestamp']
+    tot+=c
+    print(sid[:8],dict(c),sum(c.values()),'errors',e,first,last)
+print(dict(tot),sum(tot.values()))
+"
+```
+
+<details><summary>Tool result</summary>
+
+```text
+8fa56825 {'PowerShell': 1, 'Bash': 6, 'Artifact': 3, 'Write': 7, 'Edit': 1} 18 errors 1 2026-09-23T11:43:39.605Z 2026-09-23T11:57:17.119Z
+745ecfb7 {'Bash': 55, 'Artifact': 3, 'Write': 34, 'Read': 6, 'ToolSearch': 1, 'TaskStop': 3, 'Edit': 1} 103 errors 4 2026-09-23T12:07:34.447Z 2026-09-23T12:53:45.924Z
+0d400f3a {'Bash': 46, 'Read': 1, 'Edit': 1, 'Write': 2, 'ToolSearch': 1, 'TaskStop': 1} 52 errors 1 2026-09-23T13:49:06.458Z 2026-09-23T14:08:14.401Z
+{'PowerShell': 1, 'Bash': 107, 'Artifact': 6, 'Write': 43, 'Edit': 3, 'Read': 7, 'ToolSearch': 2, 'TaskStop': 4} 173
+Shell cwd was reset to [REDACTED: local home path]\adtz-02-splitledger
+```
+
+</details>
+
+**Tool call: Write**
+
+File: `[REDACTED: local home path]\AppData\Local\Temp\claude\C--Users-[REDACTED: local username]-adtz-02-splitledger\0d400f3a-2d58-426f-93ba-e1c6d4600f2a\scratchpad\header2.md`
+
+```text
+# Claude Code conversation transcript (Homework 2)
+
+A sanitized, public rendering of the Claude Code sessions used for Homework 2 (SplitLedger) development so far. It was generated from the original session files, which stay outside this repository. It is **not** a verbatim or lossless transcript: some content was redacted or left out, as listed below. For the prompts alone, see the [Claude Code prompt log](claude-code-prompts.md).
+
+## Sessions covered
+
+| Session | Local time (+02:00) | Status | Contents |
+| --- | --- | --- | --- |
+| `8fa56825-d817-4b21-8a31-fc6b59021218` | 2026-09-23 13:43 – 13:57 | Complete | Home-directory listing, cloning and orientation, Question 4 design canvas (`/design`) |
+| `745ecfb7-5953-45ab-a1d2-b64bee611196` | 2026-09-23 14:07 – 14:53 | Complete | Question 4 frontend, stopping the dev server, checkout synchronization, Question 5 contract and backend |
+| `0d400f3a-2d58-426f-93ba-e1c6d4600f2a` | 2026-09-23 15:49 – 16:08 | **Partial** | Setting up this development record (interrupted by an API error), resuming it (commit `4f0e3fe`), and the Question 6 prompt |
+
+The first session started in the home directory, before the repository was cloned; the others started in the repository root. Times are local (+02:00); the original records are in UTC.
+
+**Session `0d400f3a…` is partial.** It began as record maintenance and became a development session with the Question 6 prompt. It is rendered through the last completed turn plus the Question 6 prompt. Claude's work on Question 6 (its tool calls and replies) is not rendered yet and will be added at the next development checkpoint.
+
+Not covered:
+
+- Sessions that only maintained the prompt log (`56fad681…`) or only verified the checkout (`c076f5a1…`), and the Homework 1 sessions. The [prompt log](claude-code-prompts.md#sources-and-gaps) uses the same boundary.
+- **Gap:** application commit `fbf6627` ("Keep group currency locked after first recorded expense") appears in no local Claude Code transcript, so it has no conversation here.
+
+## What is included
+
+Entries appear in the order they occur in the session files:
+
+- **All 10 user prompts** in the covered range (3, 4 and 3 per session), word for word with their line breaks. Pasted prompts appear without Claude Code's paste wrapper. The `/design` prompt is shown as Claude Code stored it: a slash-command record with the command name and arguments.
+- **All 52 visible Claude text replies** in the covered range (4, 33 and 15), rendered as Markdown with unchanged wording. No line breaks were added.
+- **All 173 tool calls with their full inputs and all 173 tool results as text** (18, 103 and 52): 107 Bash, 43 Write, 7 Read, 6 Artifact, 4 TaskStop, 3 Edit, 2 ToolSearch and 1 PowerShell. For Bash and PowerShell, the tool's description is shown in the call heading. 6 results are marked as errors, as Claude Code recorded them. No text result was shortened for size.
+- **5 automatic Claude Code recaps**, shown to the user while they were away.
+- **1 Claude Code API error** ("The response stopped arriving"), which ended the first turn of session `0d400f3a…`. It is labeled as an error, not as a Claude reply.
+- **The output of the `/clear` command** that started session `0d400f3a…` (empty).
+
+Session `0d400f3a…` maintains this record, so its tool calls and results quote the original transcripts, earlier renderings of this file, and the redaction rules themselves. The same redactions were applied to those quotations.
+
+## What is omitted
+
+- **Claude's work on the current Question 6 turn** in session `0d400f3a…`, as explained above.
+- **6 screenshots.** Six Read results in session `745ecfb7…` were PNG images of the frontend taken during browser testing. Each is marked `[OMITTED: image content in tool result]`; the image data is not reproduced.
+- **116 thinking blocks.** 112 were stored with no readable text, only encrypted signatures. 4 contained Claude's internal reasoning text, which is not part of the visible replies.
+- **1 skill expansion:** the instructions Claude Code injected for Claude when `/design` was invoked. It is not a user or Claude turn.
+- **218 context attachments that Claude Code injected for the model.** These are not conversation turns:
+  - 147 token-count reminders
+  - 6 system-prompt snapshots and 2 project-instructions attachments (`CLAUDE.md`/`AGENTS.md`)
+  - 13 environment notices, 3 date notices and 3 model notices
+  - 9 notices that a file had been edited, with a file excerpt
+  - 3 session-context notices and 3 commit/PR attribution settings
+  - 3 skill listings, 8 deferred-tool listings, 3 agent listings and 3 MCP-instruction listings
+  - 3 auto-mode notices and 1 command-permissions notice
+  - 8 "user hasn't heard from you" reminders
+- **The `/clear` command record and its caveat** that started session `0d400f3a…`. Only the command's (empty) output is shown.
+- **Session bookkeeping records:** mode and permission-mode markers, file-history snapshots and deltas, auto-generated titles, last-prompt markers, turn durations, cost state, and artifact and frame-link state.
+- **`exit` and `/clear`**, which ended sessions `8fa56825…` and `745ecfb7…`. Prompt history records them, but the session files do not.
+
+## Redactions
+
+Redacted text is replaced inline with an explicit marker. The counts are the replacements made when generating this file. Some markers in session `0d400f3a…` were already present in the earlier renderings that it quotes, so the file contains more markers than these counts.
+
+| Marker | Replacements | What was removed |
+| --- | --- | --- |
+| `[REDACTED: local home path]` | 399 | The Windows home directory prefix in paths (all path forms) |
+| `[REDACTED: local username]` | 252 | The local Windows username, mainly in Claude Code's per-project folder names and in quoted redaction rules |
+| `[REDACTED: home directory listing]` | 5 | Listings of the home directory's contents (from the first prompt's `ls`, from an `ls` of the home directory at the start of session `0d400f3a…`, and in quoted renderings) |
+| `[REDACTED: home directory listing line]` | 9 | Single lines of that listing quoted in `grep` and `sed` output |
+| `[REDACTED: summary of the home directory listing]` | 2 | Claude's reply summarizing that listing, and a quotation of it |
+| `[REDACTED: PATH environment variable]` | 5 | The full `PATH` printed in a `which` error message, and quotations of it |
+| `[REDACTED: personal name]` | 15 | The author name in `git log`, `git show` and `backend/pyproject.toml` output |
+| `[REDACTED: email address]` | 6 | The personal email address in the same outputs |
+| `[REDACTED: personal account name]` | 13 | The personal GitHub login shown by `gh auth status`, and in quoted redaction rules |
+| `[REDACTED: account identifier]` | 2 | A Claude account identifier printed from a session bookkeeping record |
+| `[REDACTED: credential]` | 2 | The GitHub CLI token field in `gh auth status` output (already masked there), and a quotation of it |
+
+The following were reviewed and kept:
+
+- The public repository owner `GerhardBalz-Admin`
+- `noreply@anthropic.com` in commit trailers
+- The SplitLedger design canvas link, which is already published in the prompt log, and the links to Claude's built-in Design artifact types
+- Demo accounts such as `dana@example.com` with the demo password `splitledger`
+- `localhost` and `127.0.0.1` dev-server URLs
+- Session IDs, the Claude Code background-task IDs, and the ID of the SplitLedger design artifact
+- A random bearer token in a failing `pytest` traceback, created by the in-memory test client for one test run; it grants access to nothing
+- Content hashes of the design canvas files in an Artifact listing
+- The Homework 1 prompts and records quoted from local prompt history, which are already public in the Homework 1 repository
+
+---
+
+```
+
+<details><summary>Tool result</summary>
+
+```text
+File created successfully at: [REDACTED: local home path]\AppData\Local\Temp\claude\C--Users-[REDACTED: local username]-adtz-02-splitledger\0d400f3a-2d58-426f-93ba-e1c6d4600f2a\scratchpad\header2.md (file state is current in your context — no need to Read it back)
+```
+
+</details>
+
+**Tool call: Edit**
+
+File: `[REDACTED: local home path]\AppData\Local\Temp\claude\C--Users-[REDACTED: local username]-adtz-02-splitledger\0d400f3a-2d58-426f-93ba-e1c6d4600f2a\scratchpad\header2.md`
+
+Old:
+
+```text
+| `[REDACTED: home directory listing]` | 5 | Listings of the home directory's contents (from the first prompt's `ls`, from an `ls` of the home directory at the start of session `0d400f3a…`, and in quoted renderings) |
+```
+
+New:
+
+```text
+| `[REDACTED: home directory listing]` | 3 | Listings of the home directory's contents: from the first prompt's `ls`, from an `ls` of the home directory at the start of session `0d400f3a…`, and a quotation of the first |
+```
+
+<details><summary>Tool result</summary>
+
+```text
+The file [REDACTED: local home path]\AppData\Local\Temp\claude\C--Users-[REDACTED: local username]-adtz-02-splitledger\0d400f3a-2d58-426f-93ba-e1c6d4600f2a\scratchpad\header2.md has been updated successfully. (file state is current in your context — no need to Read it back)
+```
+
+</details>
+
+**Tool call: Bash** — Assemble conversation file and check headings
+
+```sh
+S=[REDACTED: local home path]/AppData/Local/Temp/claude/C--Users-[REDACTED: local username]-adtz-02-splitledger/0d400f3a-2d58-426f-93ba-e1c6d4600f2a/scratchpad; cd $S; { cat header2.md all.md; printf '\n*Session `0d400f3a…` continues: Claude'"'"'s work on the Question 6 prompt above is not rendered yet (partial session).*\n'; } > [REDACTED: local home path]/adtz-02-splitledger/_docs/claude-code-conversation.md; cd [REDACTED: local home path]/adtz-02-splitledger && tail -3 _docs/claude-code-conversation.md && uv run --no-project --with markdown-it-py python -c "
+from markdown_it import MarkdownIt
+toks=MarkdownIt('commonmark').parse(open('_docs/claude-code-conversation.md',encoding='utf-8').read())
+for i,t in enumerate(toks):
+    if t.type=='heading_open' and t.tag in('h1','h2','h3'): print(t.tag,toks[i+1].content[:60].encode('ascii','replace').decode())
+print('details open/close', sum('<details>' in t.content for t in toks if t.type=='html_block'), sum('</details>' in t.content for t in toks if t.type=='html_block'))
+"
+```
+
+<details><summary>Tool result</summary>
+
+````text
+```
+
 *Session `0d400f3a…` continues: Claude's work on the Question 6 prompt above is not rendered yet (partial session).*
+h1 Claude Code conversation transcript (Homework 2)
+h2 Sessions covered
+h2 What is included
+h2 What is omitted
+h2 Redactions
+h2 Session `8fa56825-d817-4b21-8a31-fc6b59021218`
+h3 2026-09-23 13:43:39 ? User
+h3 2026-09-23 13:45:53 ? User
+h3 2026-09-23 13:51:18 ? User (slash command)
+h2 Session `745ecfb7-5953-45ab-a1d2-b64bee611196`
+h3 2026-09-23 14:07:34 ? User (pasted)
+h3 2026-09-23 14:34:17 ? User
+h3 2026-09-23 14:38:39 ? User (pasted)
+h3 2026-09-23 14:41:52 ? User (pasted)
+h2 Session `0d400f3a-2d58-426f-93ba-e1c6d4600f2a`
+h3 2026-09-23 15:49:10 ? User (pasted)
+h3 2026-09-23 15:59:51 ? User (pasted)
+h3 2026-09-23 16:08:14 ? User (pasted)
+details open/close 173 173
+````
+
+</details>
+
+**Tool call: Bash** — Check removed lines in published part
+
+```sh
+git diff --unified=0 _docs/claude-code-conversation.md | grep -E '^[-+]' | grep -v -E '^(\+\+\+|---)' | awk 'NR<=400' | grep -n -v '^+' | head -30; git diff --numstat _docs/claude-code-conversation.md
+```
+
+<details><summary>Tool result</summary>
+
+```text
+1:-A sanitized, public rendering of the two Claude Code sessions used for Homework 2 (SplitLedger) development so far. It was generated from the original session files, which stay outside this repository. It is **not** a verbatim or lossless transcript: some content was redacted or left out, as listed below. For the prompts alone, see the [Claude Code prompt log](claude-code-prompts.md).
+3:-| Session | Local time (+02:00) | Contents |
+4:-| --- | --- | --- |
+5:-| `8fa56825-d817-4b21-8a31-fc6b59021218` | 2026-09-23 13:43 – 13:57 | Home-directory listing, cloning and orientation, Question 4 design canvas (`/design`) |
+6:-| `745ecfb7-5953-45ab-a1d2-b64bee611196` | 2026-09-23 14:07 – 14:53 | Question 4 frontend, stopping the dev server, checkout synchronization, Question 5 contract and backend |
+12:-The first session started in the home directory, before the repository was cloned; the second started in the repository root. Both sessions are complete: each one's last turn is included. Times are local (+02:00); the original records are in UTC.
+16:-- Sessions that only maintained the prompt log (`56fad681…`), only verified the checkout (`c076f5a1…`), or produced this record, and the Homework 1 sessions. The [prompt log](claude-code-prompts.md#sources-and-gaps) uses the same boundary.
+18:-- **All 7 user prompts**, word for word with their line breaks. Pasted prompts appear without Claude Code's paste wrapper. The `/design` prompt is shown as Claude Code stored it: a slash-command record with the command name and arguments.
+19:-- **All 37 visible Claude text replies**, rendered as Markdown with unchanged wording. No line breaks were added.
+20:-- **All 121 tool calls with their full inputs and all 121 tool results as text:** 61 Bash, 41 Write, 6 Artifact, 6 Read, 3 TaskStop, 2 Edit, 1 PowerShell and 1 ToolSearch. For Bash and PowerShell, the tool's description is shown in the call heading. 5 results are marked as errors, as Claude Code recorded them. No text result was shortened for size.
+28:-- **6 screenshots.** Six Read results were PNG images of the frontend taken during browser testing. Each is marked `[OMITTED: image content in tool result]`; the image data is not reproduced.
+29:-- **72 thinking blocks.** 69 were stored with no readable text, only encrypted signatures. 3 contained Claude's internal reasoning text, which is not part of the visible replies.
+33:-- **144 context attachments that Claude Code injected for the model.** These are not conversation turns:
+34:-  - 94 token-count reminders
+35:-  - 4 system-prompt snapshots and 1 project-instructions attachment (`CLAUDE.md`/`AGENTS.md`)
+36:-  - 12 environment notices, 2 date notices and 2 model notices
+37:-  - 8 notices that a file had been edited, with a file excerpt
+38:-  - 2 session-context notices and 2 commit/PR attribution settings
+39:-  - 2 skill listings, 5 deferred-tool listings, 2 agent listings and 2 MCP-instruction listings
+40:-  - 2 auto-mode notices and 1 command-permissions notice
+41:-  - 3 "user hasn't heard from you" reminders
+52:-- **`exit` and `/clear`**, which ended the first and second session. Prompt history records them, but the session files do not.
+54:-Redacted text is replaced inline with an explicit marker:
+56:-| Marker | Count | What was removed |
+58:-| `[REDACTED: local home path]` | 157 | The Windows home directory prefix in paths (all path forms) |
+59:-| `[REDACTED: local username]` | 84 | The local Windows username, mainly in Claude Code's per-project folder names |
+60:-| `[REDACTED: home directory listing]` | 1 | The contents of the home directory listed by the first prompt (`ls`) |
+61:-| `[REDACTED: summary of the home directory listing]` | 1 | Claude's reply summarizing that listing |
+62:-| `[REDACTED: PATH environment variable]` | 1 | The full `PATH` printed in a `which` error message |
+63:-| `[REDACTED: personal name]` | 3 | The author name in `git log` output and in the `authors` entry of `backend/pyproject.toml` generated by `uv init` |
+3926	531	_docs/claude-code-conversation.md
+```
+
+</details>
+
+**Tool call: Bash** — Diff published session bodies old vs new
+
+```sh
+git show HEAD:_docs/claude-code-conversation.md > "$TEMP/old_conv.md"; python - <<'EOF'
+import os
+t=os.environ['TEMP']
+old=open(t+'/old_conv.md',encoding='utf-8').read(); new=open('_docs/claude-code-conversation.md',encoding='utf-8').read()
+ob=old[old.index('\n## Session `8fa56825'):]
+nb=new[new.index('\n## Session `8fa56825'):new.index('\n## Session `0d400f3a')]
+import difflib
+d=[l for l in difflib.unified_diff(ob.splitlines(),nb.splitlines(),lineterm='',n=0) if l[:1] in '+-' and l[:3] not in('+++','---')]
+print(len(d)); print('\n'.join(x[:160] for x in d[:20]))
+EOF
+```
+
+<details><summary>Tool result</summary>
+
+```text
+1
++
+```
+
+</details>
+
+**Tool call: Bash** — Add current session to prompt log
+
+````sh
+PYTHONIOENCODING=utf-8 python - <<'EOF'
+import json,re,datetime
+f='[REDACTED: local home path]/.claude/projects/C--Users-[REDACTED: local username]-adtz-02-splitledger/0d400f3a-2d58-426f-93ba-e1c6d4600f2a.jsonl'
+ps=[]
+for l in open(f,encoding='utf-8'):
+    d=json.loads(l)
+    if d.get('type')=='user' and (d.get('origin') or {}).get('kind')=='human' and isinstance(d['message']['content'],str) and d['timestamp']<='2026-09-23T14:08:14.401Z':
+        m=re.fullmatch(r'\n\n<pasted_content id="\w+">\n(.*)\n</pasted_content id="\w+">\n',d['message']['content'],re.S)
+        ps.append((d['timestamp'],m.group(1)))
+assert len(ps)==3
+heads=[("Set up the development record","Claude found the source sessions, drafted this log and the conversation file, and found that no transcript accounts for commit `fbf6627`. The turn ended with a Claude Code API error (\"The response stopped arriving\") before the log was written."),
+       ("Resume the development record","Claude corrected this log, created the conversation file, linked it from the README, added the development-record rule to `AGENTS.md`, and pushed commit `4f0e3fe`."),
+       ("Question 6: connect the frontend to the backend","**In progress.** The outcome will be recorded at the next development checkpoint.")]
+def lt(ts): return datetime.datetime.fromisoformat(ts.replace('Z','+00:00')).astimezone(datetime.timezone(datetime.timedelta(hours=2))).strftime('%Y-%m-%d %H:%M:%S')
+sec="""### Session `0d400f3a-2d58-426f-93ba-e1c6d4600f2a` (2026-09-23) · partial
+
+Started in the repository root with `/clear`. It began by maintaining this record and became a development session with prompt 10. **Partial:** recorded through prompt 10, whose turn is still in progress.
+"""
+for i,((ts,p),(h,o)) in enumerate(zip(ps,heads),8):
+    sec+=f"\n#### {i}. {h}\n\n{lt(ts)} +02:00 · pasted\n\n```text\n{p}\n```\n\nOutcome: {o}\n"
+s=open('_docs/claude-code-prompts.md',encoding='utf-8',newline='').read()
+crlf='\r\n' in s; s=s.replace('\r\n','\n')
+anchor="\n## Sources and gaps\n"
+assert anchor in s
+s=s.replace(anchor,"\n"+sec+anchor)
+old_ex="- Excluded sessions: `56fad681…` (finding the Question 4 prompt for this log), `c076f5a1…` (checkout verification only; no development), the session that produced this record, and the Homework 1 sessions `ec7765e9…`, `b45f1efe…` and `abc5d6e3…`."
+new_ex="- Excluded sessions: `56fad681…` (finding the Question 4 prompt for this log), `c076f5a1…` (checkout verification only; no development), and the Homework 1 sessions `ec7765e9…`, `b45f1efe…` and `abc5d6e3…`. Session `0d400f3a…` is included because it went on to Question 6 development; its earlier record-maintenance turns are included with it."
+assert old_ex in s; s=s.replace(old_ex,new_ex)
+old2="- All seven prompts above are taken from the two session transcripts and match `history.jsonl` exactly."
+assert old2 in s; s=s.replace(old2,"- All ten prompts above are taken from the three session transcripts and match `history.jsonl` exactly.")
+old3="- Not listed because they are not prompts to Claude: `exit`, which ended session `8fa56825…` at 14:42:21, and `/clear`, which ended session `745ecfb7…` at 15:27:38. Both appear only in the prompt history."
+assert old3 in s; s=s.replace(old3,old3+" The `/clear` that started session `0d400f3a…` at 15:49:06 is also not listed.")
+old4="Each prompt is transcribed verbatim"
+open('_docs/claude-code-prompts.md','w',encoding='utf-8',newline='').write(s.replace('\n','\r\n') if crlf else s)
+EOF
+sed -n '/### Session `0d400f3a/,/## Sources/p' _docs/claude-code-prompts.md | head -20
+````
+
+<details><summary>Tool result</summary>
+
+````text
+### Session `0d400f3a-2d58-426f-93ba-e1c6d4600f2a` (2026-09-23) · partial
+
+Started in the repository root with `/clear`. It began by maintaining this record and became a development session with prompt 10. **Partial:** recorded through prompt 10, whose turn is still in progress.
+
+#### 8. Set up the development record
+
+2026-09-23 15:49:10 +02:00 · pasted
+
+```text
+Set up the same Claude Code development record approach for Homework 2 (SplitLedger) that Homework 1 now uses.
+
+First check the branch and working-tree status in adtz-02-splitledger. If the tree is clean and the branch is main, run git pull --ff-only origin main. If there are local changes or the pull cannot fast-forward, stop and report the details; do not overwrite or discard anything. Read AGENTS.md, CLAUDE.md, README.md, and _docs/claude-code-prompts.md before editing.
+
+Find the original local Claude Code history and session transcripts relevant to SplitLedger, including sessions that began in my home directory before the repository was cloned. Establish which sessions and turns are Homework 2 development work. Reconcile the existing prompt log against those sources: retain verified content, correct inaccuracies, and add missing prompts in chronological order with their original wording and line breaks. Identify any unavailable source rather than reconstructing a prompt from a recap.
+
+Create _docs/claude-code-conversation.md as a public, sanitized rendering of those development sessions. Preserve the sequence and actual wording of user prompts and visible Claude replies, and include tool calls and results so a reader can follow the work. State the sessions covered, coverage counts, redactions, formatting changes, and omissions at the top. Mark redactions inline. Keep original session files outside this public repository. Inspect the entire output and staged diff for credentials, personal information, local paths, and other sensitive material. If safe publication cannot be established, stop before committing and report the concern.
+
+Add a link to the new conversation file beside the prompt-log link in README.md, preserving any newer README changes. Add a "Claude Code development record" rule to AGENTS.md, following the Homework 1 approach: keep the two files aligned by session ID and coverage using original transcripts as evidence; reconcile earlier completed development sessions at the next checkpoint; mark an unfinished current session as partial in both files; use the same inclusion boundary; label redactions and omissions; report gaps instead of inventing content. Confirm that CLAUDE.md still imports AGENTS.md, without duplicating the rule there.
+
+Verify coverage against the source transcripts and check the rendered Markdown. Change only AGENTS.md, README.md, _docs/claude-code-prompts.md, and the new _docs/claude-code-conversation.md. Do not change application code, specifications, homework answers, or tests, and do not start Question 6. If the checks pass, commit and push the documentation changes. Report the commit hash, sessions covered, counts, gaps, and every redaction or omission.
+````
+
+</details>
+
+**Claude** · 2026-09-23 16:19:34
+
+Prompt log has session `0d400f3a` (prompts 8–10, marked partial). Fixing one tense in the prompt 7 outcome, then verifying all 10 prompts in both files against the transcripts and history.
+
+**Tool call: Bash** — Verify all 10 prompts in both files
+
+````sh
+python - <<'EOF'
+p='_docs/claude-code-prompts.md'; s=open(p,encoding='utf-8',newline='').read()
+o="The frontend still uses its in-browser mock; database persistence is deferred to Question 7."
+assert o in s; s=s.replace(o,"At that point the frontend still used its in-browser mock; database persistence is deferred to Question 7.")
+open(p,'w',encoding='utf-8',newline='').write(s)
+EOF
+PYTHONIOENCODING=utf-8 python - <<'EOF'
+import json,re
+P='[REDACTED: local home path]/.claude/projects/'
+S=[('C--Users-[REDACTED: local username]/','8fa56825-d817-4b21-8a31-fc6b59021218'),('C--Users-[REDACTED: local username]-adtz-02-splitledger/','745ecfb7-5953-45ab-a1d2-b64bee611196'),('C--Users-[REDACTED: local username]-adtz-02-splitledger/','0d400f3a-2d58-426f-93ba-e1c6d4600f2a')]
+tx=[]
+for sub,sid in S:
+    for l in open(P+sub+sid+'.jsonl',encoding='utf-8'):
+        d=json.loads(l)
+        if d.get('type')=='user' and (d.get('origin') or {}).get('kind')=='human' and isinstance(d['message']['content'],str) and d['timestamp']<='2026-09-23T14:08:14.401Z':
+            c=d['message']['content']; m=re.fullmatch(r'\n\n<pasted_content id="\w+">\n(.*)\n</pasted_content id="\w+">\n',c,re.S)
+            tx.append(m.group(1) if m else c)
+hist=[]
+for l in open('[REDACTED: local home path]/.claude/history.jsonl',encoding='utf-8'):
+    d=json.loads(l)
+    if d['sessionId'] not in [s for _,s in S]: continue
+    t=d['display']
+    for k,v in (d.get('pastedContents') or {}).items():
+        if v.get('content'): t=re.sub(r'\[Pasted text #%s \+\d+ lines\]'%k,lambda _:v['content'],t)
+    hist.append(t)
+conv=open('[REDACTED: local home path]/adtz-02-splitledger/_docs/claude-code-conversation.md',encoding='utf-8').read()
+log=open('[REDACTED: local home path]/adtz-02-splitledger/_docs/claude-code-prompts.md',encoding='utf-8').read()
+cb=re.findall(r'^### [^\n]*User[^\n]*\n\n```text\n(.*?)\n```$',conv,re.M|re.S)
+lb=re.findall(r'```text\n(.*?)\n```',log,re.S)
+print(len(tx),len(cb),len(lb))
+for i,t in enumerate(tx):
+    d='/design '+re.search(r'<command-args>(.*)</command-args>',t,re.S).group(1) if t.startswith('<command') else t
+    print(i+1, cb[i]==t, lb[i]==d, d in hist)
+print('partial marked:', 'Partial' in conv and 'partial' in log)
+EOF
+````
+
+<details><summary>Tool result</summary>
+
+```text
+10 16 10
+1 True True True
+2 True True True
+3 True True True
+4 True True True
+5 True True True
+6 True True True
+7 True True True
+8 True True False
+9 False True False
+10 False True True
+partial marked: True
+```
+
+</details>
+
+**Tool call: Bash** — Inspect history entries for current session
+
+```sh
+cd ~/.claude && PYTHONIOENCODING=utf-8 python -c "
+import json
+for l in open('history.jsonl',encoding='utf-8'):
+    d=json.loads(l)
+    if d['sessionId'].startswith('0d400f3a'): print(repr(d['display'][:80]), {k:{kk:(str(vv)[:60]) for kk,vv in v.items()} for k,v in (d.get('pastedContents') or {}).items()})
+"; ls ~/.claude | head -30
+```
+
+<details><summary>Tool result</summary>
+
+```text
+'[Pasted text #4 +10 lines]' {'4': {'id': '4', 'type': 'text', 'contentHash': 'e9bf4d95826c5d6b'}}
+'[Pasted text #5 +8 lines]' {'5': {'id': '5', 'type': 'text', 'contentHash': '943f039336b1d232'}}
+'[Pasted text #6 +4 lines]' {'6': {'id': '6', 'type': 'text', 'content': 'Do Homework 2 Question 6: connect the existing SplitLedger f'}}
+backups/
+cache/
+downloads/
+file-history/
+history.jsonl
+paste-cache/
+plugins/
+projects/
+session-env/
+sessions/
+settings.json
+shell-snapshots/
+skills/
+state/
+Shell cwd was reset to [REDACTED: local home path]\adtz-02-splitledger
+```
+
+</details>
+
+**Tool call: Bash** — Cross-check pasted prompts via paste cache
+
+```sh
+ls ~/.claude/paste-cache | head; PYTHONIOENCODING=utf-8 python - <<'EOF'
+import json,re,os,glob
+P='[REDACTED: local home path]/.claude/'
+f=P+'projects/C--Users-[REDACTED: local username]-adtz-02-splitledger/0d400f3a-2d58-426f-93ba-e1c6d4600f2a.jsonl'
+tx=[]
+for l in open(f,encoding='utf-8'):
+    d=json.loads(l)
+    if d.get('type')=='user' and (d.get('origin') or {}).get('kind')=='human' and isinstance(d['message']['content'],str):
+        tx.append(re.fullmatch(r'\n\n<pasted_content id="\w+">\n(.*)\n</pasted_content id="\w+">\n',d['message']['content'],re.S).group(1))
+for h in ['e9bf4d95826c5d6b','943f039336b1d232']:
+    fs=glob.glob(P+'paste-cache/'+h+'*')
+    print(h,fs)
+    if fs:
+        c=open(fs[0],encoding='utf-8').read()
+        print(' matches transcript prompt:',[i+8 for i,t in enumerate(tx) if t==c or t==c.strip('\n')])
+EOF
+```
+
+<details><summary>Tool result</summary>
+
+```text
+0da65c6b9077763f.txt
+75038e6a75592312.txt
+943f039336b1d232.txt
+e9bf4d95826c5d6b.txt
+e9bf4d95826c5d6b ['[REDACTED: local home path]/.claude/paste-cache\\e9bf4d95826c5d6b.txt']
+ matches transcript prompt: [8]
+943f039336b1d232 ['[REDACTED: local home path]/.claude/paste-cache\\943f039336b1d232.txt']
+ matches transcript prompt: [9]
+```
+
+</details>
+
+**Tool call: Bash** — Verify conversation prompts via Markdown parser
+
+```sh
+PYTHONIOENCODING=utf-8 uv run --no-project --with markdown-it-py python - <<'EOF'
+import json,re
+from markdown_it import MarkdownIt
+P='[REDACTED: local home path]/.claude/projects/'
+S=[('C--Users-[REDACTED: local username]/','8fa56825-d817-4b21-8a31-fc6b59021218'),('C--Users-[REDACTED: local username]-adtz-02-splitledger/','745ecfb7-5953-45ab-a1d2-b64bee611196'),('C--Users-[REDACTED: local username]-adtz-02-splitledger/','0d400f3a-2d58-426f-93ba-e1c6d4600f2a')]
+tx=[]
+for sub,sid in S:
+    for l in open(P+sub+sid+'.jsonl',encoding='utf-8'):
+        d=json.loads(l)
+        if d.get('type')=='user' and (d.get('origin') or {}).get('kind')=='human' and isinstance(d['message']['content'],str) and d['timestamp']<='2026-09-23T14:08:14.401Z':
+            c=d['message']['content']; m=re.fullmatch(r'\n\n<pasted_content id="\w+">\n(.*)\n</pasted_content id="\w+">\n',c,re.S)
+            tx.append(m.group(1) if m else c)
+toks=MarkdownIt('commonmark').parse(open('_docs/claude-code-conversation.md',encoding='utf-8').read())
+got=[]
+for i,t in enumerate(toks):
+    if t.type=='heading_open' and t.tag=='h3':
+        j=i+3
+        while toks[j].type!='fence': j+=1
+        got.append(toks[j].content.rstrip('\n'))
+print(len(tx),len(got),[a==b for a,b in zip(tx,got)])
+EOF
+```
+
+<details><summary>Tool result</summary>
+
+```text
+10 10 [True, True, True, True, True, True, True, True, True, True]
+```
+
+</details>
+
+**Claude** · 2026-09-23 16:20:11
+
+All 10 prompts match in both files. Staging everything and scanning the full staged diff.
+
+**Tool call: Bash** — Stage and scan full diff; check remote
+
+```sh
+git add -A && git status --short && git diff --cached --stat | tail -3 && git diff --cached | grep '^+' | grep -n -E '[REDACTED: local username]($|[^r])|[REDACTED: email address]|gmail\.com|[REDACTED: personal name]|[REDACTED: personal account name]($|[^-])|gho_[A-Za-z0-9*]|ghp_|github_pat|AKIA|PRIVATE KEY|C:\\+Users|/c/Users|[REDACTED: account identifier]|NTUSER|[REDACTED: home directory entry name]/|Dropbox|OneDrive|[REDACTED: home directory entry name]|Bearer [A-Za-z0-9_-]{20,}' | grep -v noreply | cut -c1-160; git fetch origin && git log --oneline HEAD..origin/main | wc -l
+```
+
+<details><summary>Tool result</summary>
+
+```text
+warning: in the working copy of '_docs/claude-code-prompts.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'frontend/README.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'frontend/package.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'frontend/src/api/client.test.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'frontend/src/pages/AuthPage.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'frontend/src/test/mockServer.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'frontend/src/test/mockFetch.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'frontend/src/vite-env.d.ts', LF will be replaced by CRLF the next time Git touches it
+M  README.md
+M  _docs/claude-code-conversation.md
+M  _docs/claude-code-prompts.md
+M  _docs/homework-answers.md
+M  backend/README.md
+M  frontend/README.md
+M  frontend/package.json
+M  frontend/src/api/client.test.ts
+M  frontend/src/api/client.ts
+M  frontend/src/api/types.ts
+M  frontend/src/auth.tsx
+M  frontend/src/pages/AuthPage.tsx
+A  frontend/src/test/mockFetch.ts
+R  frontend/src/api/mockServer.ts -> frontend/src/test/mockServer.ts
+A  frontend/src/vite-env.d.ts
+ frontend/src/{api => test}/mockServer.ts |    8 +-
+ frontend/src/vite-env.d.ts               |   10 +
+ 15 files changed, 4165 insertions(+), 617 deletions(-)
+505:+headers = {'Authorization': 'Bearer TlePqIpzEMl_hGnrUanUoTp6GzU3hCz8xHmF2mVN0_I'}
+2268:+S=[REDACTED: local home path]/AppData/Local/Temp/claude/C--Users-[REDACTED: local username]-adtz-02-splitledger/0d400f3a-2d58-426f-93ba-e1c6d4600f2a/scrat
+3564:+11864:+headers = {'Authorization': 'Bearer TlePqIpzEMl_hGnrUanUoTp6GzU3hCz8xHmF2mVN0_I'}
+3579:+11830:headers = {'Authorization': 'Bearer TlePqIpzEMl_hGnrUanUoTp6GzU3hCz8xHmF2mVN0_I'}
+3605:+headers = {'Authorization': 'Bearer TlePqIpzEMl_hGnrUanUoTp6GzU3hCz8xHmF2mVN0_I'}
+3650:+11830:Bearer TlePqIpzEMl_hGnrUanUoTp6GzU3hCz8xHmF2mVN0_I
+0
+```
+
+</details>
+
+**Claude** · 2026-09-23 16:20:20
+
+Line 2268 is my own earlier `grep` command, and its search pattern names private home folders (`[REDACTED: home directory entry name]`, `Dropbox`, …). Finding every such occurrence.
+
+**Tool call: Bash** — Find home-folder names in conversation file
+
+```sh
+grep -n -o -E '.{0,60}([REDACTED: home directory entry name]|Dropbox|OneDrive|NTUSER|[REDACTED: home directory entry name]|[REDACTED: home directory entry name]|[REDACTED: home directory entry name]|[REDACTED: home directory entry name]|[REDACTED: home directory entry name]|[REDACTED: home directory entry name]|[REDACTED: home directory entry name]).{0,40}' _docs/claude-code-conversation.md | cut -c1-200
+```
+
+<details><summary>Tool result</summary>
+
+```text
+14146: grep -n -i -E 'DESKTOP-|LAPTOP-|hostname|Users[\\/]|/home/|OneDrive|Dropbox|MINGW|\bsk-|ghp_|github_pat|AKI
+```
+
+</details>
+
+**Tool call: Bash** — Show what matched on diff line 2268
+
+```sh
+git diff --cached | grep '^+' | sed -n 2268p | grep -o -E '.{0,50}([REDACTED: local username]($|[^r])|gmail\.com|[REDACTED: personal name]|[REDACTED: personal account name]($|[^-])|NTUSER|[REDACTED: home directory entry name]/|Dropbox|OneDrive|[REDACTED: home directory entry name]|/c/Users|C:\\+Users).{0,50}'
+```
+
+<details><summary>Tool result</summary>
+
+```text
+i -E 'DESKTOP-|LAPTOP-|hostname|Users[\\/]|/home/|OneDrive|Dropbox|MINGW|\bsk-|ghp_|github_pat|AKIA|PRIVATE
+```
+
+</details>
+
+**Tool call: Bash** — Note kept terms; recheck whitespace and tests
+
+```sh
+python - <<'EOF'
+p='_docs/claude-code-conversation.md'; s=open(p,encoding='utf-8').read()
+o="- The Homework 1 prompts and records quoted from local prompt history, which are already public in the Homework 1 repository\n"
+assert s.count(o)==1
+s=s.replace(o,o+"- Generic search terms such as `OneDrive` and `Dropbox` in a `grep` pattern Claude used to look for leaks; the listing lines that pattern found are redacted\n")
+open(p,'w',encoding='utf-8',newline='\n').write(s)
+EOF
+git add _docs/claude-code-conversation.md && git diff --cached --check | grep -v '^+' | grep -v '_docs/claude-code-conversation.md' | head; cd frontend && npm test 2>&1 | grep -E "Tests|Test Files"
+```
+
+<details><summary>Tool result</summary>
+
+```text
+warning: in the working copy of '_docs/claude-code-conversation.md', LF will be replaced by CRLF the next time Git touches it
+ Test Files  2 passed (2)
+      Tests  19 passed (19)
+```
+
+</details>
+
+**Claude** · 2026-09-23 16:21:36
+
+Checks pass. Committing and pushing (with the GitHub CLI credential helper and a timeout, since plain `git push` hangs here).
+
+**Tool call: Bash** — Commit and push Question 6 work
+
+```sh
+cd [REDACTED: local home path]/adtz-02-splitledger && git commit -q -F - <<'EOF'
+Connect the SplitLedger frontend to the FastAPI backend
+
+The API client now sends every request with fetch to
+http://localhost:8000/api (override with VITE_API_BASE_URL), with the
+session token as a Bearer header and a clear error when the backend is
+unreachable. The in-browser mock moves to src/test and serves only the
+unit tests through a fetch stub; the sign-in page drops its mock reset.
+
+Record the Question 6 answer and run instructions, and add the current
+Claude Code session to the development record as a partial session.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+EOF
+git log --oneline -1; GIT_TERMINAL_PROMPT=0 timeout 90 git -c credential.helper= -c 'credential.helper=!gh auth git-credential' push origin main 2>&1 | tail -2; git status --short --branch
+```
+
+<details><summary>Tool result</summary>
+
+```text
+3d22ad2 Connect the SplitLedger frontend to the FastAPI backend
+To https://github.com/GerhardBalz-Admin/adtz-02-splitledger.git
+   4f0e3fe..3d22ad2  main -> main
+## main...origin/main
+```
+
+</details>
+
+**Claude** · 2026-09-23 16:21:59
+
+Question 6 is done: the frontend now talks to the FastAPI backend, and I tested it in a real browser. It's committed and pushed as **`3d22ad2`** on `main`, and the working tree is clean.
+
+**Backend URL the frontend uses:**
+```text
+http://localhost:8000/api
+```
+Every call goes through `frontend/src/api/client.ts`, which sends it with `fetch` to that address, for example `POST http://localhost:8000/api/auth/signin`. You can point it somewhere else by setting `VITE_API_BASE_URL`. The backend already accepted browser requests from `http://localhost:5173`, so it didn't need changes.
+
+**Commands to run both parts:**
+```bash
+cd backend && uv run uvicorn splitledger_backend.main:app --reload   # terminal 1, http://localhost:8000
+cd frontend && npm install && npm run dev                            # terminal 2, http://localhost:5173
+```
+Then open http://localhost:5173 and sign in as `dana@example.com` with the password `splitledger`.
+
+**How I verified it:** I ran both servers and drove the app with a Playwright script in a headless Chromium browser:
+- All 46 requests the app made went to `http://localhost:8000/api`.
+- Dana (desktop width) signed in and saw the backend's demo data (Flat 4B, +81.66). A wrong password showed the backend's own error message.
+- Dana created a group and added a 90.00 expense dated 2026-09-20. I then asked the backend directly and it had the group and the expense, with Dana as payer.
+- Ben (phone width), in a separate browser, was rejected with a wrong code and joined with the right one. Joining twice didn't add him twice, and he doesn't see the invite code.
+- When Dana edited the expense to include Ben, Ben's browser showed Dana +45.00, Ben −45.00, summing to 0.00.
+- After Dana deleted the expense, the backend had no expenses and the currency stayed locked. After she signed out, the backend rejected her old sign-in.
+- With the backend stopped, the sign-in form says "Cannot reach the SplitLedger backend at http://localhost:8000/api. Check that it is running."
+- Tests: frontend 19 passed, backend 85 passed; type-checking and the build pass.
+
+**What changed in the app**
+- The browser no longer uses the fake backend. It now lives in `frontend/src/test/` and is used only by the unit tests, which therefore don't need a running server.
+- I added tests for the request URLs, the sign-in header, and the "can't reach the backend" error.
+- The "Reset demo data" link is gone from the sign-in page, because the real backend has no reset. Restarting the backend restores the demo data, since everything is kept in memory until Question 7.
+- The Question 6 answer is in `_docs/homework-answers.md`. The READMEs now say how to run both parts, and I fixed the Question 4 and 5 answers that still said the frontend wasn't connected.
+
+**Development record:** under the `AGENTS.md` rule, this session now counts as development work, so both record files include it and mark it **partial**. They cover it through the Question 6 prompt, but not my work on Question 6 yet; that gets added at the next checkpoint. All 10 prompts match the original transcripts, and I checked the two pasted ones against Claude Code's local paste cache. My own tool output in this session quoted private material, so I redacted more:
+- **Your username:** it showed up inside the redaction rules I printed.
+- **Your Claude account ID:** it appeared in a record I printed.
+- **Your home folder listing:** it appeared in my `ls` output and in three lines of `grep` output.
+
+I kept my leak-check `grep` command, whose search terms include the generic words `OneDrive` and `Dropbox`, and said so in the file's header.
+
+**Two things to know**
+- I stopped two leftover Vite dev servers from this project, and both servers are now stopped. The Question 4 session had left one running on port 5173, and it was serving outdated code, so the browser check failed until I restarted it. Stopping my own dev server left a second one behind the same way. So if `npm run dev` ever says port 5173 is in use, look for a stray `node … vite.js` process.
+- Still open from before: the public `backend/pyproject.toml` contains your name and gmail address.
+
+I didn't start Question 7.
+
+*Claude Code automatic recap* · 2026-09-23 16:25:02
+
+> Question 6 of the SplitLedger homework is done and pushed as 3d22ad2: the frontend now calls the FastAPI backend at http://localhost:8000/api, verified in a browser. Next, decide whether to start Question 7, the SQLAlchemy/SQLite database.
+
+
+## Session `a96d8d11-e7d5-4490-ac25-ad94a55266de`
+
+
+*Local command* · 2026-09-23 16:35:00
+
+```text
+<local-command-stdout></local-command-stdout>
+```
+
+### 2026-09-23 16:35:04 · User (pasted)
+
+```text
+Do Homework 2 Question 7 in SplitLedger. First inspect the branch and working tree; if clean on main, pull with `git pull --ff-only origin main`. Preserve and report any local changes or pull conflict instead of overwriting them. Read AGENTS.md, _docs/specs.md, the official Question 7 instruction, and the current backend and tests.
+
+Replace the backend's in-memory mock store with SQLAlchemy-backed persistence. Use SQLite locally while keeping the application database-agnostic through SQLAlchemy. Preserve the existing API contract, permissions, balance rules, deterministic join-order splits, and the permanent currency lock after the first recorded expense, even if all expenses are deleted. Ensure user-created data survives an application restart. Keep tests isolated; run the existing tests and add focused persistence and restart tests where needed. Ask for and report your recommendations for any remaining test gaps.
+
+Follow AGENTS.md for the Claude Code development record: reconcile the partial Question 6 session from its original local transcript, then record this development session to the available completed turn in both files. Do not reconstruct missing dialogue from recaps; preserve the disclosed fbf6627 provenance gap and inspect the staged transcript diff before publication.
+
+Document setup and the exact command you actually used to run tests, record the Question 7 answer in _docs/homework-answers.md, and report the results. Commit and push verified Question 7 work. Do not submit the homework.
+```
+
+*Session `a96d8d11…` continues: Claude's work on the Question 7 prompt above is not rendered yet (partial session).*

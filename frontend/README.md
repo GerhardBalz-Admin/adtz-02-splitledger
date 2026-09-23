@@ -23,7 +23,7 @@ http://localhost:8000/api
 
 To use another backend, set `VITE_API_BASE_URL` before starting or building, for example `VITE_API_BASE_URL=http://127.0.0.1:9000/api npm run dev`. The backend allows browser requests from `http://localhost:5173` and `http://127.0.0.1:5173`; set `SPLITLEDGER_CORS_ORIGINS` there when the frontend runs elsewhere.
 
-The client sends the session token as `Authorization: Bearer <token>` and keeps it in `localStorage`. When the backend rejects the token, for example after a backend restart clears its in-memory sessions, the client forgets it and the app returns to the sign-in page. If the backend is not running, forms show "Cannot reach the SplitLedger backend at http://localhost:8000/api".
+The client sends the session token as `Authorization: Bearer <token>` and keeps it in `localStorage`. When the backend rejects the token, for example after the user signs out elsewhere or the backend database is reset, the client forgets it and the app returns to the sign-in page. If the backend is not running, forms show "Cannot reach the SplitLedger backend at http://localhost:8000/api".
 
 | Method | Path | Purpose |
 | --- | --- | --- |

@@ -3,7 +3,7 @@
 from datetime import UTC, date, datetime
 from functools import cache
 
-from .database import ExpenseRecord, GroupRecord, MembershipRecord, MockDatabase, UserRecord
+from .database import ExpenseRecord, GroupRecord, MembershipRecord, Store, UserRecord
 from .security import hash_password
 
 DEMO_PASSWORD = "splitledger"
@@ -19,7 +19,7 @@ def _at(timestamp: str) -> datetime:
     return datetime.fromisoformat(timestamp).replace(tzinfo=UTC)
 
 
-def seed_demo_data(db: MockDatabase) -> None:
+def seed_demo_data(db: Store) -> None:
     for name in ("dana", "anna", "ben", "chiara"):
         db.add_user(
             UserRecord(
@@ -30,8 +30,15 @@ def seed_demo_data(db: MockDatabase) -> None:
             )
         )
 
-    db.add_group(GroupRecord("g_flat4b", "Flat 4B", "CHF", "u_dana", "K7QM-4RX2", _at("2026-08-28T09:00:00")))
-    db.add_group(GroupRecord("g_ticino", "Ticino weekend", "EUR", "u_ben", "T3NW-8HPD", _at("2026-09-02T12:00:00")))
+    for group_id, name, currency, creator, code, created in (
+        ("g_flat4b", "Flat 4B", "CHF", "u_dana", "K7QM-4RX2", "2026-08-28T09:00:00"),
+        ("g_ticino", "Ticino weekend", "EUR", "u_ben", "T3NW-8HPD", "2026-09-02T12:00:00"),
+    ):
+        db.add_group(
+            GroupRecord(
+                id=group_id, name=name, currency=currency, created_by=creator, invite_code=code, created_at=_at(created)
+            )
+        )
 
     for group_id, user_id, joined in (
         ("g_flat4b", "u_dana", "2026-08-28T09:00:00"),
@@ -42,7 +49,7 @@ def seed_demo_data(db: MockDatabase) -> None:
         ("g_ticino", "u_dana", "2026-09-02T13:00:00"),
         ("g_ticino", "u_chiara", "2026-09-03T07:30:00"),
     ):
-        db.add_membership(MembershipRecord(group_id, user_id, _at(joined)))
+        db.add_membership(MembershipRecord(group_id=group_id, user_id=user_id, joined_at=_at(joined)))
 
     flat = ["u_dana", "u_anna", "u_ben", "u_chiara"]
     ticino = ["u_ben", "u_dana", "u_chiara"]

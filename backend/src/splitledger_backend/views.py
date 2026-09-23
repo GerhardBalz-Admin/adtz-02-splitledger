@@ -1,7 +1,7 @@
 """Builds response models from database records."""
 
 from . import schemas
-from .database import ExpenseRecord, GroupRecord, MockDatabase, UserRecord
+from .database import ExpenseRecord, GroupRecord, Store, UserRecord
 from .money import ExpenseShareInput, compute_balances
 
 
@@ -26,7 +26,7 @@ def expense_view(expense: ExpenseRecord) -> schemas.Expense:
     )
 
 
-def group_balances(db: MockDatabase, group_id: str) -> dict[str, int]:
+def group_balances(db: Store, group_id: str) -> dict[str, int]:
     member_ids = [m.user_id for m in db.list_memberships(group_id)]
     shares = [
         ExpenseShareInput(payer_id=e.payer_id, amount_minor=e.amount_minor, participant_ids=e.participant_ids)
@@ -35,7 +35,7 @@ def group_balances(db: MockDatabase, group_id: str) -> dict[str, int]:
     return compute_balances(member_ids, shares)
 
 
-def group_summary(db: MockDatabase, group: GroupRecord, user_id: str) -> schemas.GroupSummary:
+def group_summary(db: Store, group: GroupRecord, user_id: str) -> schemas.GroupSummary:
     return schemas.GroupSummary(
         id=group.id,
         name=group.name,
@@ -47,7 +47,7 @@ def group_summary(db: MockDatabase, group: GroupRecord, user_id: str) -> schemas
     )
 
 
-def group_detail(db: MockDatabase, group: GroupRecord, user_id: str) -> schemas.GroupDetail:
+def group_detail(db: Store, group: GroupRecord, user_id: str) -> schemas.GroupDetail:
     memberships = db.list_memberships(group.id)
     balances = group_balances(db, group.id)
     members = []

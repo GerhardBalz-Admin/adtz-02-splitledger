@@ -2,9 +2,10 @@ import re
 import secrets
 
 from fastapi import APIRouter, HTTPException, Response, status
+from sqlalchemy.exc import IntegrityError
 
 from .. import schemas
-from ..database import GroupRecord, MembershipRecord, MockDatabase, new_id
+from ..database import GroupRecord, MembershipRecord, Store, new_id
 from ..deps import CurrentUser, Db, MemberGroup
 from ..views import group_detail, group_summary
 
@@ -19,7 +20,7 @@ def normalize_invite_code(code: str) -> str:
     return re.sub(r"[^A-Z0-9]", "", code.upper())
 
 
-def new_invite_code(db: MockDatabase) -> str:
+def new_invite_code(db: Store) -> str:
     while True:
         raw = "".join(secrets.choice(CODE_ALPHABET) for _ in range(8))
         code = f"{raw[:4]}-{raw[4:]}"
@@ -27,7 +28,7 @@ def new_invite_code(db: MockDatabase) -> str:
             return code
 
 
-def find_group_by_code(db: MockDatabase, code: str) -> GroupRecord | None:
+def find_group_by_code(db: Store, code: str) -> GroupRecord | None:
     normalized = normalize_invite_code(code)
     if len(normalized) != 8:
         return None
@@ -67,16 +68,20 @@ def create_group(body: schemas.GroupCreate, db: Db, user: CurrentUser) -> schema
     operation_id="joinGroup",
 )
 def join_group(body: schemas.JoinRequest, response: Response, db: Db, user: CurrentUser) -> schemas.JoinResult:
-    with db.transaction():
-        group = find_group_by_code(db, body.invite_code)
-        if group is None:
-            raise HTTPException(status.HTTP_404_NOT_FOUND, "That code doesn't match any group. Check it and try again.")
-        already_member = db.is_member(group.id, user.id)
-        if already_member:
-            response.status_code = status.HTTP_200_OK
-        else:
-            db.add_membership(MembershipRecord(group_id=group.id, user_id=user.id))
-        return schemas.JoinResult(group=group_summary(db, group, user.id), already_member=already_member)
+    group = find_group_by_code(db, body.invite_code)
+    if group is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "That code doesn't match any group. Check it and try again.")
+    already_member = db.is_member(group.id, user.id)
+    if not already_member:
+        try:
+            with db.transaction():
+                db.add_membership(MembershipRecord(group_id=group.id, user_id=user.id))
+        except IntegrityError:
+            # A simultaneous request with the same code added the membership first.
+            already_member = True
+    if already_member:
+        response.status_code = status.HTTP_200_OK
+    return schemas.JoinResult(group=group_summary(db, group, user.id), already_member=already_member)
 
 
 @router.get("/{groupId}", response_model_exclude_none=True, operation_id="getGroup")

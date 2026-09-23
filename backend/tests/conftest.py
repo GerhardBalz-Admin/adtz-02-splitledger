@@ -1,27 +1,46 @@
-from collections.abc import Callable
+from collections.abc import Callable, Iterator
+from pathlib import Path
 
 import pytest
 from fastapi.testclient import TestClient
 
-from splitledger_backend.database import MockDatabase
+from splitledger_backend.database import Database
 from splitledger_backend.main import create_app
 from splitledger_backend.seed import DEMO_PASSWORD, seed_demo_data
 
 Headers = dict[str, str]
 
 
-@pytest.fixture
-def client() -> TestClient:
-    """A client against an empty in-memory database."""
-    return TestClient(create_app(MockDatabase()))
+@pytest.fixture(autouse=True)
+def no_default_database(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    """Keep any app that opens the default database away from the developer's database file."""
+    monkeypatch.setenv("SPLITLEDGER_DATABASE_URL", sqlite_url(tmp_path / "default.sqlite3"))
+
+
+def sqlite_url(path: Path) -> str:
+    return f"sqlite:///{path.as_posix()}"
 
 
 @pytest.fixture
-def demo_client() -> TestClient:
+def database(tmp_path: Path) -> Iterator[Database]:
+    """An empty SQLite database in a file of its own, deleted after the test."""
+    database = Database(sqlite_url(tmp_path / "test.sqlite3"))
+    yield database
+    database.dispose()
+
+
+@pytest.fixture
+def client(database: Database) -> TestClient:
+    """A client against an empty database."""
+    return TestClient(create_app(database))
+
+
+@pytest.fixture
+def demo_client(database: Database) -> TestClient:
     """A client against the demo data (Dana, Anna, Ben, Chiara; Flat 4B and Ticino weekend)."""
-    db = MockDatabase()
-    seed_demo_data(db)
-    return TestClient(create_app(db))
+    with database.store() as store, store.transaction():
+        seed_demo_data(store)
+    return TestClient(create_app(database))
 
 
 def auth(token: str) -> Headers:

@@ -3,7 +3,7 @@ from typing import Annotated
 from fastapi import APIRouter, HTTPException, Path, Response, status
 
 from .. import schemas
-from ..database import ExpenseRecord, GroupRecord, MockDatabase, UserRecord, new_id
+from ..database import ExpenseRecord, GroupRecord, Store, UserRecord, new_id
 from ..deps import CurrentUser, Db, MemberGroup
 from ..views import expense_view
 
@@ -12,7 +12,7 @@ ExpenseId = Annotated[str, Path(alias="expenseId")]
 router = APIRouter(prefix="/groups/{groupId}/expenses", tags=["expenses"])
 
 
-def participants_in_join_order(db: MockDatabase, group_id: str, participant_ids: list[str]) -> list[str]:
+def participants_in_join_order(db: Store, group_id: str, participant_ids: list[str]) -> list[str]:
     member_order = [m.user_id for m in db.list_memberships(group_id)]
     selected = set(participant_ids)
     if not selected <= set(member_order):
@@ -22,7 +22,7 @@ def participants_in_join_order(db: MockDatabase, group_id: str, participant_ids:
     return [member_id for member_id in member_order if member_id in selected]
 
 
-def own_expense(db: MockDatabase, group: GroupRecord, expense_id: str, user: UserRecord) -> ExpenseRecord:
+def own_expense(db: Store, group: GroupRecord, expense_id: str, user: UserRecord) -> ExpenseRecord:
     expense = db.get_expense(expense_id)
     if expense is None or expense.group_id != group.id:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Expense not found.")

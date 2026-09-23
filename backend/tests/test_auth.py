@@ -1,5 +1,7 @@
 from fastapi.testclient import TestClient
 
+from splitledger_backend.database import Database
+
 from conftest import auth
 
 
@@ -60,9 +62,9 @@ def test_signout_invalidates_token(client: TestClient, signup):
     assert client.post("/api/auth/signout").status_code == 204
 
 
-def test_passwords_are_not_stored_in_plain_text(client: TestClient, signup):
+def test_passwords_are_not_stored_in_plain_text(client: TestClient, database: Database, signup):
     signup("erin@example.com", "long-enough")
-    db = client.app.state.db
-    user = db.get_user_by_email("erin@example.com")
-    assert user is not None
-    assert "long-enough" not in user.password_hash
+    with database.store() as store:
+        user = store.get_user_by_email("erin@example.com")
+        assert user is not None
+        assert "long-enough" not in user.password_hash

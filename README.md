@@ -26,12 +26,13 @@ npm test        # unit tests
 
 ## Backend
 
-The FastAPI backend is in [`backend/`](backend/README.md). It implements the API contract in [`openapi.yaml`](openapi.yaml) and uses an in-memory mock database for now, so its data is lost when it stops.
+The FastAPI backend is in [`backend/`](backend/README.md). It implements the API contract in [`openapi.yaml`](openapi.yaml) and stores its data with SQLAlchemy in a local SQLite file (`backend/splitledger.sqlite3`), so data survives a restart. `SPLITLEDGER_DATABASE_URL` selects another database.
 
 ```bash
 cd backend
+uv sync                                                # install dependencies
 uv run uvicorn splitledger_backend.main:app --reload   # http://localhost:8000 (API under /api)
-uv run pytest
+uv run pytest                                          # run the backend tests
 ```
 
 ## Course materials

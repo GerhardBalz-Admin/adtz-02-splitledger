@@ -1,20 +1,23 @@
 """Shared FastAPI dependencies: the database and the signed-in user."""
 
+from collections.abc import Iterator
 from typing import Annotated
 
 from fastapi import Depends, HTTPException, Path, Request, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
-from .database import GroupRecord, MockDatabase, UserRecord
+from .database import GroupRecord, Store, UserRecord
 
 bearer = HTTPBearer(auto_error=False)
 
 
-def get_db(request: Request) -> MockDatabase:
-    return request.app.state.db
+def get_db(request: Request) -> Iterator[Store]:
+    """A store on a new database session, closed after the request; uncommitted changes are discarded."""
+    with request.app.state.database.store() as store:
+        yield store
 
 
-Db = Annotated[MockDatabase, Depends(get_db)]
+Db = Annotated[Store, Depends(get_db)]
 Credentials = Annotated[HTTPAuthorizationCredentials | None, Depends(bearer)]
 
 

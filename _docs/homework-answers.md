@@ -50,4 +50,17 @@ The connection was verified in a headless Chromium browser against both running 
 
 ## Question 7: Database and tests
 
-Pending implementation. Record the actual test command after adding SQLAlchemy persistence and running the tests.
+```bash
+uv run pytest
+```
+
+Run it from `backend/` (after `uv sync` on a new checkout). The backend now stores its data with SQLAlchemy 2.0 instead of the in-memory mock. Locally it uses a SQLite file, `backend/splitledger.sqlite3`, which is not committed. The app stays database-agnostic: it uses only portable SQLAlchemy column types, stores timestamps as UTC, and reads the database URL from `SPLITLEDGER_DATABASE_URL`. The API contract, permissions, balance rules, join-order splits and the permanent currency lock are unchanged. The lock is stored with the group, so it survives deleting every expense and restarting the server. Session tokens are also stored, as SHA-256 digests, so signed-in users stay signed in after a restart.
+
+Each test gets its own SQLite file in a temporary directory, so tests are isolated and never touch the local database. The 85 earlier backend tests pass unchanged apart from their fixtures. Nine new tests in `backend/tests/test_persistence.py` start the app the way uvicorn does, stop it, start it again on the same file, and check the data. All 94 backend tests pass, and the 19 frontend unit tests still pass with `npm test`. A manual check with uvicorn gave the same result: an expense and an account created before a restart were still there afterwards, the old token still worked, and the balances still summed to zero.
+
+Claude recommended these further tests, which are not implemented yet:
+
+- Run the backend suite against a second database, such as PostgreSQL, to show in practice that the app is database-agnostic. So far only SQLite is tested.
+- Test simultaneous requests: two sign-ups with the same email, or two joins with the same code. The database's unique constraints handle these, but no test covers them.
+- Add schema migrations (for example Alembic) with an upgrade test before the table layout changes. Start-up currently creates only missing tables.
+- Add a browser end-to-end test that uses the app, restarts the backend, and checks that the frontend shows the same data.
