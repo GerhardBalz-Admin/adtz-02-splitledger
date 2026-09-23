@@ -90,7 +90,7 @@ def change_currency(body: schemas.GroupUpdate, group: MemberGroup, db: Db, user:
         raise HTTPException(status.HTTP_403_FORBIDDEN, "Only the group creator can change the currency.")
     with db.transaction():
         if body.currency.value != group.currency:
-            if db.count_expenses(group.id) > 0:
+            if group.has_recorded_expense:
                 raise HTTPException(
                     status.HTTP_409_CONFLICT, "The currency cannot change once expenses have been recorded."
                 )

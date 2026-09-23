@@ -156,14 +156,18 @@ def test_currency_locked_after_first_expense(client: TestClient, signup):
     assert same.status_code == 200
 
 
-def test_currency_unlocks_when_group_has_no_expenses_again(client: TestClient, signup):
-    """Spec core flow 2: the creator may change the currency "only while the group has no expenses"."""
+def test_currency_remains_locked_after_last_expense_is_deleted(client: TestClient, signup):
     dana = signup("dana@example.com")
     group = create_group(client, dana)
     expense = add_expense(client, dana, group["id"], participantIds=[group["createdBy"]])
-    client.delete(f"/api/groups/{group['id']}/expenses/{expense['id']}", headers=dana)
+    deletion = client.delete(f"/api/groups/{group['id']}/expenses/{expense['id']}", headers=dana)
+    assert deletion.status_code == 204
+    detail = client.get(f"/api/groups/{group['id']}", headers=dana).json()
+    assert detail["expenses"] == []
+    assert detail["currencyLocked"] is True
     response = client.patch(f"/api/groups/{group['id']}", json={"currency": "EUR"}, headers=dana)
-    assert response.status_code == 200
+    assert response.status_code == 409
+    assert client.get(f"/api/groups/{group['id']}", headers=dana).json()["currency"] == "CHF"
 
 
 def test_currency_change_validation(client: TestClient, signup):

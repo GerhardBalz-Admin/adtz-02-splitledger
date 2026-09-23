@@ -27,10 +27,15 @@ There is no real backend yet. Every backend call goes through [`src/api/client.t
 | POST | `/groups/{id}/expenses` | Add an expense (payer = signed-in user) |
 | PATCH, DELETE | `/groups/{id}/expenses/{expenseId}` | Edit or delete your own expense |
 
-The mock enforces the spec rules: nonmembers get 404, only the creator receives the invite code, only an expense's creator can change it, and the currency is locked once expenses exist. It stores its data in `localStorage`, so data survives a reload. **Reset demo data** on the sign-in page restores the seed data.
+The mock enforces the spec rules: nonmembers get 404, only the creator receives the invite code, only an expense's creator can change it, and the currency stays locked after the first expense is recorded, even if it is deleted. It stores its data in `localStorage`, so data survives a reload. **Reset demo data** on the sign-in page restores the seed data.
 
 Demo accounts: `dana@example.com`, `anna@example.com`, `ben@example.com`, `chiara@example.com`. They all use the password `splitledger`. Dana created *Flat 4B*, whose invite code is `K7QM-4RX2`.
 
 ## Money rules
 
 Amounts are integer minor units (cents). [`src/lib/split.ts`](src/lib/split.ts) splits each expense equally among the selected members. Any leftover cents go one each to the selected members in group join order, so the shares always add up to the total and group balances sum to zero.
+# Currency lock for older mock data
+
+The browser mock records whether a group has ever had an expense. When loading
+data saved by an older mock that lacks this history, it keeps the group currency
+locked because deleted expenses cannot be recovered from the current list.

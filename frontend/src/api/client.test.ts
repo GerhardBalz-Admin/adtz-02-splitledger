@@ -92,13 +92,23 @@ describe('mocked backend through the api client', () => {
     await expectStatus(api.createExpense('g_flat4b', { ...valid, date: '2026-02-30' }), 422);
   });
 
-  it('locks the currency once expenses exist', async () => {
+  it('keeps the currency locked after the last expense is deleted', async () => {
     await api.signIn('dana@example.com', DEMO_PASSWORD);
     await expectStatus(api.changeCurrency('g_flat4b', 'EUR'), 409);
     const group = await api.createGroup('Empty', 'CHF');
+    expect(group.currencyLocked).toBe(false);
     expect((await api.changeCurrency(group.id, 'EUR')).currency).toBe('EUR');
-    await api.createExpense(group.id, { description: 'X', amountMinor: 1, date: '2026-09-01', participantIds: ['u_dana'] });
+    const expense = await api.createExpense(group.id, { description: 'X', amountMinor: 1, date: '2026-09-01', participantIds: ['u_dana'] });
     await expectStatus(api.changeCurrency(group.id, 'USD'), 409);
+    await api.deleteExpense(group.id, expense.id);
+    expect((await api.getGroup(group.id)).expenses).toHaveLength(0);
+    expect((await api.getGroup(group.id)).currencyLocked).toBe(true);
+    await expectStatus(api.changeCurrency(group.id, 'USD'), 409);
+    expect((await api.getGroup(group.id)).currency).toBe('EUR');
+    vi.resetModules();
+    const fresh = await import('./client');
+    expect((await fresh.api.getGroup(group.id)).currencyLocked).toBe(true);
+    await expect(fresh.api.changeCurrency(group.id, 'USD')).rejects.toMatchObject({ status: 409 });
 
     await api.signIn('ben@example.com', DEMO_PASSWORD);
     await expectStatus(api.changeCurrency('g_ticino', 'CHF'), 409);
@@ -110,5 +120,17 @@ describe('mocked backend through the api client', () => {
     vi.resetModules();
     const fresh = await import('./client');
     expect((await fresh.api.getGroup(group.id)).name).toBe('Persistent');
+  });
+
+  it('keeps old mock groups locked when deleted expense history is unknown', async () => {
+    await api.signIn('dana@example.com', DEMO_PASSWORD);
+    const group = await api.createGroup('Legacy', 'CHF');
+    const oldData = JSON.parse(localStorage.getItem('splitledger.mockdb.v1')!);
+    delete oldData.groups.find((row: { id: string }) => row.id === group.id).hasRecordedExpense;
+    localStorage.setItem('splitledger.mockdb.v1', JSON.stringify(oldData));
+    vi.resetModules();
+    const fresh = await import('./client');
+    expect((await fresh.api.getGroup(group.id)).currencyLocked).toBe(true);
+    await expect(fresh.api.changeCurrency(group.id, 'EUR')).rejects.toMatchObject({ status: 409 });
   });
 });

@@ -68,7 +68,7 @@ export function CreateGroupPage() {
               </option>
             ))}
           </select>
-          <span className="hint">Every expense in this group uses this currency. It can't change once expenses exist.</span>
+          <span className="hint">Every expense in this group uses this currency. It can't change after the first expense is recorded, even if that expense is deleted.</span>
         </div>
         {error && (
           <p className="form-error" role="alert">

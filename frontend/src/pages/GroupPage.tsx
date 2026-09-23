@@ -220,7 +220,7 @@ function CurrencyPanel({ group, onChanged }: { group: GroupDetail; onChanged: ()
   const [currency, setCurrency] = useState<CurrencyCode>(group.currency);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const locked = group.expenses.length > 0;
+  const locked = group.currencyLocked;
 
   async function handleSave() {
     setSaving(true);

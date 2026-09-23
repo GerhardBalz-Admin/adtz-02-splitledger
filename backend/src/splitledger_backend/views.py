@@ -66,6 +66,7 @@ def group_detail(db: MockDatabase, group: GroupRecord, user_id: str) -> schemas.
         currency=group.currency,
         created_by=group.created_by,
         is_creator=is_creator,
+        currency_locked=group.has_recorded_expense,
         invite_code=group.invite_code if is_creator else None,
         members=members,
         expenses=[expense_view(e) for e in db.list_expenses(group.id)],

@@ -39,6 +39,7 @@ class GroupRecord:
     created_by: str
     invite_code: str
     created_at: datetime = field(default_factory=utc_now)
+    has_recorded_expense: bool = False
 
 
 @dataclass
@@ -151,6 +152,7 @@ class MockDatabase:
         with self._lock:
             expense.seq = next(self._seq)
             self._expenses[expense.id] = expense
+            self._groups[expense.group_id].has_recorded_expense = True
             return expense
 
     def get_expense(self, expense_id: str) -> ExpenseRecord | None:

@@ -54,6 +54,7 @@ export interface GroupDetail {
   currency: CurrencyCode;
   createdBy: string;
   isCreator: boolean;
+  currencyLocked: boolean;
   /** Present only when the signed-in user created the group. */
   inviteCode?: string;
   /** Members in join order. */

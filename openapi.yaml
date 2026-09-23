@@ -187,7 +187,7 @@ paths:
       summary: Change the group currency
       description: |
         Only the group creator may change the currency, and only before the
-        first expense is recorded. Setting the current currency again always
+        first expense is recorded. Deleting expenses never unlocks it. Setting the current currency again always
         succeeds without changes.
       requestBody:
         required: true
@@ -479,13 +479,16 @@ components:
 
     GroupDetail:
       type: object
-      required: [id, name, currency, createdBy, isCreator, members, expenses, balances]
+      required: [id, name, currency, createdBy, isCreator, currencyLocked, members, expenses, balances]
       properties:
         id: { type: string }
         name: { type: string }
         currency: { $ref: '#/components/schemas/CurrencyCode' }
         createdBy: { type: string }
         isCreator: { type: boolean }
+        currencyLocked:
+          type: boolean
+          description: True once any expense has been recorded, even if all are deleted.
         inviteCode:
           type: string
           description: Present only when the signed-in user created the group.

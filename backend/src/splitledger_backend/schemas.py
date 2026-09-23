@@ -122,6 +122,7 @@ class GroupDetail(CamelModel):
     currency: CurrencyCode
     created_by: str
     is_creator: bool
+    currency_locked: bool
     # Only set for the group's creator; omitted from the JSON otherwise.
     invite_code: str | None = None
     members: list[Member]

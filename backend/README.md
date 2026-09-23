@@ -42,7 +42,7 @@ The demo data matches the frontend mock. The accounts are `dana@example.com`, `a
 - Authenticated endpoints need `Authorization: Bearer <token>` and answer `401` otherwise. Passwords are stored as salted PBKDF2 hashes.
 - A user sees only the groups they belong to. A nonmember gets `404` for a group and everything in it, the same response as for a group that does not exist.
 - Only the group creator receives `inviteCode`. Joining with a code the user already used creates no duplicate membership, and an unknown code returns `404`.
-- Only the creator may change the currency (`403` otherwise), and only while the group has no expenses (`409` otherwise).
+- Only the creator may change the currency (`403` otherwise), and only before the first expense is recorded (`409` afterward, even if all expenses are deleted). `currencyLocked` in group detail reflects this permanent lock.
 - The payer is always the signed-in user; any payer field in the request body is ignored. Participants must be distinct current members of the group. Amounts are positive integers of minor units, and dates are `YYYY-MM-DD`.
 - Only the expense's creator may edit or delete it (`403` otherwise).
 - Balances are the amount paid minus allocated shares. Leftover cents go to the selected members in group join order, so balances in a group always sum to zero.

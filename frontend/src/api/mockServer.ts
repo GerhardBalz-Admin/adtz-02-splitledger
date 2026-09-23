@@ -22,6 +22,7 @@ interface GroupRow {
   currency: CurrencyCode;
   createdBy: string;
   inviteCode: string;
+  hasRecordedExpense: boolean;
 }
 
 interface MembershipRow {
@@ -107,8 +108,8 @@ function seedDatabase(): Database {
     password: DEMO_PASSWORD,
   }));
   const groups: GroupRow[] = [
-    { id: 'g_flat4b', name: 'Flat 4B', currency: 'CHF', createdBy: 'u_dana', inviteCode: 'K7QM-4RX2' },
-    { id: 'g_ticino', name: 'Ticino weekend', currency: 'EUR', createdBy: 'u_ben', inviteCode: 'T3NW-8HPD' },
+    { id: 'g_flat4b', name: 'Flat 4B', currency: 'CHF', createdBy: 'u_dana', inviteCode: 'K7QM-4RX2', hasRecordedExpense: true },
+    { id: 'g_ticino', name: 'Ticino weekend', currency: 'EUR', createdBy: 'u_ben', inviteCode: 'T3NW-8HPD', hasRecordedExpense: true },
   ];
   const memberships: MembershipRow[] = [
     { groupId: 'g_flat4b', userId: 'u_dana', joinedAt: '2026-08-28T09:00:00Z' },
@@ -161,6 +162,12 @@ function load(): Database {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
       memoryDb = JSON.parse(raw) as Database;
+      // Old mock data did not track deleted expenses. An absent flag cannot
+      // prove the group never had an expense, so keep its currency locked.
+      for (const group of memoryDb.groups) {
+        if (typeof group.hasRecordedExpense !== 'boolean') group.hasRecordedExpense = true;
+      }
+      save(memoryDb);
       return memoryDb;
     }
   } catch {
@@ -261,6 +268,7 @@ function detail(db: Database, group: GroupRow, userId: string): GroupDetail {
     currency: group.currency,
     createdBy: group.createdBy,
     isCreator,
+    currencyLocked: group.hasRecordedExpense,
     ...(isCreator ? { inviteCode: group.inviteCode } : {}),
     members,
     expenses: groupExpenses(db, group.id).map(toExpense),
@@ -367,6 +375,7 @@ function routeGroups(db: Database, req: MockRequest, parts: string[]): MockRespo
       currency,
       createdBy: user.id,
       inviteCode: newInviteCode(db),
+      hasRecordedExpense: false,
     };
     db.groups.push(group);
     db.memberships.push({ groupId: group.id, userId: user.id, joinedAt: new Date().toISOString() });
@@ -395,7 +404,7 @@ function routeGroups(db: Database, req: MockRequest, parts: string[]): MockRespo
     const { currency } = asRecord(body);
     if (group.createdBy !== user.id) throw new HttpError(403, 'Only the group creator can change the currency.');
     if (typeof currency !== 'string' || !isCurrencyCode(currency)) throw new HttpError(422, 'Choose a currency.');
-    if (currency !== group.currency && groupExpenses(db, group.id).length > 0) {
+    if (currency !== group.currency && group.hasRecordedExpense) {
       throw new HttpError(409, 'The currency cannot change once expenses have been recorded.');
     }
     group.currency = currency;
@@ -411,6 +420,7 @@ function routeGroups(db: Database, req: MockRequest, parts: string[]): MockRespo
       createdAt: new Date().toISOString(),
     };
     db.expenses.push(row);
+    group.hasRecordedExpense = true;
     return { status: 201, body: toExpense(row) };
   }
 
