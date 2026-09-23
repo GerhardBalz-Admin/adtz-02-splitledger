@@ -1,6 +1,6 @@
 # SplitLedger — Homework 2 specification
 
-**Status:** Accepted for Homework 2 Question 2 on 2026-09-23; implementation defaults resolved on 2026-09-23.  
+**Status:** Accepted for Homework 2 Question 2 on 2026-09-23; implementation defaults resolved and pre-expense currency editing accepted on 2026-09-23.  
 **Purpose:** AI Dev Tools Zoomcamp 2026, Homework 2 learning exercise. This is not a final-project selection or a continuation of another project.
 
 ## Product goal
@@ -11,7 +11,7 @@ SplitLedger helps signed-in members of small groups record shared expenses and s
 
 1. A signed-in user may create and belong to multiple groups.
 2. A user joins an existing group by entering its invite code after signing in. Only the group creator can view and copy the code in the app.
-3. Every group has one currency, chosen when the group is created; all expenses in that group use it. No conversion occurs.
+3. Every group has one currency, chosen when the group is created. Only the group creator may change it before the first expense is recorded; after that, it is locked. All expenses in the group use that currency. No conversion occurs.
 4. An expense is divided equally among a selected, nonempty subset of that group's members.
 5. The signed-in member who enters an expense is its payer. The payer may be excluded from the selected members who share that expense.
 6. A member may edit or delete only expenses they created.
@@ -21,7 +21,7 @@ SplitLedger helps signed-in members of small groups record shared expenses and s
 ## Core user flows
 
 1. **Account:** Sign up with email and password, then sign in and out.
-2. **Create a group:** Enter a group name and choose a currency. The creator becomes a member and can view and copy the invite code to share outside the app. Other members cannot view it in the app.
+2. **Create a group:** Enter a group name and choose a currency. The creator becomes a member and can view and copy the invite code to share outside the app. Other members cannot view it in the app. The creator may change the currency only while the group has no expenses.
 3. **Join a group:** A signed-in user enters a valid invite code and becomes a member. Re-entering the same code does not create duplicate membership.
 4. **View groups:** A signed-in user sees only groups to which they belong and can open each group's expense list and balances.
 5. **Add an expense:** In a group, enter a description and positive amount; select at least one current group member who shares it. The expense date defaults to today but may be changed. The payer is the signed-in member. Save the expense and update the group's balances.
@@ -43,6 +43,7 @@ The sum of all member balances in a group must be zero. Store and calculate mone
 - A user can sign up, sign in, create two separate groups, and view only groups they have joined.
 - Another signed-in user can join one group with its code; invalid codes do not grant access.
 - Only the group creator can view and copy the invite code in the app.
+- Only the group creator can change the currency before the first expense; no one can change it after an expense has been recorded.
 - Group members can view that group's expenses and balances. A nonmember cannot read or change them.
 - A member can add an expense with a positive amount, a description, and at least one selected member of the same group.
 - A member can enter an earlier expense date and see that date in the expense list.
@@ -71,7 +72,6 @@ Resolved for the Homework 2 implementation on 2026-09-23:
 
 - Use email/password accounts without email verification for this local exercise.
 - Members can join through the invite code without an email from the app.
-- Group currency cannot change after expenses have been recorded. Until then, the group creator may change it.
 - Leftover minor units from an equal split go one each to the selected members in group join order.
 
 These are design assumptions for this exercise, not additional user decisions.
