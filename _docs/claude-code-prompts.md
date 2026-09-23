@@ -18,7 +18,22 @@ Claude Code cloned and inspected the repository, then described the remaining ho
 
 Result: [SplitLedger design canvas](https://claude.ai/artifact/6X7AnnKpUKMTgNmQqYR3e4) with six linked desktop artboards.
 
-The frontend prototype was subsequently built, tested, and pushed. **The exact Claude Code prompt that initiated frontend implementation has not been preserved in the shared transcript**; do not treat the [course's Question 4 example prompt](https://github.com/DataTalksClub/ai-dev-tools-zoomcamp/blob/main/cohorts/2026/homework/02-development/homework.md#question-4-frontend-prototype) as a verbatim record of what was entered.
+## Question 4: frontend implementation
+
+Claude Code located the following verbatim prompt in both its local `~/.claude/history.jsonl` and the transcript of session `745ecfb7-5953-45ab-a1d2-b64bee611196`. It reported that the prompt was entered on 2026-09-23 at 12:07:34 UTC from `C:\\Users\\gerha\\adtz-02-splitledger`.
+
+```text
+Implement the frontend for the app described in _docs/specs.md, using the SplitLedger artboard I selected:
+https://claude.ai/artifact/6X7AnnKpUKMTgNmQqYR3e4
+
+Put it in frontend/. Don't implement the backend yet. Centralize all backend calls in one place and mock them for now. Make the UI interactive so I can use the main features from the spec.
+
+For this homework implementation, use the three defaults listed in the spec and allocate leftover cents to selected members in group join order. Adapt the selected desktop design to phone widths.
+
+Run the frontend, verify the main flows, and report the exact start command. Once verified, record the Question 4 answer in _docs/homework-answers.md, then commit and push.
+```
+
+The frontend prototype was subsequently built, tested, and pushed.
 
 ## Question 4: stop the development server
 
