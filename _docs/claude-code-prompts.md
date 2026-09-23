@@ -57,4 +57,21 @@ Claude Code reported a clean fast-forward from `5bd49dd` to `33f6b7bbdf0b83b348e
 
 ## Question 5
 
-No Question 5 Claude Code execution has been confirmed in the shared transcript. Add its **actual entered prompt** and result here after it runs; do not label a suggested prompt as executed.
+The following prompt was entered in Claude Code, as shown in the shared Question 5 transcript (terminal indentation normalized):
+
+```text
+Let's do Homework 2 Question 5.
+
+Read _docs/specs.md, AGENTS.md, and the existing frontend API and mock-backend code. First create openapi.yaml as the contract for the features the frontend needs. Then implement a FastAPI backend in backend/ from that contract.
+
+Use uv for Python dependency management and an in-memory mock database for now; SQLAlchemy and SQLite belong to Question 7. Write endpoint tests first, then implement and run them.
+
+Enforce the spec's permissions and balance rules in the backend, including creator-only currency changes before the first expense. Keep backend calls centralized in the frontend, but do not connect the frontend to the real backend yet; that is Question 6.
+
+Document the actual backend start and test commands, record the Question 5 answer, and report test results and any deliberate gaps. Commit and push the completed Question 5 changes.
+```
+
+Claude Code reported pushing the contract and FastAPI mock-database backend in commit `9dd1915`, with 85 backend tests passing. It recorded the backend start command in [the homework answers](homework-answers.md). The frontend still uses its in-browser mock; database persistence is deferred to Question 7.
+
+**Follow-up before Question 6:** The current backend test permits changing currency after all expenses are deleted, whereas [accepted decision 3](specs.md#accepted-decisions) says it is locked after the first expense was recorded. Reconcile the behavior, test, and frontend mock with the accepted decision before connecting the frontend.
+
