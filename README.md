@@ -2,7 +2,7 @@
 
 AI Dev Tools Zoomcamp 2026 Homework 2 expense-splitting app.
 
-The accepted product specification is in [`_docs/specs.md`](_docs/specs.md). [Homework 2 answers and progress](_docs/homework-answers.md) are recorded separately.
+The accepted product specification is in [`_docs/specs.md`](_docs/specs.md). [Homework 2 answers and progress](_docs/homework-answers.md) and the [Claude Code prompt log](_docs/claude-code-prompts.md) are recorded separately.
 
 ## Frontend prototype
 
