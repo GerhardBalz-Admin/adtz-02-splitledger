@@ -15,6 +15,16 @@ npm run dev     # http://localhost:5173
 npm test        # unit tests
 ```
 
+## Backend
+
+The FastAPI backend is in [`backend/`](backend/README.md). It implements the API contract in [`openapi.yaml`](openapi.yaml) and uses an in-memory mock database for now. The frontend does not call it yet.
+
+```bash
+cd backend
+uv run uvicorn splitledger_backend.main:app --reload   # http://localhost:8000 (API under /api)
+uv run pytest
+```
+
 ## Course materials
 
 - [Module 2 lesson and recording](https://github.com/DataTalksClub/ai-dev-tools-zoomcamp/blob/main/02-development/01-build-and-ship-an-ai-assisted-full-stack-app.md)

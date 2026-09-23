@@ -30,7 +30,11 @@ Run it from `frontend/` after `npm install`. It serves the prototype at http://l
 
 ## Question 5: Backend
 
-Pending implementation. Record the actual backend start command after creating and checking the FastAPI backend.
+```bash
+uv run uvicorn splitledger_backend.main:app --reload
+```
+
+Run it from `backend/`. It serves the API at http://localhost:8000/api and interactive docs at http://localhost:8000/docs. The [backend](../backend/README.md) is a FastAPI app managed with uv. It implements the [`openapi.yaml`](../openapi.yaml) contract, which was written first from the frontend's centralized API client. It uses an in-memory mock database for now. The endpoint tests were written before the implementation, and all of them pass with `uv run pytest`. The frontend is not connected to it yet.
 
 ## Question 6: Frontend–backend connection
 

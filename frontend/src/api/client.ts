@@ -2,8 +2,8 @@
 //
 // Every call goes through `request`, which currently hands the request to the
 // in-browser mock server. To switch to the real backend, replace the body of
-// `request` with a `fetch` to the API base URL; the endpoint paths and payloads
-// below are the contract the backend must implement.
+// `request` with a `fetch` to the API base URL (http://localhost:8000/api).
+// The endpoint paths and payloads below follow the contract in /openapi.yaml.
 
 import type { CurrencyCode } from '../lib/money';
 import { handleMockRequest } from './mockServer';

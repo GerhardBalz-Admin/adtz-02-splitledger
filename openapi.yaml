@@ -1,0 +1,503 @@
+openapi: 3.1.0
+info:
+  title: SplitLedger API
+  version: 0.1.0
+  description: |
+    Contract between the SplitLedger frontend (`frontend/src/api/client.ts`) and
+    the FastAPI backend (`backend/`). It covers the Homework 2 features in
+    `_docs/specs.md`.
+
+    Conventions:
+    - JSON field names are camelCase.
+    - Money is always an integer number of minor units (cents). Every supported
+      currency has two decimal places.
+    - Dates are ISO `YYYY-MM-DD`; timestamps are ISO 8601 in UTC.
+    - Authenticated endpoints need `Authorization: Bearer <token>` with a token
+      from sign-up or sign-in.
+    - Every error response has a human-readable `detail` string.
+    - Groups a user does not belong to answer `404`, so their existence is not
+      revealed.
+servers:
+  - url: http://localhost:8000/api
+    description: Local development backend
+
+tags:
+  - name: auth
+  - name: groups
+  - name: expenses
+
+paths:
+  /auth/signup:
+    post:
+      tags: [auth]
+      operationId: signUp
+      summary: Create an account and start a session
+      description: No email verification. The email is trimmed and lower-cased.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Credentials' }
+      responses:
+        '201':
+          description: Account created and signed in.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Session' }
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+
+  /auth/signin:
+    post:
+      tags: [auth]
+      operationId: signIn
+      summary: Start a session
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Credentials' }
+      responses:
+        '200':
+          description: Signed in.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Session' }
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+
+  /auth/signout:
+    post:
+      tags: [auth]
+      operationId: signOut
+      summary: End the current session
+      description: Always succeeds; an unknown or missing token is ignored.
+      security: []
+      responses:
+        '204':
+          description: Session ended.
+
+  /auth/me:
+    get:
+      tags: [auth]
+      operationId: currentUser
+      summary: The signed-in user
+      responses:
+        '200':
+          description: Current user.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/User' }
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /groups:
+    get:
+      tags: [groups]
+      operationId: listGroups
+      summary: Groups the signed-in user belongs to
+      responses:
+        '200':
+          description: Groups in the order the user joined them.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/GroupSummary' }
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      tags: [groups]
+      operationId: createGroup
+      summary: Create a group
+      description: The creator becomes its first member and receives the invite code.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/GroupCreate' }
+      responses:
+        '201':
+          description: Group created.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/GroupDetail' }
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+
+  /groups/join:
+    post:
+      tags: [groups]
+      operationId: joinGroup
+      summary: Join a group with its invite code
+      description: |
+        Letter case, spaces and hyphens in the code are ignored. Joining a
+        group you already belong to creates no duplicate membership.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/JoinRequest' }
+      responses:
+        '200':
+          description: Already a member; nothing changed.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/JoinResult' }
+        '201':
+          description: Joined the group.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/JoinResult' }
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+
+  /groups/{groupId}:
+    parameters:
+      - $ref: '#/components/parameters/GroupId'
+    get:
+      tags: [groups]
+      operationId: getGroup
+      summary: A group's members, expenses and balances
+      responses:
+        '200':
+          description: Group detail.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/GroupDetail' }
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      tags: [groups]
+      operationId: changeCurrency
+      summary: Change the group currency
+      description: |
+        Only the group creator may change the currency, and only before the
+        first expense is recorded. Setting the current currency again always
+        succeeds without changes.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/GroupUpdate' }
+      responses:
+        '200':
+          description: Updated group.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/GroupDetail' }
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+
+  /groups/{groupId}/expenses:
+    parameters:
+      - $ref: '#/components/parameters/GroupId'
+    post:
+      tags: [expenses]
+      operationId: createExpense
+      summary: Record an expense paid by the signed-in user
+      description: |
+        The payer is always the authenticated user. Any payer field in the
+        request body is ignored.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ExpenseInput' }
+      responses:
+        '201':
+          description: Expense recorded.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Expense' }
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+
+  /groups/{groupId}/expenses/{expenseId}:
+    parameters:
+      - $ref: '#/components/parameters/GroupId'
+      - $ref: '#/components/parameters/ExpenseId'
+    patch:
+      tags: [expenses]
+      operationId: updateExpense
+      summary: Replace an expense's description, amount, date and participants
+      description: Only the member who created the expense may change it.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ExpenseInput' }
+      responses:
+        '200':
+          description: Updated expense.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Expense' }
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+    delete:
+      tags: [expenses]
+      operationId: deleteExpense
+      summary: Delete an expense
+      description: Only the member who created the expense may delete it.
+      responses:
+        '204':
+          description: Deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+security:
+  - bearerAuth: []
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+
+  parameters:
+    GroupId:
+      name: groupId
+      in: path
+      required: true
+      schema: { type: string }
+    ExpenseId:
+      name: expenseId
+      in: path
+      required: true
+      schema: { type: string }
+
+  responses:
+    Unauthorized:
+      description: Missing, unknown or expired token, or wrong credentials.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+    Forbidden:
+      description: A member tried an action reserved for the group or expense creator.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+    NotFound:
+      description: The resource does not exist or the user is not a member of its group.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+    Conflict:
+      description: The request conflicts with current state.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+    ValidationError:
+      description: The request body is invalid.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+
+  schemas:
+    Error:
+      type: object
+      required: [detail]
+      properties:
+        detail:
+          type: string
+          examples: ['Enter an amount greater than zero.']
+
+    CurrencyCode:
+      type: string
+      enum: [CHF, EUR, USD, GBP]
+
+    Credentials:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          maxLength: 254
+          examples: ['dana@example.com']
+        password:
+          type: string
+          description: At least 8 characters when signing up.
+          maxLength: 128
+
+    User:
+      type: object
+      required: [id, email, displayName]
+      properties:
+        id: { type: string }
+        email: { type: string }
+        displayName:
+          type: string
+          description: The email's local part with its first letter capitalized.
+
+    Session:
+      type: object
+      required: [token, user]
+      properties:
+        token: { type: string }
+        user: { $ref: '#/components/schemas/User' }
+
+    GroupCreate:
+      type: object
+      required: [name, currency]
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 60
+          description: Trimmed; must not be blank.
+        currency: { $ref: '#/components/schemas/CurrencyCode' }
+
+    GroupUpdate:
+      type: object
+      required: [currency]
+      properties:
+        currency: { $ref: '#/components/schemas/CurrencyCode' }
+
+    JoinRequest:
+      type: object
+      required: [inviteCode]
+      properties:
+        inviteCode:
+          type: string
+          examples: ['K7QM-4RX2']
+
+    GroupSummary:
+      type: object
+      required: [id, name, currency, isCreator, memberCount, expenseCount, myBalance]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        currency: { $ref: '#/components/schemas/CurrencyCode' }
+        isCreator: { type: boolean }
+        memberCount: { type: integer }
+        expenseCount: { type: integer }
+        myBalance:
+          type: integer
+          description: The signed-in user's net balance in minor units.
+
+    JoinResult:
+      type: object
+      required: [group, alreadyMember]
+      properties:
+        group: { $ref: '#/components/schemas/GroupSummary' }
+        alreadyMember: { type: boolean }
+
+    Member:
+      type: object
+      required: [id, displayName, email, joinedAt]
+      properties:
+        id: { type: string, description: The member's user id. }
+        displayName: { type: string }
+        email: { type: string }
+        joinedAt: { type: string, format: date-time }
+
+    ExpenseInput:
+      type: object
+      required: [description, amountMinor, date, participantIds]
+      properties:
+        description:
+          type: string
+          minLength: 1
+          maxLength: 120
+          description: Trimmed; must not be blank.
+        amountMinor:
+          type: integer
+          minimum: 1
+          maximum: 99999999999
+        date:
+          type: string
+          format: date
+        participantIds:
+          type: array
+          minItems: 1
+          uniqueItems: true
+          items: { type: string }
+          description: Distinct user ids of current group members. The payer may be left out.
+
+    Expense:
+      type: object
+      required: [id, description, amountMinor, date, payerId, participantIds, createdAt]
+      properties:
+        id: { type: string }
+        description: { type: string }
+        amountMinor: { type: integer }
+        date: { type: string, format: date }
+        payerId: { type: string }
+        participantIds:
+          type: array
+          items: { type: string }
+          description: In group join order.
+        createdAt: { type: string, format: date-time }
+
+    MemberBalance:
+      type: object
+      required: [memberId, balance]
+      properties:
+        memberId: { type: string }
+        balance:
+          type: integer
+          description: |
+            Amount paid minus allocated shares, in minor units. Positive means
+            the member is owed money. Balances in a group always sum to zero.
+
+    GroupDetail:
+      type: object
+      required: [id, name, currency, createdBy, isCreator, members, expenses, balances]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        currency: { $ref: '#/components/schemas/CurrencyCode' }
+        createdBy: { type: string }
+        isCreator: { type: boolean }
+        inviteCode:
+          type: string
+          description: Present only when the signed-in user created the group.
+        members:
+          type: array
+          items: { $ref: '#/components/schemas/Member' }
+          description: In join order.
+        expenses:
+          type: array
+          items: { $ref: '#/components/schemas/Expense' }
+          description: Newest date first; ties broken by newest creation time.
+        balances:
+          type: array
+          items: { $ref: '#/components/schemas/MemberBalance' }
+          description: One entry per member, in join order.
