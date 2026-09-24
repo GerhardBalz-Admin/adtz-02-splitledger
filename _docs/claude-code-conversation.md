@@ -11847,7 +11847,7 @@ tests\test_groups.py:163:
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 
 client = <starlette.testclient.TestClient object at 0x00000230CEC37020>
-headers = {'Authorization': 'Bearer TlePqIpzEMl_hGnrUanUoTp6GzU3hCz8xHmF2mVN0_I'}
+headers = {'Authorization': 'Bearer [REDACTED: ephemeral test session token]'}
 group_id = '0433dbe732894ff984a9aa089b9b2bc6'
 overrides = {'participantIds': ['b8d1314376f24712bab075e67284b271']}
 
@@ -15446,7 +15446,7 @@ M  _docs/claude-code-prompts.md
  _docs/claude-code-conversation.md | 12420 ++++++++++++++++++++++++++++++++++++
  _docs/claude-code-prompts.md      |    72 +-
  4 files changed, 12483 insertions(+), 18 deletions(-)
-11864:+headers = {'Authorization': 'Bearer TlePqIpzEMl_hGnrUanUoTp6GzU3hCz8xHmF2mVN0_I'}
+11864:+headers = {'Authorization': 'Bearer [REDACTED: ephemeral test session token]'}
 12510:-Claude Code located the following verbatim prompt in both its local `~/.claude/history.jsonl` and the transcript of session `745ecfb7-5953-45ab-a1d2-b64bee611196`. It reported that the prompt w
 ```
 
@@ -15461,7 +15461,7 @@ grep -n 'TlePqIpz' _docs/claude-code-conversation.md | cut -c1-120; L=$(grep -n 
 <details><summary>Tool result</summary>
 
 ````text
-11830:headers = {'Authorization': 'Bearer TlePqIpzEMl_hGnrUanUoTp6GzU3hCz8xHmF2mVN0_I'}
+11830:headers = {'Authorization': 'Bearer [REDACTED: ephemeral test session token]'}
 ```
 
 </details>
@@ -15487,7 +15487,7 @@ tests\test_groups.py:163:
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 
 client = <starlette.testclient.TestClient object at 0x00000230CEC37020>
-headers = {'Authorization': 'Bearer TlePqIpzEMl_hGnrUanUoTp6GzU3hCz8xHmF2mVN0_I'}
+headers = {'Authorization': 'Bearer [REDACTED: ephemeral test session token]'}
 group_id = '0433dbe732894ff984a9aa089b9b2bc6'
 overrides = {'participantIds': ['b8d1314376f24712bab075e67284b271']}
 
@@ -15532,7 +15532,7 @@ grep -n -o -E '(Bearer |"token" *: *"|token=|TOKEN=)[A-Za-z0-9_\-\.]{16,}' _docs
 ```text
 11352:token=db.create_session
 11360:token=db.create_session
-11830:Bearer TlePqIpzEMl_hGnrUanUoTp6GzU3hCz8xHmF2mVN0_I
+11830:Bearer [REDACTED: ephemeral test session token]
 3691:---------------------------------------------------------------------------
 7809:-adtz-02-splitledger\745ecfb7-5953-45ab-a1d2-b64bee611196\scratchpad\e2e\flows
 8538:-adtz-02-splitledger\745ecfb7-5953-45ab-a1d2-b64bee611196\scratchpad\e2e\shots\d-03-g
@@ -15549,7 +15549,7 @@ grep -n -o -E '(Bearer |"token" *: *"|token=|TOKEN=)[A-Za-z0-9_\-\.]{16,}' _docs
 2301:82942dd26e185eb81943da3f7b51673eb979733212af51869ee8318058f12353
 2296:8807bf2c8245a3e04db082424956c964f3a164d85c90944e3baeab686dcd1aa7
 2297:9d3d37f4d55388add0e0c1a3d478b86bafc0aae4d57ce1926897930f412992c2
-11830:TlePqIpzEMl_hGnrUanUoTp6GzU3hCz8xHmF2mVN0_I
+11830:[REDACTED: ephemeral test session token]
 1262:\8fa56825-d817-4b21-8a31-fc6b59021218\scratchpad\design\project\Auth
 1416:\8fa56825-d817-4b21-8a31-fc6b59021218\scratchpad\design\project\CreateGroup
 1677:\8fa56825-d817-4b21-8a31-fc6b59021218\scratchpad\design\project\ExpenseForm
@@ -19766,12 +19766,12 @@ A  frontend/src/vite-env.d.ts
  frontend/src/{api => test}/mockServer.ts |    8 +-
  frontend/src/vite-env.d.ts               |   10 +
  15 files changed, 4165 insertions(+), 617 deletions(-)
-505:+headers = {'Authorization': 'Bearer TlePqIpzEMl_hGnrUanUoTp6GzU3hCz8xHmF2mVN0_I'}
+505:+headers = {'Authorization': 'Bearer [REDACTED: ephemeral test session token]'}
 2268:+S=[REDACTED: local home path]/AppData/Local/Temp/claude/C--Users-[REDACTED: local username]-adtz-02-splitledger/0d400f3a-2d58-426f-93ba-e1c6d4600f2a/scrat
-3564:+11864:+headers = {'Authorization': 'Bearer TlePqIpzEMl_hGnrUanUoTp6GzU3hCz8xHmF2mVN0_I'}
-3579:+11830:headers = {'Authorization': 'Bearer TlePqIpzEMl_hGnrUanUoTp6GzU3hCz8xHmF2mVN0_I'}
-3605:+headers = {'Authorization': 'Bearer TlePqIpzEMl_hGnrUanUoTp6GzU3hCz8xHmF2mVN0_I'}
-3650:+11830:Bearer TlePqIpzEMl_hGnrUanUoTp6GzU3hCz8xHmF2mVN0_I
+3564:+11864:+headers = {'Authorization': 'Bearer [REDACTED: ephemeral test session token]'}
+3579:+11830:headers = {'Authorization': 'Bearer [REDACTED: ephemeral test session token]'}
+3605:+headers = {'Authorization': 'Bearer [REDACTED: ephemeral test session token]'}
+3650:+11830:Bearer [REDACTED: ephemeral test session token]
 0
 ```
 
